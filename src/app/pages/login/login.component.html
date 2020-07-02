@@ -1,0 +1,38 @@
+<div class="col-md-12 login-box">
+    <!-- <img class="mb-4" src="https://images.tcdn.com.br/img/img_prod/482949/adesivo_bf_ms_com_icone_grande_3186_1_20180717103700.png" alt="" width="300" height="70"> -->
+
+    <div class="card card-user">
+        <div class="card-header text-center">
+            <h5 class="card-title">Login</h5>
+        </div>
+        <div class="card-body">
+            <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
+                <div class="row">
+                    <div class="col-md-12 ">
+                        <div class="form-group">
+                            <label>Login</label>
+                            <input type="text" class="form-control" formControlName="login">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12 ">
+                        <div class="form-group">
+                            <label>Senha</label>
+                            <input type="password" class="form-control" formControlName="senha">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="update ml-auto mr-auto">
+                        <button type="submit" class="btn btn-primary btn-round" [disabled]="!loginForm.valid">Login</button>
+                    </div>
+                </div>
+                <p>
+                </p>
+            </form>
+        </div>
+    </div>
+</div>
