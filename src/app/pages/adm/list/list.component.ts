@@ -5,6 +5,8 @@ import { Subscription } from "rxjs";
 import { AdmService } from "../../../../app/services/adm/adm.service";
 import { LoginService } from "../../../../app/services/login/login.service";
 
+import { Router } from "@angular/router";
+
 @Component({
   selector: "adm-list",
   moduleId: module.id,
@@ -33,7 +35,8 @@ export class AdmListComponent implements OnInit, OnDestroy {
 
   constructor(
     public admService: AdmService,
-    private loginService: LoginService
+    private loginService: LoginService,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -74,6 +77,10 @@ export class AdmListComponent implements OnInit, OnDestroy {
       console.log(event);
       //call getAdms with filter
     }
+  }
+
+  createNew(){
+    this.router.navigate(["/admin/adm/new"]);
   }
 
   ngOnDestroy() {
