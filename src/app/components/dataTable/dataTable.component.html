@@ -1,0 +1,44 @@
+<div class="row align-items-center">
+
+    <div class="col mb-2">
+        <span class="">{{dataTable.count}} registros encontrados</span>
+    </div>
+
+    <div class="col col-lg-2">
+        <div class="form-group">
+            <select class="form-control custom-select" [(ngModel)]="dataTable.pageSize"
+                (change)="onChangedPageSize.emit($event.target.value)">
+                <option *ngFor="let pageSize of pageSizeOptions" [value]='pageSize'>{{pageSize}}</option>
+            </select>
+        </div>
+    </div>
+
+</div>
+
+<div class="table-responsive">
+    <table class="table table-striped" *ngIf="dataTable.result.length > 0">
+        <thead>
+            <tr>
+                <th *ngFor="let item of dataTableHead">{{item}}</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let data of dataTable.result">
+                <td *ngFor="let property of dataTableProperties">{{data[property]}}</td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <tr>
+                <td [attr.colspan]="dataTableHead.length">
+                    <ngb-pagination [page]="dataTable.currentPage" [pageSize]="dataTable.pageSize"
+                        [collectionSize]="dataTable.count" (pageChange)="onChangedPage.emit($event)">
+                    </ngb-pagination>
+                </td>
+            </tr>
+        </tfoot>
+
+    </table>
+</div>
+<div class="text-center mt-5 mb-5">
+    <span *ngIf="dataTable.length == 0">Nenhum registro encontrado!</span>
+</div>

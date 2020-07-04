@@ -14,12 +14,13 @@ import { Router } from "@angular/router";
   styleUrls: ["../../../layouts/admin-layout/admin-layout.component.scss"],
 })
 export class AdmListComponent implements OnInit, OnDestroy {
-  dataTableHead = ["Id", "Login", "Criado em", "Alterado em", "Ativo"];
-
   //Pagination
   pageSizeOptions = [10, 25, 50, 100];
 
-  dataList: AdmResponse = {
+  //DataTable
+  dataTableHead = ["Id", "Login", "Criado em", "Alterado em", "Ativo"];
+  dataTableProperties = ["id", "login", "createdAt", "updatedAt", "ativo"];
+  dataTable: AdmResponse = {
     count: 0,
     currentPage: 1,
     pageSize: this.pageSizeOptions[0],
@@ -40,7 +41,7 @@ export class AdmListComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
-    this.getAdms(this.dataList.pageSize, this.dataList.currentPage);
+    this.getAdms(this.dataTable.pageSize, this.dataTable.currentPage);
     this.getLoginAuthorization();
   }
 
@@ -49,7 +50,7 @@ export class AdmListComponent implements OnInit, OnDestroy {
     this.dataSub = this.admService
       .getDataUpdatedListener()
       .subscribe((admResponse: AdmResponse) => {
-        this.dataList = admResponse;
+        this.dataTable = admResponse;
       });
   }
 
@@ -65,11 +66,12 @@ export class AdmListComponent implements OnInit, OnDestroy {
   }
 
   onChangedPage(page) {
-    this.getAdms(this.dataList.pageSize, page);
+    this.getAdms(this.dataTable.pageSize, page);
   }
 
   onChangedPageSize(pageSize) {
-    this.getAdms(pageSize, this.dataList.currentPage);
+    console.log(pageSize);
+    this.getAdms(pageSize, this.dataTable.currentPage);
   }
 
   search(event) {
@@ -79,7 +81,7 @@ export class AdmListComponent implements OnInit, OnDestroy {
     }
   }
 
-  createNew(){
+  createNew() {
     this.router.navigate(["/admin/adm/new"]);
   }
 
