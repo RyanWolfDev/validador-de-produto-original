@@ -1,11 +1,15 @@
+//Angular
 import { Component, OnInit, OnDestroy } from "@angular/core";
-
-import { Adm, AdmResponse } from "../../../models/adm.model";
+import { Router } from "@angular/router";
 import { Subscription } from "rxjs";
+
+//Services
 import { AdmService } from "../../../../app/services/adm/adm.service";
 import { LoginService } from "../../../../app/services/login/login.service";
 
-import { Router } from "@angular/router";
+//Models
+import { ToolbarButton } from "../../../models/toolbarButton.model";
+import { AdmResponse } from "../../../models/adm.model";
 
 @Component({
   selector: "adm-list",
@@ -18,8 +22,20 @@ export class AdmListComponent implements OnInit, OnDestroy {
   pageSizeOptions = [10, 25, 50, 100];
 
   //DataTable
-  dataTableHead = ["Id", "Login", "Criado em", "Alterado em", "Ativo"];
-  dataTableProperties = ["id", "login", "createdAt", "updatedAt", "ativo"];
+  dataTableHead: string[] = [
+    "Id",
+    "Login",
+    "Criado em",
+    "Alterado em",
+    "Ativo",
+  ];
+  dataTableProperties: string[] = [
+    "id",
+    "login",
+    "createdAt",
+    "updatedAt",
+    "ativo",
+  ];
   dataTable: AdmResponse = {
     count: 0,
     currentPage: 1,
@@ -27,6 +43,18 @@ export class AdmListComponent implements OnInit, OnDestroy {
     message: "",
     result: [],
   };
+
+  //Toolbar Buttons
+  toolbarButtons: ToolbarButton[] = [
+    {
+      name: "Novo",
+      colorClass: "success",
+      iconClass: "nc-icon nc-simple-add",
+      function: () => {
+        this.createNew();
+      },
+    },
+  ];
 
   //Authentication Listener
   userIsAuthenticated = false;

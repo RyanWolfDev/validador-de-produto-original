@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, ViewChild } from "@angular/core";
+import { Component, Input, Output, EventEmitter } from "@angular/core";
 import { AdmResponse } from "../../models/adm.model";
 
 @Component({

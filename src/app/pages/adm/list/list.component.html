@@ -3,6 +3,7 @@
     <div class="card">
         <div class="card-body">
             <div class="row align-items-center">
+
                 <div class="col-xl-4">
                     <form (keydown)="search($event)">
                         <div class="input-group no-border mb-0">
@@ -17,20 +18,9 @@
                 </div>
 
                 <div class="col-xl-8 text-right">
-                    <!-- <button class="col-xl-3 btn btn-default btn-round px-auto mx-1">
-                        <i class="nc-icon nc-cloud-download-93"></i>
-                        Exportar
-                    </button> -->
-                    <!-- <button class="col-xl-3 btn btn-info btn-round px-auto mx-1">
-                        <i class="nc-icon nc-zoom-split"></i>
-                        Filtro
-                    </button> -->
-                    <button class="col-xl-3 btn btn-success btn-round px-auto mx-1">
-                        <i class="nc-icon nc-simple-add"></i>
-                        Novo
-                    </button>
+                    <toolbar-button *ngFor="let button of toolbarButtons" [toolbarButton]="button"
+                        (onClick)="button.function($event)"></toolbar-button>
                 </div>
-
 
             </div>
         </div>
@@ -38,10 +28,10 @@
 
     <div class="card">
         <div class="card-body">
-      
-            <data-table [dataTable]="dataTable" [dataTableHead]="dataTableHead" [dataTableProperties]="dataTableProperties"
-                (onChangedPage)="onChangedPage($event)" (onChangedPageSize)="onChangedPageSize($event)"
-                [pageSizeOptions]="pageSizeOptions">
+
+            <data-table [dataTable]="dataTable" [dataTableHead]="dataTableHead"
+                [dataTableProperties]="dataTableProperties" [pageSizeOptions]="pageSizeOptions"
+                (onChangedPage)="onChangedPage($event)" (onChangedPageSize)="onChangedPageSize($event)">
             </data-table>
 
         </div>

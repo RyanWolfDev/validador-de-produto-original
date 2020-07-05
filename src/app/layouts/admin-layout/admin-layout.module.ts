@@ -16,6 +16,7 @@ import { MapsComponent } from "../../pages/maps/maps.component";
 import { NotificationsComponent } from "../../pages/notifications/notifications.component";
 import { UpgradeComponent } from "../../pages/upgrade/upgrade.component";
 import { DataTableComponent } from "../../components/dataTable/dataTable.component";
+import { ToolbarButtonComponent } from "../../components/toolbarButton/toolbarButton.component";
 
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 
@@ -39,6 +40,7 @@ import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
     MapsComponent,
     NotificationsComponent,
     DataTableComponent,
+    ToolbarButtonComponent,
   ],
 })
 export class AdminLayoutModule {}
