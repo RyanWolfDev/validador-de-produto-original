@@ -19,6 +19,7 @@ import { DataTableComponent } from "../../components/dataTable/dataTable.compone
 import { ToolbarButtonComponent } from "../../components/toolbarButton/toolbarButton.component";
 
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
+import { FilterTableComponent } from "../../components/filterTable/filterTable.component";
 
 @NgModule({
   imports: [
@@ -41,6 +42,7 @@ import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
     NotificationsComponent,
     DataTableComponent,
     ToolbarButtonComponent,
+    FilterTableComponent,
   ],
 })
 export class AdminLayoutModule {}

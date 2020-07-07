@@ -1,0 +1,8 @@
+<div class="input-group no-border mb-0">
+    <input type="text" value="" class="form-control" (keydown.enter)="onKeydown($event)" placeholder="Procurar..." [(ngModel)]="filterTableValue">
+    <div class="input-group-append">
+        <button class="input-group-text px-2" (click)="search()">
+            <i class="nc-icon nc-zoom-split"></i>
+        </button>
+    </div>
+</div>

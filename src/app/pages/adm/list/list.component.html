@@ -5,16 +5,7 @@
             <div class="row align-items-center">
 
                 <div class="col-xl-4">
-                    <form (keydown)="search($event)">
-                        <div class="input-group no-border mb-0">
-                            <input type="text" value="" class="form-control" placeholder="Procurar...">
-                            <div class="input-group-append">
-                                <button class="input-group-text px-2" type="submit">
-                                    <i class="nc-icon nc-zoom-split"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </form>
+                    <filter-table (onSearch)="filterSearch($event)"></filter-table>
                 </div>
 
                 <div class="col-xl-8 text-right">

@@ -1,4 +1,5 @@
 const Adm = require('../models/_index').Adm;
+const { Op } = require("sequelize");
 
 const bcryptjs = require('bcryptjs');
 const jwt = require('jsonwebtoken');
@@ -38,7 +39,28 @@ exports.get = async (req, res) => {
 
     const limit = parseInt(req.query.limit ? req.query.limit : 10);
     const page = parseInt(req.query.page ? req.query.page : 1);
+    const filterSearch = req.query.filterSearch ? req.query.filterSearch : "";
     const offset = limit * (page - 1);
+    let whereQuery = {};
+
+    if (filterSearch) {
+        whereQuery = {
+            [Op.or]: [
+                {
+                    id:
+                    {
+                        [Op.substring]: filterSearch
+                    }
+                },
+                {
+                    login:
+                    {
+                        [Op.substring]: filterSearch
+                    }
+                }
+            ]
+        }
+    }
 
     try {
         totalAdms = await Adm.findAndCountAll();
@@ -48,7 +70,8 @@ exports.get = async (req, res) => {
             offset: offset,
             order: [
                 ['id', 'DESC']
-            ]
+            ],
+            where: whereQuery
         })
         res.status(200).json({
             message: 'Todos os Administradores foram buscados com sucesso!',

@@ -21,8 +21,8 @@ export class AdmService {
     private appService: AppService
   ) {}
 
-  getAdms(pageSize: number, currentPage: number) {
-    const queryParams = `?limit=${pageSize}&page=${currentPage}`;
+  getAdms(pageSize: number, currentPage: number, filterSeach: string = "") {
+    const queryParams = `?limit=${pageSize}&page=${currentPage}&filterSearch=${filterSeach}`;
     this.http
       .get<AdmResponse>(this.appService.getApiUrl() + "/adm" + queryParams)
       .pipe(

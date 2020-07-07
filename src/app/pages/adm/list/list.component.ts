@@ -73,8 +73,8 @@ export class AdmListComponent implements OnInit, OnDestroy {
     this.getLoginAuthorization();
   }
 
-  getAdms(pageSize, currentPage) {
-    this.admService.getAdms(pageSize, currentPage);
+  getAdms(pageSize, currentPage, filterSearch = "") {
+    this.admService.getAdms(pageSize, currentPage, filterSearch);
     this.dataSub = this.admService
       .getDataUpdatedListener()
       .subscribe((admResponse: AdmResponse) => {
@@ -94,19 +94,21 @@ export class AdmListComponent implements OnInit, OnDestroy {
   }
 
   onChangedPage(page) {
+    this.dataTable.currentPage = page;
     this.getAdms(this.dataTable.pageSize, page);
   }
 
   onChangedPageSize(pageSize) {
-    console.log(pageSize);
+    this.dataTable.pageSize = pageSize;
     this.getAdms(pageSize, this.dataTable.currentPage);
   }
 
-  search(event) {
-    if (event.keyCode === 13) {
-      console.log(event);
-      //call getAdms with filter
-    }
+  filterSearch(filterSearch) {
+    this.getAdms(
+      this.dataTable.pageSize,
+      this.dataTable.currentPage,
+      filterSearch
+    );
   }
 
   createNew() {
