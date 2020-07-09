@@ -22,7 +22,8 @@
 
             <data-table [dataTable]="dataTable" [dataTableHead]="dataTableHead"
                 [dataTableProperties]="dataTableProperties" [pageSizeOptions]="pageSizeOptions"
-                (onChangedPage)="onChangedPage($event)" (onChangedPageSize)="onChangedPageSize($event)">
+                (onChangedPage)="onChangedPage($event)" (onChangedPageSize)="onChangedPageSize($event)"
+                (onChangeBooleanValue)="onChangeBooleanValue($event,$event)">
             </data-table>
 
         </div>

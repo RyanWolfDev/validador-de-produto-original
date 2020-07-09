@@ -23,8 +23,20 @@
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let data of dataTable.result">
-                <td *ngFor="let property of dataTableProperties">{{data[property]}}</td>
+            <tr *ngFor="let data of dataTable.result; let dataIndex = index">
+                <td *ngFor="let property of dataTableProperties; let propertyIndex = index">
+                    <span *ngIf="property.type=='text'">
+                        {{data[property.name]}}
+                    </span>
+                    <span *ngIf="property.type=='date'">
+                        {{data[property.name] | date: 'dd/MM/yyyy'}}
+                    </span>
+                    <div class="custom-control custom-switch" *ngIf="property.type=='boolean'">
+                        <input type="checkbox" [checked]="data[property.name]" class="custom-control-input"
+                            [id]="data.id" (change)="onChangeBooleanValue.emit(data)">
+                        <label class="custom-control-label" [for]="data.id"></label>
+                    </div>
+                </td>
             </tr>
         </tbody>
         <tfoot>
@@ -42,3 +54,5 @@
 <div class="text-center mt-5 mb-5">
     <span *ngIf="dataTable.result.length == 0">Nenhum registro encontrado!</span>
 </div>
+
+<confirm-modal></confirm-modal>

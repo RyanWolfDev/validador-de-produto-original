@@ -29,12 +29,27 @@ export class AdmListComponent implements OnInit, OnDestroy {
     "Alterado em",
     "Ativo",
   ];
-  dataTableProperties: string[] = [
-    "id",
-    "login",
-    "createdAt",
-    "updatedAt",
-    "ativo",
+  dataTableProperties: Object[] = [
+    {
+      name: "id",
+      type: "text",
+    },
+    {
+      name: "login",
+      type: "text",
+    },
+    {
+      name: "createdAt",
+      type: "date",
+    },
+    {
+      name: "updatedAt",
+      type: "date",
+    },
+    {
+      name: "ativo",
+      type: "boolean",
+    },
   ];
   dataTable: AdmResponse = {
     count: 0,
@@ -56,6 +71,8 @@ export class AdmListComponent implements OnInit, OnDestroy {
     },
   ];
 
+  filterText: string;
+
   //Authentication Listener
   userIsAuthenticated = false;
   userId: string;
@@ -73,7 +90,11 @@ export class AdmListComponent implements OnInit, OnDestroy {
     this.getLoginAuthorization();
   }
 
-  getAdms(pageSize, currentPage, filterSearch = "") {
+  getAdms(
+    pageSize: number,
+    currentPage: number,
+    filterSearch = this.filterText
+  ) {
     this.admService.getAdms(pageSize, currentPage, filterSearch);
     this.dataSub = this.admService
       .getDataUpdatedListener()
@@ -104,6 +125,7 @@ export class AdmListComponent implements OnInit, OnDestroy {
   }
 
   filterSearch(filterSearch) {
+    this.filterText = filterSearch;
     this.getAdms(
       this.dataTable.pageSize,
       this.dataTable.currentPage,
@@ -113,6 +135,11 @@ export class AdmListComponent implements OnInit, OnDestroy {
 
   createNew() {
     this.router.navigate(["/admin/adm/new"]);
+  }
+
+  onChangeBooleanValue(data) {
+    data.ativo = !data.ativo;
+    this.admService.updateAdm(data);
   }
 
   ngOnDestroy() {

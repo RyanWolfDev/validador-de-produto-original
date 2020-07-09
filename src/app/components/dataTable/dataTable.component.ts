@@ -9,8 +9,16 @@ import { AdmResponse } from "../../models/adm.model";
 export class DataTableComponent {
   @Input() dataTable: AdmResponse;
   @Input() dataTableHead: string[];
-  @Input() dataTableProperties: string[];
-  @Input() pageSizeOptions :number[];
-  @Output("onChangedPage") onChangedPage: EventEmitter<any> = new EventEmitter();
-  @Output("onChangedPageSize") onChangedPageSize: EventEmitter<any> = new EventEmitter();
+  @Input() dataTableProperties: Object[];
+  @Input() pageSizeOptions: number[];
+  @Output("onChangedPage") onChangedPage: EventEmitter<
+    any
+  > = new EventEmitter();
+  @Output("onChangedPageSize") onChangedPageSize: EventEmitter<
+    any
+  > = new EventEmitter();
+  @Output("onChangeBooleanValue") onChangeBooleanValue: EventEmitter<
+    any
+  > = new EventEmitter();
+
 }

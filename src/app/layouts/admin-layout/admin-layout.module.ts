@@ -17,9 +17,10 @@ import { NotificationsComponent } from "../../pages/notifications/notifications.
 import { UpgradeComponent } from "../../pages/upgrade/upgrade.component";
 import { DataTableComponent } from "../../components/dataTable/dataTable.component";
 import { ToolbarButtonComponent } from "../../components/toolbarButton/toolbarButton.component";
+import { FilterTableComponent } from "../../components/filterTable/filterTable.component";
+import { ConfirmModalComponent } from "../../components/confirmModal/confirmModal.component";
 
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
-import { FilterTableComponent } from "../../components/filterTable/filterTable.component";
 
 @NgModule({
   imports: [
@@ -43,6 +44,7 @@ import { FilterTableComponent } from "../../components/filterTable/filterTable.c
     DataTableComponent,
     ToolbarButtonComponent,
     FilterTableComponent,
+    ConfirmModalComponent,
   ],
 })
 export class AdminLayoutModule {}
