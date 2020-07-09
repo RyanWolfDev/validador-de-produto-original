@@ -42,15 +42,16 @@ export class AdmService {
       });
   }
 
+  updateAdm(adm: Adm) {
+    this.http
+      .put(this.appService.getApiUrl() + "/adm/" + adm.id, adm)
+      .subscribe((response) => {
+        console.log(response);
+        this.router.navigate(["/admin/adm"]);
+      });
+  }
+
   getDataUpdatedListener() {
     return this.dataUpdated.asObservable();
   }
-
-  // getAdms(pageSize: number, currentPage: number): Observable<AdmResponse> {
-  //   const queryParams = `?limit=${pageSize}&page=${currentPage}`;
-
-  //   return this.http
-  //     .get<AdmResponse>(this.appService.getApiUrl() + "/adm" + queryParams)
-  //     .pipe(retry(1));
-  // }
 }
