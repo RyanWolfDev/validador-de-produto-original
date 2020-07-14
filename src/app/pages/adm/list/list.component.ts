@@ -9,7 +9,7 @@ import { LoginService } from "../../../../app/services/login/login.service";
 
 //Models
 import { ToolbarButton } from "../../../models/toolbarButton.model";
-import { AdmResponse } from "../../../models/adm.model";
+import { AdmResponse, Adm } from "../../../models/adm.model";
 
 @Component({
   selector: "adm-list",
@@ -62,6 +62,14 @@ export class AdmListComponent implements OnInit, OnDestroy {
   //Toolbar Buttons
   toolbarButtons: ToolbarButton[] = [
     {
+      name: "Deletar",
+      colorClass: "danger",
+      iconClass: "nc-icon nc-simple-remove",
+      function: () => {
+        this.getCheckedRows();
+      },
+    },
+    {
       name: "Novo",
       colorClass: "success",
       iconClass: "nc-icon nc-simple-add",
@@ -72,6 +80,7 @@ export class AdmListComponent implements OnInit, OnDestroy {
   ];
 
   filterText: string;
+  rowsChecked: Adm[];
 
   //Authentication Listener
   userIsAuthenticated = false;
@@ -140,6 +149,12 @@ export class AdmListComponent implements OnInit, OnDestroy {
   onChangeBooleanValue(data) {
     data.ativo = !data.ativo;
     this.admService.updateAdm(data);
+  }
+
+  getCheckedRows() {
+    this.dataTable.result.filter((value, index, array) => {
+      return value.isChecked === true;
+    });
   }
 
   ngOnDestroy() {

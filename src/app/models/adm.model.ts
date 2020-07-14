@@ -4,6 +4,7 @@ export interface Adm {
   ativo: boolean;
   createdAt: Date;
   updatedAt: Date;
+  isChecked: boolean;
 }
 
 export interface AdmResponse {

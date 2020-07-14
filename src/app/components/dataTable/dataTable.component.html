@@ -19,11 +19,18 @@
     <table class="table table-striped" *ngIf="dataTable.result.length > 0">
         <thead>
             <tr>
+                <th>
+                    <input type="checkbox" (change)="onCheckAllRows()" value="" id="checkAllCheckBox">
+                </th>
                 <th *ngFor="let item of dataTableHead">{{item}}</th>
             </tr>
         </thead>
         <tbody>
             <tr *ngFor="let data of dataTable.result; let dataIndex = index">
+                <td>
+                    <input type="checkbox" [checked]="data.isChecked" value="" id="dataIndex"
+                        (change)="onRowChecked(dataIndex)">
+                </td>
                 <td *ngFor="let property of dataTableProperties; let propertyIndex = index">
                     <span *ngIf="property.type=='text'">
                         {{data[property.name]}}
@@ -41,7 +48,7 @@
         </tbody>
         <tfoot>
             <tr>
-                <td [attr.colspan]="dataTableHead.length">
+                <td [attr.colspan]="dataTableHead.length + 1">
                     <ngb-pagination [page]="dataTable.currentPage" [pageSize]="dataTable.pageSize"
                         [collectionSize]="dataTable.count" (pageChange)="onChangedPage.emit($event)">
                     </ngb-pagination>
@@ -50,6 +57,7 @@
         </tfoot>
 
     </table>
+
 </div>
 <div class="text-center mt-5 mb-5">
     <span *ngIf="dataTable.result.length == 0">Nenhum registro encontrado!</span>
