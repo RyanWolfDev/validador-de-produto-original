@@ -18,9 +18,9 @@ import { UpgradeComponent } from "../../pages/upgrade/upgrade.component";
 import { DataTableComponent } from "../../components/dataTable/dataTable.component";
 import { ToolbarButtonComponent } from "../../components/toolbarButton/toolbarButton.component";
 import { FilterTableComponent } from "../../components/filterTable/filterTable.component";
-import { ConfirmModalComponent } from "../../components/confirmModal/confirmModal.component";
 
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
+import { ConfirmDialogModule } from "../../components/confirm-dialog/confirm-dialog.module";
 
 @NgModule({
   imports: [
@@ -29,6 +29,7 @@ import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
     FormsModule,
     NgbModule,
     ReactiveFormsModule,
+    ConfirmDialogModule
   ],
   declarations: [
     DashboardComponent,
@@ -44,7 +45,6 @@ import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
     DataTableComponent,
     ToolbarButtonComponent,
     FilterTableComponent,
-    ConfirmModalComponent,
   ],
 })
 export class AdminLayoutModule {}

@@ -6,6 +6,7 @@ import { Subscription } from "rxjs";
 //Services
 import { AdmService } from "../../../../app/services/adm/adm.service";
 import { LoginService } from "../../../../app/services/login/login.service";
+import { ConfirmDialogService } from "../../../components/confirm-dialog/confirm-dialog.service";
 
 //Models
 import { ToolbarButton } from "../../../models/toolbarButton.model";
@@ -62,14 +63,6 @@ export class AdmListComponent implements OnInit, OnDestroy {
   //Toolbar Buttons
   toolbarButtons: ToolbarButton[] = [
     {
-      name: "Deletar",
-      colorClass: "danger",
-      iconClass: "nc-icon nc-simple-remove",
-      function: () => {
-        this.getCheckedRows();
-      },
-    },
-    {
       name: "Novo",
       colorClass: "success",
       iconClass: "nc-icon nc-simple-add",
@@ -91,7 +84,8 @@ export class AdmListComponent implements OnInit, OnDestroy {
   constructor(
     public admService: AdmService,
     private loginService: LoginService,
-    private router: Router
+    private router: Router,
+    private confirmDialogService: ConfirmDialogService
   ) {}
 
   ngOnInit() {
@@ -148,13 +142,26 @@ export class AdmListComponent implements OnInit, OnDestroy {
 
   onChangeBooleanValue(data) {
     data.ativo = !data.ativo;
-    this.admService.updateAdm(data);
+    this.showDialog(data, "Tem certeza que quer desativar o Administrador?");
   }
 
   getCheckedRows() {
     this.dataTable.result.filter((value, index, array) => {
       return value.isChecked === true;
     });
+  }
+
+  showDialog(data, message) {
+    this.confirmDialogService.confirmThis(
+      message,
+      () => {
+        this.admService.updateAdm(data);
+      },
+      () => {
+        data.ativo = !data.ativo;
+        return;
+      }
+    );
   }
 
   ngOnDestroy() {
