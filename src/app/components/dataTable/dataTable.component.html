@@ -20,7 +20,7 @@
         <thead>
             <tr>
                 <th>
-                    <input type="checkbox" (change)="onCheckAllRows()" value="" id="checkAllCheckBox">
+                    <input type="checkbox" [checked]="isCheckAllChecked" (change)="onCheckAllRows()" value="" id="checkAllCheckBox">
                 </th>
                 <th *ngFor="let item of dataTableHead">{{item}}</th>
             </tr>
