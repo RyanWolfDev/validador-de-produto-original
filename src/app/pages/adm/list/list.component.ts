@@ -24,6 +24,7 @@ export class AdmListComponent implements OnInit, OnDestroy {
 
   //DataTable
   dataTableHead: string[] = [
+    "checkbox",
     "Id",
     "Login",
     "Criado em",
@@ -31,6 +32,10 @@ export class AdmListComponent implements OnInit, OnDestroy {
     "Ativo",
   ];
   dataTableProperties: Object[] = [
+    {
+      name: "",
+      type: "checkbox",
+    },
     {
       name: "id",
       type: "text",
