@@ -1,5 +1,5 @@
-<button class="col-xl-3 btn btn-{{toolbarButton.colorClass}} btn-round px-auto mx-1"
-    (click)="callFunction($event)">
+<button class="col-xl-{{toolbarButton.size}} btn btn-{{toolbarButton.colorClass}} btn-round px-auto mx-1" (click)="callFunction($event)"
+    title="{{toolbarButton.name}}">
     <i class="{{toolbarButton.iconClass}}"></i>
     {{toolbarButton.name}}
 </button>

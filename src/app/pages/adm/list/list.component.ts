@@ -10,7 +10,8 @@ import { ConfirmDialogService } from "../../../components/confirm-dialog/confirm
 
 //Models
 import { ToolbarButton } from "../../../models/toolbarButton.model";
-import { AdmResponse, Adm } from "../../../models/adm.model";
+import { Adm } from "../../../models/adm.model";
+import { DataTable } from "../../../models/dataTable.model";
 
 @Component({
   selector: "adm-list",
@@ -31,6 +32,7 @@ export class AdmListComponent implements OnInit, OnDestroy {
     "Alterado em",
     "Ativo",
   ];
+
   dataTableProperties: Object[] = [
     {
       name: "",
@@ -57,7 +59,8 @@ export class AdmListComponent implements OnInit, OnDestroy {
       type: "boolean",
     },
   ];
-  dataTable: AdmResponse = {
+  
+  dataTable: DataTable = {
     count: 0,
     currentPage: 1,
     pageSize: this.pageSizeOptions[0],
@@ -71,6 +74,7 @@ export class AdmListComponent implements OnInit, OnDestroy {
       name: "Novo",
       colorClass: "success",
       iconClass: "nc-icon nc-simple-add",
+      size: 3,
       function: () => {
         this.createNew();
       },
@@ -91,7 +95,7 @@ export class AdmListComponent implements OnInit, OnDestroy {
     private loginService: LoginService,
     private router: Router,
     private confirmDialogService: ConfirmDialogService
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.getAdms(this.dataTable.pageSize, this.dataTable.currentPage);
@@ -106,8 +110,8 @@ export class AdmListComponent implements OnInit, OnDestroy {
     this.admService.getAdms(pageSize, currentPage, filterSearch);
     this.dataSub = this.admService
       .getDataUpdatedListener()
-      .subscribe((admResponse: AdmResponse) => {
-        this.dataTable = admResponse;
+      .subscribe((response: DataTable) => {
+        this.dataTable = response;
       });
   }
 

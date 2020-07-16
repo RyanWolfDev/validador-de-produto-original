@@ -4,7 +4,8 @@ import { map, retry } from "rxjs/operators";
 import { HttpClient } from "@angular/common/http";
 import { Router } from "@angular/router";
 
-import { Adm, AdmResponse } from "../../models/adm.model";
+import { Adm } from "../../models/adm.model";
+import { DataTable } from "src/app/models/dataTable.model";
 
 import { AppService } from "../../app.service";
 
@@ -13,7 +14,7 @@ import { AppService } from "../../app.service";
 })
 export class AdmService {
   private data: Adm[] = [];
-  private dataUpdated = new Subject<AdmResponse>();
+  private dataUpdated = new Subject<DataTable>();
 
   constructor(
     private http: HttpClient,
@@ -24,7 +25,7 @@ export class AdmService {
   getAdms(pageSize: number, currentPage: number, filterSeach: string = "") {
     const queryParams = `?limit=${pageSize}&page=${currentPage}&filterSearch=${filterSeach}`;
     this.http
-      .get<AdmResponse>(this.appService.getApiUrl() + "/adm" + queryParams)
+      .get<DataTable>(this.appService.getApiUrl() + "/adm" + queryParams)
       .pipe(
         map((response) => {
           return response;
