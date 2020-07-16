@@ -2,40 +2,85 @@
 
     <div class="col-md-12">
         <div class="card card-user">
+
             <div class="card-header">
-                <h5 class="card-title">Novo Administrador</h5>
+                <h5 class="card-title">{{pageTitle}}</h5>
             </div>
+
             <div class="card-body">
-                <form>
-                    <div class="row">
-                        <div class="col-md-12 pr-1">
+
+                <form [formGroup]="form" (keydown.enter)="onSubmit()" (ngSubmit)="onSubmit()">
+
+                    <div class="row px-1">
+                        <div class="col-md-9">
+
                             <div class="form-group">
                                 <label>Login</label>
-                                <input type="text" class="form-control">
+                                <input formControlName="login" type="text" class="form-control">
+
+                                <div *ngIf="login.invalid && (login.dirty || login.touched)" class="text-danger">
+                                    <div *ngIf="login.errors.required">{{fieldRequiredMessage}}</div>
+                                </div>
                             </div>
+
+                        </div>
+
+                        <div class="col-md-3">
+
+                            <div class="form-group">
+                                <label>Ativo</label>
+                                <div class="custom-control custom-switch">
+                                    <input type="checkbox" formControlName="ativo" [checked]="ativo" [id]="ativoToggle"
+                                        class="custom-control-input">
+                                    <label class="custom-control-label" [for]="ativoToggle"></label>
+                                </div>
+                            </div>
+
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-md-6 pr-1">
+
+                    <div class="row" *ngIf="mode === 'create'">
+                        <div class="col-md-6">
+
                             <div class="form-group">
                                 <label>Senha</label>
-                                <input type="password" class="form-control">
+                                <input formControlName="senha" type="password" class="form-control">
+
+                                <div *ngIf="senha.invalid && (senha.dirty || senha.touched)" class="text-danger">
+                                    <div *ngIf="senha.errors.required">{{fieldRequiredMessage}}</div>
+                                </div>
                             </div>
+
                         </div>
-                        <div class="col-md-6 px-1">
+                        <div class="col-md-6">
+
                             <div class="form-group">
                                 <label>Confirmar Senha</label>
-                                <input type="password" class="form-control">
+                                <input formControlName="confirmarSenha" type="password" class="form-control">
+
+                                <div *ngIf="confirmarSenha.invalid && (confirmarSenha.dirty || confirmarSenha.touched)"
+                                    class="text-danger">
+                                    <div *ngIf="confirmarSenha.errors.confirmPasswordValidator">As senhas não são as
+                                        mesmas!</div>
+                                    <div *ngIf="confirmarSenha.errors.required">{{fieldRequiredMessage}}</div>
+                                </div>
                             </div>
+
                         </div>
                     </div>
+
                     <div class="row">
                         <div class="update ml-auto mr-auto">
-                            <button [routerLink]="['/adm']" class="btn btn-danger btn-round">Cancelar</button>
-                            <button type="submit" class="btn btn-primary btn-round">Salvar</button>
+
+                            <button type="button" (click)='onCancel()' class="btn btn-dark btn-round">Cancelar</button>
+
+                            <button type="submit" [disabled]="!form.valid"
+                                class="btn btn-primary btn-round">Salvar</button>
                         </div>
                     </div>
+
                 </form>
+
             </div>
         </div>
     </div>

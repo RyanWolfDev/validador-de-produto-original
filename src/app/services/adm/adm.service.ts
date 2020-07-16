@@ -20,9 +20,9 @@ export class AdmService {
     private http: HttpClient,
     private router: Router,
     private appService: AppService
-  ) {}
+  ) { }
 
-  getAdms(pageSize: number, currentPage: number, filterSeach: string = "") {
+  getAll(pageSize: number, currentPage: number, filterSeach: string = "") {
     const queryParams = `?limit=${pageSize}&page=${currentPage}&filterSearch=${filterSeach}`;
     this.http
       .get<DataTable>(this.appService.getApiUrl() + "/adm" + queryParams)
@@ -43,13 +43,26 @@ export class AdmService {
       });
   }
 
-  updateAdm(adm: Adm) {
+  save(adm: Adm) {
     this.http
-      .put(this.appService.getApiUrl() + "/adm/" + adm.id, adm)
+      .post<Adm>(`${this.appService.getApiUrl()}/adm`, adm)
+      .subscribe((responseData) => {
+        console.log(responseData);
+        this.router.navigate(["/admin/adm"]);
+      });
+  }
+
+  update(adm: Adm) {
+    this.http
+      .put(`${this.appService.getApiUrl()}/adm/${adm.id}`, adm)
       .subscribe((response) => {
         console.log(response);
         this.router.navigate(["/admin/adm"]);
       });
+  }
+
+  getById(id: string) {
+    return this.http.get<{ message: string, result: Adm }>(`${this.appService.getApiUrl()}/adm/${id}`);
   }
 
   getDataUpdatedListener() {

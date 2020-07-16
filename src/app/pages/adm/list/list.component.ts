@@ -5,7 +5,6 @@ import { Subscription } from "rxjs";
 
 //Services
 import { AdmService } from "../../../../app/services/adm/adm.service";
-import { LoginService } from "../../../../app/services/login/login.service";
 import { ConfirmDialogService } from "../../../components/confirm-dialog/confirm-dialog.service";
 
 //Models
@@ -17,7 +16,6 @@ import { DataTable } from "../../../models/dataTable.model";
   selector: "adm-list",
   moduleId: module.id,
   templateUrl: "list.component.html",
-  styleUrls: ["../../../layouts/admin-layout/admin-layout.component.scss"],
 })
 export class AdmListComponent implements OnInit, OnDestroy {
   //Pagination
@@ -59,7 +57,7 @@ export class AdmListComponent implements OnInit, OnDestroy {
       type: "boolean",
     },
   ];
-  
+
   dataTable: DataTable = {
     count: 0,
     currentPage: 1,
@@ -83,23 +81,16 @@ export class AdmListComponent implements OnInit, OnDestroy {
 
   filterText: string;
   rowsChecked: Adm[];
-
-  //Authentication Listener
-  userIsAuthenticated = false;
-  userId: string;
-  private authStatusSub: Subscription;
   private dataSub: Subscription;
 
   constructor(
     public admService: AdmService,
-    private loginService: LoginService,
     private router: Router,
     private confirmDialogService: ConfirmDialogService
   ) { }
 
   ngOnInit() {
     this.getAdms(this.dataTable.pageSize, this.dataTable.currentPage);
-    this.getLoginAuthorization();
   }
 
   getAdms(
@@ -107,22 +98,11 @@ export class AdmListComponent implements OnInit, OnDestroy {
     currentPage: number,
     filterSearch = this.filterText
   ) {
-    this.admService.getAdms(pageSize, currentPage, filterSearch);
+    this.admService.getAll(pageSize, currentPage, filterSearch);
     this.dataSub = this.admService
       .getDataUpdatedListener()
       .subscribe((response: DataTable) => {
         this.dataTable = response;
-      });
-  }
-
-  getLoginAuthorization() {
-    this.userId = this.loginService.getUserId();
-    this.userIsAuthenticated = this.loginService.getIsAuth();
-    this.authStatusSub = this.loginService
-      .getAuthStatusListener()
-      .subscribe((isAuthenticated) => {
-        this.userIsAuthenticated = isAuthenticated;
-        this.userId = this.loginService.getUserId();
       });
   }
 
@@ -151,7 +131,7 @@ export class AdmListComponent implements OnInit, OnDestroy {
 
   onChangeBooleanValue(data) {
     data.ativo = !data.ativo;
-    this.showDialog(data, "Tem certeza que quer desativar o Administrador?");
+    this.showDialog(data, "Você tem certeza?");
   }
 
   getCheckedRows() {
@@ -164,7 +144,7 @@ export class AdmListComponent implements OnInit, OnDestroy {
     this.confirmDialogService.confirmThis(
       message,
       () => {
-        this.admService.updateAdm(data);
+        this.admService.update(data);
       },
       () => {
         data.ativo = !data.ativo;
@@ -175,6 +155,5 @@ export class AdmListComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.dataSub.unsubscribe();
-    this.authStatusSub.unsubscribe();
   }
 }
