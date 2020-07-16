@@ -5,7 +5,7 @@ import { HttpClient } from "@angular/common/http";
 import { Router } from "@angular/router";
 
 import { Adm } from "../../models/adm.model";
-import { DataTable } from "src/app/models/dataTable.model";
+import { DataTable } from "../../models/dataTable.model";
 
 import { AppService } from "../../app.service";
 
