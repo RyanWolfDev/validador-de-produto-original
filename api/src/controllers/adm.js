@@ -122,6 +122,27 @@ exports.put = async (req, res) => {
     let id = req.params.id;
 
     try {
+        //Valido se login de Adm já existe
+        loginExistente = await Adm.findAll({
+            where: {
+                login: req.body.login,
+
+                [Op.and]: [
+                    {
+                        id:
+                        {
+                            [Op.not]: id
+                        }
+                    }
+                ]
+            }
+        })
+
+        //Validação para ver se o LoginExistente não é ele mesmo
+        if (loginExistente[0]) {
+            throw { message: "Login já existente!" }
+        }
+
         propertiesToUpdate = {
             login: req.body.login,
             ativo: req.body.ativo
