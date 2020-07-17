@@ -11,12 +11,17 @@ import { UpgradeComponent } from "../../pages/upgrade/upgrade.component";
 import { ProfileComponent } from "../../pages/profile/profile.component";
 import { AdmListComponent } from "../../pages/adm/list/list.component";
 import { AdmCreateComponent } from "../../pages/adm/create/create.component";
+import { ClienteListComponent } from "../../pages/cliente/list/list.component";
 
 export const AdminLayoutRoutes: Routes = [
   { path: "admin/dashboard", component: DashboardComponent },
+
   { path: "admin/profile", component: ProfileComponent },
   { path: "admin/adm", component: AdmListComponent },
   { path: "admin/adm/:id", component: AdmCreateComponent },
+
+  { path: "admin/cliente", component: ClienteListComponent },
+
 
   { path: "user", component: UserComponent },
   { path: "table", component: TableComponent },

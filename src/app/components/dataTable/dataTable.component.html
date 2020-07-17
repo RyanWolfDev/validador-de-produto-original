@@ -54,7 +54,7 @@
 
                     <!-- Boolean -->
                     <div class="custom-control custom-switch" *ngIf="property.type=='boolean'">
-                        
+
                         <input type="checkbox" [checked]="data[property.name]" class="custom-control-input"
                             [id]="data.id" (change)="onChangeBooleanValue.emit(data)">
 
@@ -70,7 +70,7 @@
         </tbody>
         <tfoot>
             <tr>
-                <td [attr.colspan]="dataTableHead.length">
+                <td [attr.colspan]="dataTableHead.length +1">
                     <ngb-pagination [page]="dataTable.currentPage" [pageSize]="dataTable.pageSize"
                         [collectionSize]="dataTable.count" (pageChange)="onChangedPage.emit($event)">
                     </ngb-pagination>

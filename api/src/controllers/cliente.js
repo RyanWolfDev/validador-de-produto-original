@@ -1,4 +1,5 @@
 const Cliente = require('../models/_index').Cliente;
+const { Op, where } = require("sequelize");
 
 const bcryptjs = require('bcryptjs');
 const jwt = require('jsonwebtoken');
@@ -29,21 +30,55 @@ exports.get = async (req, res) => {
 
     const limit = parseInt(req.query.limit ? req.query.limit : 10);
     const page = parseInt(req.query.page ? req.query.page : 1);
+    const filterSearch = req.query.filterSearch ? req.query.filterSearch : "";
     const offset = limit * (page - 1);
+    let whereQuery = {};
+
+    if (filterSearch) {
+        whereQuery = {
+            [Op.or]: [
+                {
+                    id:
+                    {
+                        [Op.substring]: filterSearch
+                    }
+                },
+                {
+                    nome:
+                    {
+                        [Op.substring]: filterSearch
+                    }
+                },
+                {
+                    email:
+                    {
+                        [Op.substring]: filterSearch
+                    }
+                }
+
+            ]
+        }
+    }
 
     try {
-        totalClientes = await Cliente.findAndCountAll();
+        totalClientes = await Cliente.findAndCountAll({
+            where: whereQuery
+        });
+
         paginatedClientes = await Cliente.findAll({
             attributes: ['id', 'nome', 'email', 'ativo', 'createdAt', 'updatedAt'],
             limit: limit,
             offset: offset,
             order: [
                 ['id', 'DESC']
-            ]
+            ],
+            where: whereQuery
         })
         res.status(200).json({
             message: 'Todos os Clientes foram buscados com sucesso!',
             count: totalClientes.count,
+            currentPage: page,
+            pageSize: limit,
             result: paginatedClientes
         })
     } catch (err) {
@@ -208,21 +243,10 @@ exports.exportCsv = async (req, res) => {
                 ['id', 'DESC']
             ]
         })
-
         const csv = await json2csv.parseAsync(todosClientes, opts);
+        res.header('Content-Type', 'text/csv');
+        res.json(csv);
 
-        await fs.writeFile(path, csv, function (err, data) {
-            if (err) {
-                throw 'Não foi possível exportar os Clientes';
-            }
-            else {
-                console.log('Arquivo Csv criado');
-                setTimeout(function () {
-                    fs.unlinkSync(path);
-                }, 5000)
-                res.status(200).download(path);
-            }
-        });
     } catch (err) {
         res.status(400).json(err);
     }

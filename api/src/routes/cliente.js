@@ -10,7 +10,7 @@ const checkAuthCliente = require('../middlewares/check-auth-cliente');
 
 //Rotas restritas aos Administradores
 router.get('', checkAuthAdm, ClientesController.get);
-router.get('/csv', ClientesController.exportCsv);
+router.get('/csv', checkAuthAdm, ClientesController.exportCsv);
 router.delete('/:id', checkAuthAdm, ClientesController.delete);
 
 //Rotas restritas ao Cliente

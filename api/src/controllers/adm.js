@@ -184,8 +184,14 @@ exports.put = async (req, res) => {
 exports.delete = async (req, res) => {
 
     let id = req.params.id;
+    let loggedId = req.userData.id;
 
     try {
+
+        if (id == loggedId) {
+            throw { message: "Não é possível excluir o administrador logado!" }
+        }
+
         result = await Adm.destroy({
             where: {
                 id: id
@@ -200,9 +206,6 @@ exports.delete = async (req, res) => {
     } catch (err) {
         res.status(400).json(err)
     }
-
-
-
 }
 
 //Logar um Adm 

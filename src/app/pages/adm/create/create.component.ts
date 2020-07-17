@@ -4,13 +4,13 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 
 //Models
-import { Adm } from '../../../models/adm.model';
+import { Adm } from '../adm.model';
 
 //Validators
 import { ConfirmPasswordValidator } from './confirm-password.validator';
 
 //Services
-import { AdmService } from '../../../services/adm/adm.service';
+import { AdmService } from '../adm.service';
 
 @Component({
     selector: 'adm-create',
@@ -78,7 +78,7 @@ export class AdmCreateComponent implements OnInit {
             }
         });
     }
-    
+
     onSubmit() {
 
         if (this.form.invalid) {

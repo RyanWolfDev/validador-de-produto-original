@@ -1,10 +1,10 @@
 import { Injectable } from "@angular/core";
-import { Subject, Observable } from "rxjs";
-import { map, retry } from "rxjs/operators";
+import { Subject } from "rxjs";
+import { map } from "rxjs/operators";
 import { HttpClient } from "@angular/common/http";
 import { Router } from "@angular/router";
 
-import { Adm } from "../../models/adm.model";
+import { Adm } from "./adm.model";
 import { DataTable } from "../../models/dataTable.model";
 
 import { AppService } from "../../app.service";
@@ -63,6 +63,10 @@ export class AdmService {
 
   getById(id: string) {
     return this.http.get<{ message: string, result: Adm }>(`${this.appService.getApiUrl()}/adm/${id}`);
+  }
+
+  delete(id: number) {
+    return this.http.delete(`${this.appService.getApiUrl()}/adm/${id}`);
   }
 
   getDataUpdatedListener() {

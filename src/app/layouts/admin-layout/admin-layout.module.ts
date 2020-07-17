@@ -6,8 +6,12 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { AdminLayoutRoutes } from "./admin-layout.routing";
 
 import { DashboardComponent } from "../../pages/dashboard/dashboard.component";
+
 import { AdmCreateComponent } from "../../pages/adm/create/create.component";
 import { AdmListComponent } from "../../pages/adm/list/list.component";
+
+import { ClienteListComponent } from "../../pages/cliente/list/list.component";
+
 import { UserComponent } from "../../pages/user/user.component";
 import { TableComponent } from "../../pages/table/table.component";
 import { TypographyComponent } from "../../pages/typography/typography.component";
@@ -21,6 +25,7 @@ import { ToolbarButtonComponent } from "../../components/toolbarButton/toolbarBu
 import { FilterTableComponent } from "../../components/filterTable/filterTable.component";
 
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
+
 import { ConfirmDialogModule } from "../../components/confirm-dialog/confirm-dialog.module";
 
 @NgModule({
@@ -30,12 +35,13 @@ import { ConfirmDialogModule } from "../../components/confirm-dialog/confirm-dia
     FormsModule,
     NgbModule,
     ReactiveFormsModule,
-    ConfirmDialogModule
+    ConfirmDialogModule,
   ],
   declarations: [
     DashboardComponent,
     AdmCreateComponent,
     AdmListComponent,
+    ClienteListComponent,
     UserComponent,
     TableComponent,
     UpgradeComponent,
@@ -48,4 +54,4 @@ import { ConfirmDialogModule } from "../../components/confirm-dialog/confirm-dia
     FilterTableComponent,
   ],
 })
-export class AdminLayoutModule {}
+export class AdminLayoutModule { }

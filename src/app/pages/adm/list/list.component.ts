@@ -4,12 +4,12 @@ import { Router } from "@angular/router";
 import { Subscription } from "rxjs";
 
 //Services
-import { AdmService } from "../../../../app/services/adm/adm.service";
+import { AdmService } from "../adm.service";
 import { ConfirmDialogService } from "../../../components/confirm-dialog/confirm-dialog.service";
 
 //Models
 import { ToolbarButton } from "../../../models/toolbarButton.model";
-import { Adm } from "../../../models/adm.model";
+import { Adm } from "../adm.model";
 import { DataTable } from "../../../models/dataTable.model";
 
 @Component({
@@ -68,6 +68,15 @@ export class AdmListComponent implements OnInit, OnDestroy {
 
   //Toolbar Buttons
   toolbarButtons: ToolbarButton[] = [
+    {
+      name: "",
+      colorClass: "danger",
+      iconClass: "nc-icon nc-simple-remove",
+      size: 1,
+      function: () => {
+        this.onDelete();
+      },
+    },
     {
       name: "Novo",
       colorClass: "success",
@@ -134,8 +143,20 @@ export class AdmListComponent implements OnInit, OnDestroy {
     this.showDialog(data, "Você tem certeza?");
   }
 
+  onDelete() {
+    const checkedRows = this.getCheckedRows();
+    checkedRows.forEach((value, index, array) => {
+      this.admService.delete(value.id).subscribe(() => {
+        if (index == array.length - 1) {
+          console.log(index);
+          this.getAdms(this.dataTable.pageSize, this.dataTable.currentPage, this.filterText);
+        }
+      });
+    })
+  }
+
   getCheckedRows() {
-    this.dataTable.result.filter((value, index, array) => {
+    return this.dataTable.result.filter((value, index, array) => {
       return value.isChecked === true;
     });
   }
