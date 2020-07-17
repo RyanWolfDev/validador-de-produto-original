@@ -20,21 +20,20 @@ export class ErrorInterceptor implements HttpInterceptor {
     return next.handle(req).pipe(
       map((event: HttpEvent<any>) => {
         if (event instanceof HttpResponse) {
-          console.log("event--->>>", event);
 
-          this.toastr.success(
-            '<span data-notify="icon" class="nc-icon nc-check-2"></span><span data-notify="message">' +
-              event.body.message +
-              "</span>",
-            "",
-            {
-              timeOut: 4000,
-              enableHtml: true,
-              closeButton: true,
-              toastClass: "alert alert-success alert-with-icon",
-              positionClass: "toast-top-right",
-            }
-          );
+          // this.toastr.success(
+          //   '<span data-notify="icon" class="nc-icon nc-check-2"></span><span data-notify="message">' +
+          //     event.body.message +
+          //     "</span>",
+          //   "",
+          //   {
+          //     timeOut: 4000,
+          //     enableHtml: true,
+          //     closeButton: true,
+          //     toastClass: "alert alert-success alert-with-icon",
+          //     positionClass: "toast-top-right",
+          //   }
+          // );
         }
         return event;
       }),

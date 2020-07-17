@@ -68,6 +68,7 @@ export class AdmCreateComponent implements OnInit {
                     this.form.setValue({
                         id: this.adm.id,
                         login: this.adm.login,
+                        ativo: this.adm.ativo,
                         senha: "",
                         confirmarSenha: ""
                     });
@@ -77,7 +78,7 @@ export class AdmCreateComponent implements OnInit {
             }
         });
     }
-
+    
     onSubmit() {
 
         if (this.form.invalid) {

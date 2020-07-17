@@ -9,7 +9,7 @@
 
             <div class="card-body">
 
-                <form [formGroup]="form" (keydown.enter)="onSubmit()" (ngSubmit)="onSubmit()">
+                <form [formGroup]="form" (ngSubmit)="onSubmit()" (keydown.enter)="$event.preventDefault()" >
 
                     <div class="row px-1">
                         <div class="col-md-9">

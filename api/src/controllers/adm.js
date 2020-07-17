@@ -160,7 +160,6 @@ exports.put = async (req, res) => {
         });
 
         if (result[0]) {
-
             admUpdated = await Adm.findByPk(id, {
                 attributes: ['id', 'login', 'ativo', 'createdAt', 'updatedAt'],
             });

@@ -16,7 +16,7 @@
 </div>
 
 <div class="table-responsive">
-    <table class="table table-striped" *ngIf="dataTable.result.length > 0">
+    <table class="table table-hover" *ngIf="dataTable.result.length > 0">
         <thead>
             <tr>
                 <th *ngFor="let item of dataTableHead">
@@ -27,31 +27,44 @@
                         {{item}}
                     </span>
                 </th>
+
+                <!-- Row Edit/Detail -->
+                <th></th>
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let data of dataTable.result; let dataIndex = index">
-                <td *ngFor="let property of dataTableProperties; let propertyIndex = index">
+            <tr class="clickable-area" *ngFor="let data of dataTable.result; let dataIndex = index">
+                <td *ngFor="let property of dataTableProperties; let propertyIndex = index"
+                    (click)="onRowChecked(dataIndex)">
 
-                    <span *ngIf="property.type=='checkbox'">
-                        <input type="checkbox" [checked]="data.isChecked" value="" id="dataIndex"
-                            (change)="onRowChecked(dataIndex)">
+                    <!-- Checkbox -->
+                    <span *ngIf=" property.type=='checkbox'">
+                        <input type="checkbox" [checked]="data.isChecked" value="" id="dataIndex">
                     </span>
 
+                    <!-- Text -->
                     <span *ngIf="property.type=='text'">
                         {{data[property.name]}}
                     </span>
 
+                    <!-- Date -->
                     <span *ngIf="property.type=='date'">
                         {{data[property.name] | date: 'dd/MM/yyyy'}}
                     </span>
 
+                    <!-- Boolean -->
                     <div class="custom-control custom-switch" *ngIf="property.type=='boolean'">
+                        
                         <input type="checkbox" [checked]="data[property.name]" class="custom-control-input"
                             [id]="data.id" (change)="onChangeBooleanValue.emit(data)">
+
                         <label class="custom-control-label" [for]="data.id"></label>
                     </div>
-
+                </td>
+                <td (click)="getDetail.emit(data.id)">
+                    <a>
+                        <i class="nc-icon nc-minimal-right"></i>
+                    </a>
                 </td>
             </tr>
         </tbody>

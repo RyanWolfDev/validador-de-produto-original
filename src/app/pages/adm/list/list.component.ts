@@ -140,6 +140,10 @@ export class AdmListComponent implements OnInit, OnDestroy {
     });
   }
 
+  getDetail(id: number) {
+    this.router.navigate([`/admin/adm/${id}`]);
+  }
+
   showDialog(data, message) {
     this.confirmDialogService.confirmThis(
       message,
