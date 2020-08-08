@@ -9,6 +9,7 @@ import { DashboardComponent } from "../../pages/dashboard/dashboard.component";
 
 import { AdmCreateComponent } from "../../pages/adm/create/create.component";
 import { AdmListComponent } from "../../pages/adm/list/list.component";
+import { AdmProfileComponent } from "../../pages/adm/profile/adm-profile.component";
 
 import { ClienteListComponent } from "../../pages/cliente/list/list.component";
 
@@ -41,6 +42,7 @@ import { ConfirmDialogModule } from "../../components/confirm-dialog/confirm-dia
     DashboardComponent,
     AdmCreateComponent,
     AdmListComponent,
+    AdmProfileComponent,
     ClienteListComponent,
     UserComponent,
     TableComponent,

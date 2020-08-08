@@ -1,0 +1,80 @@
+<div class="row">
+
+    <div class="col-md-12">
+        <div class="card card-user">
+            <div class="card-header">
+                <h5 class="card-title">{{pageTitle}}</h5>
+            </div>
+            <div class="card-body">
+                <form class="px-1" [formGroup]="form" (ngSubmit)="onSubmit()" (keydown.enter)="$event.preventDefault()">
+
+                    <div class="row">
+                        <div class="col-md-12">
+
+                            <div class="form-group">
+                                <label>Login</label>
+                                <input formControlName="login" type="text" class="form-control">
+
+                                <div *ngIf="login.invalid && (login.dirty || login.touched)" class="text-danger">
+                                    <div *ngIf="login.errors.required">{{fieldRequiredMessage}}</div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-4">
+
+                            <div class="form-group">
+                                <label>Nova Senha</label>
+                                <input formControlName="novaSenha" type="password" class="form-control">
+
+                                <div *ngIf="novaSenha.invalid && (novaSenha.dirty || novaSenha.touched)"
+                                    class="text-danger">
+                                    <div *ngIf="novaSenha.errors.required">{{fieldRequiredMessage}}</div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-4">
+
+                            <div class="form-group">
+                                <label>Confirmar Nova Senha</label>
+                                <input formControlName="confirmarNovaSenha" type="password" class="form-control">
+
+                                <div *ngIf="confirmarNovaSenha.invalid && (confirmarNovaSenha.dirty || confirmarNovaSenha.touched)"
+                                    class="text-danger">
+                                    <div *ngIf="confirmarNovaSenha.errors.confirmPasswordValidator">As senhas não são as
+                                        mesmas!</div>
+                                    <div *ngIf="confirmarNovaSenha.errors.required">{{fieldRequiredMessage}}</div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-4">
+
+                            <div class="form-group">
+                                <label>Senha Atual</label>
+                                <input formControlName="senhaAtual" type="password" class="form-control">
+                                <small class="text-muted">Obrigatória somente para atualização de senha</small>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="update ml-auto mr-auto">
+
+                            <button type="button" (click)='onCancel()' class="btn btn-dark btn-round">Cancelar</button>
+
+                            <button type="submit" [disabled]="!form.valid"
+                                class="btn btn-primary btn-round">Salvar</button>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

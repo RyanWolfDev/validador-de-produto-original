@@ -8,7 +8,7 @@ import { IconsComponent } from "../../pages/icons/icons.component";
 import { MapsComponent } from "../../pages/maps/maps.component";
 import { NotificationsComponent } from "../../pages/notifications/notifications.component";
 import { UpgradeComponent } from "../../pages/upgrade/upgrade.component";
-import { ProfileComponent } from "../../pages/profile/profile.component";
+import { AdmProfileComponent } from "../../pages/adm/profile/adm-profile.component";
 import { AdmListComponent } from "../../pages/adm/list/list.component";
 import { AdmCreateComponent } from "../../pages/adm/create/create.component";
 import { ClienteListComponent } from "../../pages/cliente/list/list.component";
@@ -16,7 +16,7 @@ import { ClienteListComponent } from "../../pages/cliente/list/list.component";
 export const AdminLayoutRoutes: Routes = [
   { path: "admin/dashboard", component: DashboardComponent },
 
-  { path: "admin/profile", component: ProfileComponent },
+  { path: "admin/profile", component: AdmProfileComponent },
   { path: "admin/adm", component: AdmListComponent },
   { path: "admin/adm/:id", component: AdmCreateComponent },
 
