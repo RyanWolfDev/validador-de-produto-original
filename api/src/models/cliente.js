@@ -32,6 +32,10 @@ module.exports = (sequelize, DataTypes) => {
     }, {
         freezeTableName: true
     });
+    
+    Cliente.associate = function (models) {
+        Cliente.hasMany(models.Autorizacao, { foreignKey: 'cliente_id', as: 'autorizacoes', onDelete: 'cascade' })
+    };
 
     //Para não retornar a senha na criação
     Cliente.prototype.toJSON = function () {

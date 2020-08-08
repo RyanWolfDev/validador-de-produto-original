@@ -1,4 +1,8 @@
 const Cliente = require('../models/_index').Cliente;
+const Autorizacao = require('../models/_index').Autorizacao;
+const Produto = require('../models/_index').Produto;
+const Token = require('../models/_index').Token;
+
 const { Op, where } = require("sequelize");
 
 const bcryptjs = require('bcryptjs');
@@ -66,12 +70,25 @@ exports.get = async (req, res) => {
         });
 
         paginatedClientes = await Cliente.findAll({
-            attributes: ['id', 'nome', 'email', 'ativo', 'createdAt', 'updatedAt'],
+            // attributes: ['id', 'nome', 'email', 'ativo', 'createdAt', 'updatedAt'],
             limit: limit,
             offset: offset,
             order: [
                 ['id', 'DESC']
             ],
+            include: [{
+                model: Autorizacao,
+                as: 'autorizacoes',
+                include: {
+                    model: Token,
+                    as: 'token',
+                    include: {
+                        model: Produto,
+                        as: 'produto',
+
+                    }
+                }
+            }],
             where: whereQuery
         })
         res.status(200).json({
@@ -94,6 +111,19 @@ exports.getById = async (req, res) => {
     try {
         result = await Cliente.findByPk(id, {
             attributes: ['id', 'nome', 'email', 'ativo', 'createdAt', 'updatedAt'],
+            include: [{
+                model: Autorizacao,
+                as: 'autorizacoes',
+                include: {
+                    model: Token,
+                    as: 'token',
+                    include: {
+                        model: Produto,
+                        as: 'produto',
+
+                    }
+                }
+            }],
         });
 
         if (result) {
