@@ -69,12 +69,12 @@ export class AdmListComponent implements OnInit, OnDestroy {
   //Toolbar Buttons
   toolbarButtons: ToolbarButton[] = [
     {
-      name: "",
+      name: "Excluir",
       colorClass: "danger",
       iconClass: "nc-icon nc-simple-remove",
-      size: 1,
+      size: 3,
       function: () => {
-        this.onDelete();
+        this.showDialog(null, "Tem certeza que deseja remover o(s) administradores? Isso pode ser irreversível");
       },
     },
     {
@@ -140,7 +140,7 @@ export class AdmListComponent implements OnInit, OnDestroy {
 
   onChangeBooleanValue(data) {
     data.ativo = !data.ativo;
-    this.showDialog(data, "Você tem certeza?");
+    this.showDialog(data, "Você tem certeza disso?");
   }
 
   onDelete() {
@@ -166,13 +166,21 @@ export class AdmListComponent implements OnInit, OnDestroy {
   }
 
   showDialog(data, message) {
+
     this.confirmDialogService.confirmThis(
       message,
       () => {
-        this.admService.update(data);
+        //If data is not empty it means the operation is an update, else is a deletion 
+        if (data) {
+          this.admService.update(data);
+        } else {
+          this.onDelete();
+        }
       },
       () => {
-        data.ativo = !data.ativo;
+        if (data) {
+          data.ativo = !data.ativo;
+        }
         return;
       }
     );

@@ -63,7 +63,7 @@ export class AdmCreateComponent implements OnInit {
                 this.confirmarSenha.disable();
 
                 this.pageTitle = `ID: ${param}`;
-                this.admService.getById(param).subscribe(response => {
+                this.admService.getById(parseInt(param)).subscribe(response => {
                     this.adm = response.result;
                     this.form.setValue({
                         id: this.adm.id,

@@ -61,7 +61,7 @@ export class AdmService {
       });
   }
 
-  getById(id: string) {
+  getById(id:number) {
     return this.http.get<{ message: string, result: Adm }>(`${this.appService.getApiUrl()}/adm/${id}`);
   }
 

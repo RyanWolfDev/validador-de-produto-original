@@ -69,10 +69,10 @@ export class ClienteListComponent implements OnInit, OnDestroy {
     //Toolbar Buttons
     toolbarButtons: ToolbarButton[] = [
         {
-            name: "Export CSV",
+            name: "Exportar CSV",
             colorClass: "warning",
             iconClass: "nc-icon nc-cloud-download-93",
-            size: 3,
+            size: 4,
             function: () => {
                 this.exportToCSV();
             },
@@ -127,7 +127,7 @@ export class ClienteListComponent implements OnInit, OnDestroy {
 
     onChangeBooleanValue(data) {
         data.ativo = !data.ativo;
-        this.showDialog(data, "Você tem certeza?");
+        this.showDialog(data, "Você tem certeza disso?");
     }
 
     getCheckedRows() {

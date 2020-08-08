@@ -14,13 +14,13 @@ export class LoginService {
   private token: string;
   private tokenTimer: any;
   private authStatusListener = new Subject<boolean>();
-  private userId: string;
+  private userId: number;
 
   constructor(
     private http: HttpClient,
     private router: Router,
     private appService: AppService
-  ) {}
+  ) { }
 
   getToken() {
     return this.token;
@@ -102,26 +102,30 @@ export class LoginService {
 
   private saveAuthData(userData: LoginModelResponse, expirationDate: Date) {
     localStorage.setItem("token", userData.token);
-    localStorage.setItem("userId", userData.adm_id);
+    localStorage.setItem("userId", userData.adm_id.toString());
+    localStorage.setItem("login", userData.login);
     localStorage.setItem("expiresIn", expirationDate.toISOString());
   }
 
   private clearAuthData() {
     localStorage.removeItem("token");
     localStorage.removeItem("userId");
+    localStorage.removeItem("login");
     localStorage.removeItem("expiresIn");
   }
 
-  private getAuthData() {
+  getAuthData() {
     const token = localStorage.getItem("token");
     const userId = localStorage.getItem("userId");
+    const login = localStorage.getItem("login");
     const expiresIn = localStorage.getItem("expiresIn");
     if (!token && !expiresIn) {
       return;
     }
     return {
       token: token,
-      userId: userId,
+      userId: parseInt(userId),
+      login: login,
       expiresIn: new Date(expiresIn),
     };
   }
