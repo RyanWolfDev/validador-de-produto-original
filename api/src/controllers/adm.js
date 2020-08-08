@@ -148,8 +148,28 @@ exports.put = async (req, res) => {
             ativo: req.body.ativo
         };
 
-        if (req.body.senha) {
-            const senhaHashed = await bcryptjs.hash(req.body.senha, 10);
+        //Se for atualização da senha do Profile
+        if (req.body.novaSenha) {
+
+            admExistente = await Adm.findAll({
+                where: {
+                    id: req.userData.id
+                }
+            })
+
+            admExistente = admExistente[0];
+
+            if (!admExistente)
+                throw { message: "Não foi possível alterar a senha do Administrador logado" }
+
+
+            senhaIsEqual = await bcryptjs.compare(req.body.senhaAtual, admExistente.senha);
+
+            if (!senhaIsEqual) {
+                throw { message: "Senha atual incorreta!" }
+            }
+
+            const senhaHashed = await bcryptjs.hash(req.body.novaSenha, 10);
             propertiesToUpdate.senha = senhaHashed;
         }
 
@@ -176,6 +196,7 @@ exports.put = async (req, res) => {
             });
         }
     } catch (err) {
+        console.log(err);
         res.status(400).json(err);
     }
 }
@@ -247,6 +268,7 @@ exports.login = async (req, res) => {
         res.status(200).json({
             message: "Administrador logado com sucesso!",
             adm_id: admExistente.id,
+            login: admExistente.login,
             token: token,
             expiresIn: 3600000
 
