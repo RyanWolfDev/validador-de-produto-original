@@ -27,6 +27,8 @@ export class NavbarComponent implements OnInit, OnDestroy {
   userIsAuthenticated = false;
   private authListenerSubs: Subscription;
 
+  userLogin: string = '';
+
   public isCollapsed = true;
   @ViewChild("navbar-cmp", { static: false }) button;
 
@@ -56,6 +58,8 @@ export class NavbarComponent implements OnInit, OnDestroy {
     this.router.events.subscribe((event) => {
       this.sidebarClose();
     });
+
+    this.userLogin = this.loginService.getAuthData().login;
   }
   getTitle() {
     var titlee = this.location.prepareExternalUrl(this.location.path());
