@@ -3,7 +3,6 @@ const Adm = require('../models/_index').Adm;
 
 module.exports = async (req, res, next) => {
     try {
-        var test = req._headers;
         const token = await req.headers.authorization.split(" ")[1];
 
         const decodedToken = await jwt.verify(token, 'LUCAS_COTRIM_DEV');
@@ -12,7 +11,6 @@ module.exports = async (req, res, next) => {
         isAdm = await Adm.findAll({
             where: {
                 id: decodedToken.id,
-                login: decodedToken.login
             }
         });
 
