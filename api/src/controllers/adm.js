@@ -149,7 +149,7 @@ exports.put = async (req, res) => {
         };
 
         //Se for atualização da senha do Profile
-        if (req.body.novaSenha) {
+        if (req.body.senhaAtual && req.body.novaSenha) {
 
             admExistente = await Adm.findAll({
                 where: {
@@ -171,6 +171,8 @@ exports.put = async (req, res) => {
 
             const senhaHashed = await bcryptjs.hash(req.body.novaSenha, 10);
             propertiesToUpdate.senha = senhaHashed;
+        } else if (req.body.senhaAtual || req.body.novaSenha) {
+            throw { message: "Preencha os campos de Nova senha e Senha Atual para atualização de senha" }
         }
 
         result = await Adm.update(propertiesToUpdate, {
