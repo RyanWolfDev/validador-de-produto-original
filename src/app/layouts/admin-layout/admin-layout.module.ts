@@ -1,3 +1,4 @@
+//Angular
 import { NgModule } from "@angular/core";
 import { RouterModule } from "@angular/router";
 import { CommonModule } from "@angular/common";
@@ -5,13 +6,15 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 
 import { AdminLayoutRoutes } from "./admin-layout.routing";
 
+//Pages
 import { DashboardComponent } from "../../pages/dashboard/dashboard.component";
 
-import { AdmCreateComponent } from "../../pages/adm/create/create.component";
-import { AdmListComponent } from "../../pages/adm/list/list.component";
-import { AdmProfileComponent } from "../../pages/adm/profile/adm-profile.component";
+import { AdmCreateComponent } from "./pages/adm/create/create.component";
+import { AdmListComponent } from "./pages/adm/list/list.component";
+import { AdmProfileComponent } from "./pages/adm/profile/adm-profile.component";
 
-import { ClienteListComponent } from "../../pages/cliente/list/list.component";
+import { ClienteListComponent } from "./pages/cliente/list/list.component";
+import { ClienteDetailedComponent } from "./pages/cliente/detailed/cliente-detailed.component";
 
 import { UserComponent } from "../../pages/user/user.component";
 import { TableComponent } from "../../pages/table/table.component";
@@ -21,13 +24,15 @@ import { MapsComponent } from "../../pages/maps/maps.component";
 import { NotificationsComponent } from "../../pages/notifications/notifications.component";
 import { UpgradeComponent } from "../../pages/upgrade/upgrade.component";
 
+//App Components
 import { DataTableComponent } from "../../components/dataTable/dataTable.component";
 import { ToolbarButtonComponent } from "../../components/toolbarButton/toolbarButton.component";
 import { FilterTableComponent } from "../../components/filterTable/filterTable.component";
+import { ConfirmDialogModule } from "../../components/confirm-dialog/confirm-dialog.module";
+
 
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 
-import { ConfirmDialogModule } from "../../components/confirm-dialog/confirm-dialog.module";
 
 @NgModule({
   imports: [
@@ -44,6 +49,7 @@ import { ConfirmDialogModule } from "../../components/confirm-dialog/confirm-dia
     AdmListComponent,
     AdmProfileComponent,
     ClienteListComponent,
+    ClienteDetailedComponent,
     UserComponent,
     TableComponent,
     UpgradeComponent,
@@ -53,7 +59,7 @@ import { ConfirmDialogModule } from "../../components/confirm-dialog/confirm-dia
     NotificationsComponent,
     DataTableComponent,
     ToolbarButtonComponent,
-    FilterTableComponent,
+    FilterTableComponent
   ],
 })
 export class AdminLayoutModule { }

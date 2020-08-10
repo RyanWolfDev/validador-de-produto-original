@@ -14,14 +14,14 @@ import { AppComponent } from "./app.component";
 import { AppRoutes } from "./app.routing";
 
 import { AdminLayoutComponent } from "./layouts/admin-layout/admin-layout.component";
-import { LoginAdminLayoutComponent } from "./layouts/login-admin-layout/login-admin-layout.component";
 
 import { ErrorInterceptor } from "./interceptors/error/error-interceptor";
 import { AuthInterceptor } from "./interceptors/auth-interceptor/auth-interceptor";
 import { AuthGuard } from "./app-auth.guard";
+import { LoginAdminComponent } from "./layouts/admin-layout/login-admin/login-admin.component";
 
 @NgModule({
-  declarations: [AppComponent, AdminLayoutComponent, LoginAdminLayoutComponent],
+  declarations: [AppComponent, AdminLayoutComponent,LoginAdminComponent],
   imports: [
     BrowserAnimationsModule,
     RouterModule.forRoot(AppRoutes, {

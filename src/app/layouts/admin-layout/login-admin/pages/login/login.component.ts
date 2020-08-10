@@ -2,14 +2,14 @@ import { Component, OnInit, OnDestroy } from "@angular/core";
 import { Subscription } from "rxjs";
 import { FormBuilder, Validators } from "@angular/forms";
 
-import { LoginService } from "../../services/login/login.service";
+import { LoginService } from "../login.service";
 
 @Component({
   selector: "login",
   moduleId: module.id,
   templateUrl: "login.component.html",
   styleUrls: [
-    "../../layouts/login-admin-layout/login-admin-layout.component.scss",
+    "../../login-admin.component.scss",
   ],
 })
 export class LoginComponent implements OnInit, OnDestroy {

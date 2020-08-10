@@ -5,12 +5,13 @@ import { Subscription } from "rxjs";
 
 //Services
 import { AdmService } from "../adm.service";
-import { ConfirmDialogService } from "../../../components/confirm-dialog/confirm-dialog.service";
+import { ConfirmDialogService } from "../../../../../components/confirm-dialog/confirm-dialog.service";
 
 //Models
-import { ToolbarButton } from "../../../models/toolbarButton.model";
+import { ToolbarButton } from "../../../../../components/toolbarButton/toolbarButton.model";
 import { Adm } from "../adm.model";
-import { DataTable } from "../../../models/dataTable.model";
+import { DataTable } from "../../../../../components/dataTable/dataTable.model";
+import { ToastrService } from "ngx-toastr";
 
 @Component({
   selector: "adm-list",
@@ -95,7 +96,8 @@ export class AdmListComponent implements OnInit, OnDestroy {
   constructor(
     public admService: AdmService,
     private router: Router,
-    private confirmDialogService: ConfirmDialogService
+    private confirmDialogService: ConfirmDialogService,
+    private toastr: ToastrService
   ) { }
 
   ngOnInit() {
@@ -145,6 +147,9 @@ export class AdmListComponent implements OnInit, OnDestroy {
 
   onDelete() {
     const checkedRows = this.getCheckedRows();
+    if (checkedRows.length < 1) {
+      this.showNotification('Nenhum Administrador foi selecionado', 'warning')
+    }
     checkedRows.forEach((value, index, array) => {
       this.admService.delete(value.id).subscribe(() => {
         if (index == array.length - 1) {
@@ -182,6 +187,22 @@ export class AdmListComponent implements OnInit, OnDestroy {
           data.ativo = !data.ativo;
         }
         return;
+      }
+    );
+  }
+
+  showNotification(message: string, type: string) {
+    this.toastr.error(
+      '<span data-notify="icon" class="nc-icon nc-alert-circle-i"></span><span data-notify="message">' +
+      message +
+      "</span>",
+      "",
+      {
+        timeOut: 4000,
+        enableHtml: true,
+        closeButton: true,
+        toastClass: `alert alert-${type} alert-with-icon`,
+        positionClass: "toast-top-right",
       }
     );
   }

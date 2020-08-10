@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from "@angular/core";
-import { LoginService } from "../..//services/login/login.service";
+import { LoginService } from "../../layouts/admin-layout/login-admin/pages/login.service";
 import { Subscription } from "rxjs";
 
 export interface RouteInfo {

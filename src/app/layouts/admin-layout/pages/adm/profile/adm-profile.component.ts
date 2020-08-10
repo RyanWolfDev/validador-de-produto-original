@@ -11,7 +11,7 @@ import { ConfirmPasswordValidator } from '../create/confirm-password.validator';
 
 //Services
 import { AdmService } from '../adm.service';
-import { LoginService } from '../../../services/login/login.service';
+import { LoginService } from '../../../login-admin/pages/login.service';
 
 @Component({
   selector: "adm-profile",

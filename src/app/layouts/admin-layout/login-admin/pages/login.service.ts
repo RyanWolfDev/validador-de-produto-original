@@ -3,8 +3,8 @@ import { HttpClient } from "@angular/common/http";
 import { Subject } from "rxjs";
 import { Router } from "@angular/router";
 
-import { LoginModelData, LoginModelResponse } from "../../models/login.model";
-import { AppService } from "../../app.service";
+import { LoginModelData, LoginModelResponse } from "./login.model";
+import { AppService } from "../../../../app.service";
 
 @Injectable({
   providedIn: "root",

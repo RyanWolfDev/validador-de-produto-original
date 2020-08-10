@@ -4,6 +4,7 @@ import {
   Output,
   EventEmitter,
   OnChanges,
+  OnInit,
 } from "@angular/core";
 
 @Component({
@@ -16,6 +17,7 @@ export class DataTableComponent implements OnChanges {
   @Input() dataTableHead: string[];
   @Input() dataTableProperties: Object[];
   @Input() pageSizeOptions: number[];
+  @Input() isClickable: boolean;
   @Output("onChangedPage") onChangedPage: EventEmitter<any> = new EventEmitter();
   @Output("onChangedPageSize") onChangedPageSize: EventEmitter<any> = new EventEmitter();
   @Output("onChangeBooleanValue") onChangeBooleanValue: EventEmitter<any> = new EventEmitter();
@@ -26,6 +28,9 @@ export class DataTableComponent implements OnChanges {
 
   ngOnChanges() {
     this.isCheckAllChecked = false;
+    if (this.isClickable == null) {
+      this.isClickable = true;
+    }
   }
 
   onRowChecked(index) {

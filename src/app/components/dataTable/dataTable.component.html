@@ -29,7 +29,7 @@
                 </th>
 
                 <!-- Row Edit/Detail -->
-                <th></th>
+                <th *ngIf="isClickable"></th>
             </tr>
         </thead>
         <tbody>
@@ -61,7 +61,7 @@
                         <label class="custom-control-label" [for]="data.id"></label>
                     </div>
                 </td>
-                <td (click)="getDetail.emit(data.id)">
+                <td *ngIf="isClickable" (click)="getDetail.emit(data.id)">
                     <a>
                         <i class="nc-icon nc-minimal-right"></i>
                     </a>
@@ -70,7 +70,7 @@
         </tbody>
         <tfoot>
             <tr>
-                <td [attr.colspan]="dataTableHead.length +1">
+                <td [attr.colspan]="isClickable ? dataTableHead.length +1 : dataTableHead.length">
                     <ngb-pagination [page]="dataTable.currentPage" [pageSize]="dataTable.pageSize"
                         [collectionSize]="dataTable.count" (pageChange)="onChangedPage.emit($event)">
                     </ngb-pagination>

@@ -5,9 +5,9 @@ import { HttpClient } from "@angular/common/http";
 import { Router } from "@angular/router";
 
 import { Adm } from "./adm.model";
-import { DataTable } from "../../models/dataTable.model";
+import { DataTable } from "../../../../components/dataTable/dataTable.model";
 
-import { AppService } from "../../app.service";
+import { AppService } from "../../../../app.service";
 
 @Injectable({
   providedIn: "root",

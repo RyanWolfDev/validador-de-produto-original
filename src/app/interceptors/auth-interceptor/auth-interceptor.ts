@@ -4,7 +4,7 @@ import {
   HttpHandler,
 } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { LoginService } from "../../services/login/login.service";
+import { LoginService } from "../../layouts/admin-layout/login-admin/pages/login.service";
 
 //Pego o token do locastorage e seto no header de toda requisição ao servidor
 @Injectable()

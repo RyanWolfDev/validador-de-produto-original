@@ -1,15 +1,15 @@
 //Angular
 import { Component, OnInit, OnDestroy } from "@angular/core";
 import { Router } from "@angular/router";
-import { Subscription } from "rxjs"; 
+import { Subscription } from "rxjs";
 
 //Services
-import { ConfirmDialogService } from "../../../components/confirm-dialog/confirm-dialog.service";
+import { ConfirmDialogService } from "../../../../../components/confirm-dialog/confirm-dialog.service";
 import { ClienteService } from "../cliente.service";
 
 //Models
-import { ToolbarButton } from "../../../models/toolbarButton.model";
-import { DataTable } from "../../../models/dataTable.model";
+import { ToolbarButton } from "../../../../../components/toolbarButton/toolbarButton.model";
+import { DataTable } from "../../../../../components/dataTable/dataTable.model";
 import { Cliente } from "../cliente.model";
 
 @Component({
@@ -160,6 +160,10 @@ export class ClienteListComponent implements OnInit, OnDestroy {
         const blob = new Blob([data], { type: 'text/csv' });
         const url = window.URL.createObjectURL(blob);
         window.open(url);
+    }
+
+    getDetail(id: number) {
+        this.router.navigate([`/admin/cliente/${id}`]);
     }
 
     ngOnDestroy() {

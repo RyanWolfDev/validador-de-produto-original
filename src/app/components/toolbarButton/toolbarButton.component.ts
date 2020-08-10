@@ -1,5 +1,5 @@
 import { Component, Input, Output, EventEmitter } from "@angular/core";
-import { ToolbarButton } from "../../models/toolbarButton.model";
+import { ToolbarButton } from "./toolbarButton.model";
 
 @Component({
   selector: "toolbar-button",

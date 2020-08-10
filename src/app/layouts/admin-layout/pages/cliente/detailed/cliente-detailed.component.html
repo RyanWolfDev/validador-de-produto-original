@@ -1,0 +1,77 @@
+<div *ngIf="cliente" class="row">
+
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="my-0">{{pageTitle}}</h5>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="card">
+
+            <div class="card-body">
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
+                        <span class="text-primary font-weight-bold">Id:</span>
+                        <span class="float-right">{{cliente.id}}</span>
+
+                    </li>
+                    <li class="list-group-item">
+                        <span class="text-primary font-weight-bold">Nome:</span>
+                        <span class="float-right">{{cliente.nome}}</span>
+
+                    </li>
+                    <li class="list-group-item">
+                        <span class="text-primary font-weight-bold">E-mail:</span>
+                        <span class="float-right">{{cliente.email}}</span>
+
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-body">
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
+                        <span class="text-primary font-weight-bold">Data de Criação:</span>
+                        <span class="float-right">{{cliente.createdAt | date: 'dd/MM/yyyy'}}</span>
+
+                    </li>
+                    <li class="list-group-item">
+                        <span class="text-primary font-weight-bold">Última Atualização:</span>
+                        <span class="float-right">{{cliente.updatedAt | date: 'dd/MM/yyyy'}}</span>
+                    </li>
+                    <li class="list-group-item">
+                        <span class="text-primary font-weight-bold">Ativo:</span>
+                        <span *ngIf="cliente.ativo"
+                            class="badge badge-pill badge-success float-right">Sim</span>
+                        <span *ngIf="!cliente.ativo"
+                            class="badge badge-pill badge-danger float-right">Não</span>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-12">
+        <div class="card">
+
+            <div class="card-header">
+                <h5 class="card-title">Autorizações</h5>
+
+                <data-table [dataTable]="dataTable" [dataTableHead]="dataTableHead"
+                    [dataTableProperties]="dataTableProperties" [pageSizeOptions]="pageSizeOptions"
+                    (onChangedPage)="onChangedPage($event)" (onChangedPageSize)="onChangedPageSize($event)"
+                    [isClickable]="isClickable">
+                </data-table>
+            </div>
+        </div>
+    </div>
+</div>

@@ -9,7 +9,7 @@ import {
 import { ROUTES } from "../../sidebar/sidebar.component";
 import { Router } from "@angular/router";
 import { Location } from "@angular/common";
-import { LoginService } from "../../../services/login/login.service";
+import { LoginService } from "../../../layouts/admin-layout/login-admin/pages/login.service";
 import { Subscription } from "rxjs";
 
 @Component({

@@ -209,6 +209,8 @@ exports.delete = async (req, res) => {
     let id = req.params.id;
     let loggedId = req.userData.id;
 
+    console.log('id: ' + id);
+
     try {
 
         if (id == loggedId) {
