@@ -52,6 +52,11 @@
                         {{data[property.name] | date: 'dd/MM/yyyy'}}
                     </span>
 
+                    <!-- Link -->
+                    <span *ngIf="property.type=='link'">
+                        <a href="http://{{data[property.link]}}" target="_blank">{{property.name}}</a>
+                    </span>
+
                     <!-- Boolean -->
                     <div class="custom-control custom-switch" *ngIf="property.type=='boolean'">
 

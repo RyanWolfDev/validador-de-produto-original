@@ -75,7 +75,10 @@ exports.getFromAdm = async (req, res) => {
 
     try {
 
-        totalAutorizacao = await Autorizacao.findAndCountAll();
+        totalAutorizacao = await Autorizacao.findAndCountAll({
+            where: whereQuery
+        });
+
         paginatedAutorizacao = await Autorizacao.findAll({
             limit: limit,
             offset: offset,
@@ -99,6 +102,8 @@ exports.getFromAdm = async (req, res) => {
         res.status(200).json({
             message: 'Todos as Autorizações foram buscados com sucesso!',
             count: totalAutorizacao.count,
+            currentPage: page,
+            pageSize: limit,
             result: paginatedAutorizacao
         })
 
@@ -118,7 +123,6 @@ exports.getFromCliente = async (req, res) => {
     let whereQuery = {};
 
     try {
-
         if (cliente_id)
             whereQuery = {
                 cliente_id: cliente_id
@@ -153,6 +157,8 @@ exports.getFromCliente = async (req, res) => {
         res.status(200).json({
             message: 'Todos as Autorizações foram buscadas com sucesso!',
             count: totalAutorizacao.count,
+            currentPage: page,
+            pageSize: limit,
             result: paginatedAutorizacao
         })
 

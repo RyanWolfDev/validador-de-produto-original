@@ -1,5 +1,5 @@
 //Angular
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 
 //Models
 import { Cliente } from '../cliente.model';
@@ -7,7 +7,9 @@ import { DataTable } from '../../../../../components/dataTable/dataTable.model';
 
 //Services
 import { ClienteService } from '../cliente.service';
+import { AutorizacaoService } from '../../autorizacao/autorizacao.service';
 import { ParamMap, ActivatedRoute, Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 @Component({
     selector: 'cliente-detailed',
@@ -15,15 +17,16 @@ import { ParamMap, ActivatedRoute, Router } from '@angular/router';
     templateUrl: 'cliente-detailed.component.html'
 })
 
-export class ClienteDetailedComponent implements OnInit {
+export class ClienteDetailedComponent implements OnInit, OnDestroy {
 
     cliente: Cliente;
     pageTitle: string = '';
+    private dataSub: Subscription;
 
     //Pagination
     pageSizeOptions = [10, 25, 50, 100];
 
-    //DataTable
+    //Autorizacao DataTable
     dataTableHead: string[] = [
         "Id",
         "Criado em",
@@ -57,8 +60,9 @@ export class ClienteDetailedComponent implements OnInit {
             type: "text",
         },
         {
-            name: "produto_imagemUrl",
-            type: "text",
+            name: "Visualizar Imagem",
+            type: "link",
+            link: "produto_imagemUrl",
         },
     ];
 
@@ -74,6 +78,7 @@ export class ClienteDetailedComponent implements OnInit {
         private clienteService: ClienteService,
         public route: ActivatedRoute,
         private router: Router,
+        private autorizacaoService: AutorizacaoService
     ) { }
 
     ngOnInit() {
@@ -86,24 +91,41 @@ export class ClienteDetailedComponent implements OnInit {
             this.clienteService.getById(param).subscribe(response => {
                 this.cliente = response.result;
                 this.pageTitle = `${this.cliente.nome}`;
-                this.loadAutorizacoes();
+                this.getAutorizacoes();
             });
         })
     }
 
-    loadAutorizacoes() {
-        this.cliente.autorizacoes.forEach((value, index) => {
-            const autorizacaoToShowInTable = {
-                id: value.id,
-                createdAt: value.createdAt,
-                autorizacao_token: value.token.token,
-                produto_descricao: value.token.produto.descricao,
-                produto_sku: value.token.produto.sku,
-                produto_imagemUrl: value.token.produto.imagemUrl
-            }
+    getAutorizacoes() {
 
-            this.dataTable.result.push(autorizacaoToShowInTable);
-        })
+        this.autorizacaoService.getAll(this.dataTable.pageSize, this.dataTable.currentPage, this.cliente.id);
+
+        this.dataSub = this.autorizacaoService
+            .getDataUpdatedListener()
+            .subscribe((response: DataTable) => {
+                this.dataTable.count = response.count;
+                this.dataTable.currentPage = response.currentPage;
+                this.dataTable.message = response.message;
+                this.dataTable.pageSize = response.pageSize;
+
+                //Monto o objeto de result da forma correta para mostrar no dataTable
+                response.result.forEach((value, index) => {
+                    const autorizacaoToShowInTable = {
+                        id: value.id,
+                        createdAt: value.createdAt,
+                        autorizacao_token: value.token.token,
+                        produto_descricao: value.token.produto.descricao,
+                        produto_sku: value.token.produto.sku,
+                        produto_imagemUrl: value.token.produto.imagemUrl
+                    }
+
+                    this.dataTable.result.push(autorizacaoToShowInTable);
+                })
+            });
+    }
+
+    ngOnDestroy() {
+        this.dataSub.unsubscribe();
     }
 }
 
