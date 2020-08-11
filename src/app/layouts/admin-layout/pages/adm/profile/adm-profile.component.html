@@ -1,12 +1,30 @@
-<div class="row">
+<form class="px-1" [formGroup]="form" (ngSubmit)="onSubmit()" (keydown.enter)="$event.preventDefault()">
 
-    <div class="col-md-12">
-        <div class="card card-user">
-            <div class="card-header">
-                <h5 class="card-title">{{pageTitle}}</h5>
-            </div>
-            <div class="card-body">
-                <form class="px-1" [formGroup]="form" (ngSubmit)="onSubmit()" (keydown.enter)="$event.preventDefault()">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card card-user">
+                <div class="card-header">
+
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <h5 class="card-title">{{pageTitle}}</h5>
+                        </div>
+                        <div class="col-sm-6 ">
+                            <ul class="nav justify-content-end">
+                                <li class="nav-item float-left">
+                                    <button type="button" (click)='onCancel()'
+                                        class="btn btn-dark btn-round">Cancelar</button>
+                                </li>
+                                <li class="nav-item">
+                                    <button type="submit" [disabled]="!form.valid"
+                                        class="btn btn-primary btn-round">Salvar</button>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                </div>
+                <div class="card-body">
 
                     <div class="row">
                         <div class="col-md-12">
@@ -62,19 +80,8 @@
 
                         </div>
                     </div>
-
-                    <div class="row">
-                        <div class="update ml-auto mr-auto">
-
-                            <button type="button" (click)='onCancel()' class="btn btn-dark btn-round">Cancelar</button>
-
-                            <button type="submit" [disabled]="!form.valid"
-                                class="btn btn-primary btn-round">Salvar</button>
-                        </div>
-                    </div>
-
-                </form>
+                </div>
             </div>
         </div>
     </div>
-</div>
+</form>

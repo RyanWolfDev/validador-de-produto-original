@@ -20,8 +20,8 @@ import { Subscription } from 'rxjs';
 export class ClienteDetailedComponent implements OnInit, OnDestroy {
 
     cliente: Cliente;
-    pageTitle: string = '';
     private dataSub: Subscription;
+    pageTitle = "Cliente"
 
     //Pagination
     pageSizeOptions = [10, 25, 50, 100];
@@ -90,7 +90,6 @@ export class ClienteDetailedComponent implements OnInit, OnDestroy {
             const param = paramMap.get("id");
             this.clienteService.getById(param).subscribe(response => {
                 this.cliente = response.result;
-                this.pageTitle = `${this.cliente.nome}`;
                 this.getAutorizacoes();
             });
         })
@@ -122,6 +121,10 @@ export class ClienteDetailedComponent implements OnInit, OnDestroy {
                     this.dataTable.result.push(autorizacaoToShowInTable);
                 })
             });
+    }
+
+    onCancel() {
+        this.router.navigate(["/admin/cliente"]);
     }
 
     ngOnDestroy() {

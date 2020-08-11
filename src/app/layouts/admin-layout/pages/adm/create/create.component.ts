@@ -94,7 +94,6 @@ export class AdmCreateComponent implements OnInit {
 
     onCancel() {
         this.router.navigate(["/admin/adm"]);
-
     }
 
     get id() { return this.form.get('id'); }

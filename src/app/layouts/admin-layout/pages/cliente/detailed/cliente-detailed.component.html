@@ -1,14 +1,23 @@
 <div *ngIf="cliente" class="row">
-
     <div class="col-md-12">
         <div class="card">
-            <div class="card-body">
-                <h5 class="my-0">{{pageTitle}}</h5>
-
+            <div class="card-header">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <h5 class="card-title">{{pageTitle}}</h5>
+                    </div>
+                    <div class="col-sm-6 ">
+                        <ul class="nav justify-content-end">
+                            <li class="nav-item">
+                                <button type="button" (click)='onCancel()'
+                                    class="btn btn-outline-dark btn-round">Cancelar</button>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-
     <div class="col-md-6">
         <div class="card">
 
@@ -49,10 +58,8 @@
                     </li>
                     <li class="list-group-item">
                         <span class="text-primary font-weight-bold">Ativo:</span>
-                        <span *ngIf="cliente.ativo"
-                            class="badge badge-pill badge-success float-right">Sim</span>
-                        <span *ngIf="!cliente.ativo"
-                            class="badge badge-pill badge-danger float-right">Não</span>
+                        <span *ngIf="cliente.ativo" class="badge badge-pill badge-success float-right">Sim</span>
+                        <span *ngIf="!cliente.ativo" class="badge badge-pill badge-danger float-right">Não</span>
                     </li>
 
                 </ul>
