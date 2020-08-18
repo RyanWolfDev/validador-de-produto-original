@@ -32,6 +32,8 @@ import { ConfirmDialogModule } from "../../components/confirm-dialog/confirm-dia
 
 
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
+import { ProdutoListComponent } from "./pages/produto/list/list.component";
+import { ProdutoCreateComponent } from "./pages/produto/create/create.component";
 
 
 @NgModule({
@@ -50,6 +52,8 @@ import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
     AdmProfileComponent,
     ClienteListComponent,
     ClienteDetailedComponent,
+    ProdutoListComponent,
+    ProdutoCreateComponent,
     UserComponent,
     TableComponent,
     UpgradeComponent,

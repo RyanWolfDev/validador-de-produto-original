@@ -4,7 +4,6 @@ const Token = require('../models/_index').Token;
 //Adicionar um Produto ao banco de dados
 exports.post = async (req, res) => {
     try {
-
         result = await Produto.create(req.body);
         res.status(201).json({
             message: "Produto cadastrado com sucesso!",
@@ -20,10 +19,39 @@ exports.get = async (req, res) => {
 
     const limit = parseInt(req.query.limit ? req.query.limit : 10);
     const page = parseInt(req.query.page ? req.query.page : 1);
+    const filterSearch = req.query.filterSearch ? req.query.filterSearch : "";
     const offset = limit * (page - 1);
+    let whereQuery = {};
+
+    if (filterSearch) {
+        whereQuery = {
+            [Op.or]: [
+                {
+                    id:
+                    {
+                        [Op.substring]: filterSearch
+                    }
+                },
+                {
+                    descricao:
+                    {
+                        [Op.substring]: filterSearch
+                    }
+                },
+                {
+                    sku:
+                    {
+                        [Op.substring]: filterSearch
+                    }
+                }
+            ]
+        }
+    }
 
     try {
-        totalProdutos = await Produto.findAndCountAll();
+        totalProdutos = await Produto.findAndCountAll({
+            where: whereQuery
+        });
         paginatedProduto = await Produto.findAll({
             attributes: ['id', 'descricao', 'sku', 'imagemUrl', 'ativo', 'createdAt', 'updatedAt'],
             limit: limit,
@@ -34,11 +62,14 @@ exports.get = async (req, res) => {
             include: [{
                 model: Token,
                 as: 'tokens'
-            }]
+            }],
+            where: whereQuery
         })
         res.status(200).json({
             message: 'Todos os Produtos foram buscados com sucesso!',
             count: totalProdutos.count,
+            currentPage: page,
+            pageSize: limit,
             result: paginatedProduto
         })
     } catch (err) {

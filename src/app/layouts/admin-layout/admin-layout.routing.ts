@@ -14,7 +14,10 @@ import { AdmListComponent } from "./pages/adm/list/list.component";
 import { AdmCreateComponent } from "./pages/adm/create/create.component";
 
 import { ClienteListComponent } from "./pages/cliente/list/list.component";
-import { ClienteDetailedComponent } from "./pages/cliente/detailed/cliente-detailed.component";
+import { ClienteDetailedComponent } from "./pages/cliente/detailed/cliente-detailed.component"; 
+
+import { ProdutoListComponent } from "./pages/produto/list/list.component";
+import { ProdutoCreateComponent } from "./pages/produto/create/create.component";
 
 export const AdminLayoutRoutes: Routes = [
    { path: "admin/dashboard", component: DashboardComponent },
@@ -25,6 +28,10 @@ export const AdminLayoutRoutes: Routes = [
 
   { path: "admin/cliente", component: ClienteListComponent },
   { path: "admin/cliente/:id", component: ClienteDetailedComponent },
+
+  { path: "admin/produto", component: ProdutoListComponent },
+  { path: "admin/produto/:id", component: ProdutoCreateComponent },
+
 
   { path: "user", component: UserComponent },
   { path: "table", component: TableComponent },

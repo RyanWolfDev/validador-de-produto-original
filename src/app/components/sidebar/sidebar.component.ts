@@ -13,8 +13,8 @@ export const ROUTES: RouteInfo[] = [
   { path: "/admin/dashboard", title: "Dashboard", icon: "nc-bank", class: "" },
   { path: "/admin/adm", title: "Administradores", icon: "nc-badge", class: "" },
   { path: "/admin/cliente", title: "Clientes", icon: "nc-circle-10", class: "" },
-  { path: "/admin/produtos", title: "Produtos", icon: "nc-cart-simple", class: "" },
-  { path: "/admin/token", title: "Gerar Tokens", icon: "nc-tag-content", class: "" },
+  { path: "/admin/produto", title: "Produtos", icon: "nc-cart-simple", class: "" },
+  { path: "/admin/token", title: "Tokens", icon: "nc-tag-content", class: "" },
 
   { path: "/icons", title: "Icons", icon: "nc-diamond", class: "" },
   {
