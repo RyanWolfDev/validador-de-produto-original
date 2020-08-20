@@ -1,0 +1,98 @@
+<form class="px-1" [formGroup]="form" (ngSubmit)="onSubmit()" (keydown.enter)="$event.preventDefault()">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <h5 class="card-title">{{pageTitle}}</h5>
+                        </div>
+                        <div class="col-sm-6 ">
+                            <ul class="nav justify-content-end">
+                                <li class="nav-item">
+                                    <button type="button" (click)='onCancel()'
+                                        class="btn btn-outline-dark btn-round">Cancelar</button>
+                                </li>
+                                <li class="nav-item">
+                                    <button type="submit" [disabled]="!form.valid"
+                                        class="btn btn-primary btn-round">Salvar</button>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-body">
+
+
+                    <div class="row">
+                        <div *ngIf="produto" class="col-md-12 mb-4">
+                            <span class="mr-5">Data de Criação: {{produto.createdAt | date: "dd/MM/yyyy"}}</span>
+                            <span class="">Última atualização: {{produto.updatedAt | date: "dd/MM/yyyy"}}</span>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label>SKU</label>
+                                <input formControlName="sku" type="text" class="form-control">
+
+                                <div *ngIf="sku.invalid && (sku.dirty || sku.touched)" class="text-danger">
+                                    <div *ngIf="sku.errors.required">{{fieldRequiredMessage}}</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-9">
+                            <div class="form-group">
+                                <label>Descrição</label>
+                                <input formControlName="descricao" type="text" class="form-control">
+
+                                <div *ngIf="descricao.invalid && (descricao.dirty || descricao.touched)"
+                                    class="text-danger">
+                                    <div *ngIf="descricao.errors.required">{{fieldRequiredMessage}}</div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="col-md-9">
+                            <div class="form-group">
+                                <label>Imagem URL</label>
+                                <input formControlName="imagemUrl" type="text" class="form-control">
+
+                                <div *ngIf="imagemUrl.invalid && (imagemUrl.dirty || imagemUrl.touched)"
+                                    class="text-danger">
+                                    <div *ngIf="imagemUrl.errors.required">{{fieldRequiredMessage}}</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label>Ativo</label>
+                                <div class="custom-control custom-switch">
+                                    <input type="checkbox" formControlName="ativo" [checked]="ativo" [id]="ativoToggle"
+                                        class="custom-control-input">
+                                    <label class="custom-control-label" [for]="ativoToggle"></label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div *ngIf="mode ==='edit'" class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title">Tokens</h5>
+
+                    <data-table [dataTable]="dataTable" [dataTableHead]="dataTableHead"
+                        [dataTableProperties]="dataTableProperties" [pageSizeOptions]="pageSizeOptions"
+                        (onChangedPage)="onChangedPage($event)" (onChangedPageSize)="onChangedPageSize($event)"
+                        [isClickable]="isClickable">
+                    </data-table>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

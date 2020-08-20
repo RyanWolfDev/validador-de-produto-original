@@ -1,5 +1,7 @@
 //Angular
 import { Component, OnInit, OnDestroy } from '@angular/core';
+import { ParamMap, ActivatedRoute, Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 //Models
 import { Cliente } from '../cliente.model';
@@ -8,8 +10,7 @@ import { DataTable } from '../../../../../components/dataTable/dataTable.model';
 //Services
 import { ClienteService } from '../cliente.service';
 import { AutorizacaoService } from '../../autorizacao/autorizacao.service';
-import { ParamMap, ActivatedRoute, Router } from '@angular/router';
-import { Subscription } from 'rxjs';
+
 
 @Component({
     selector: 'cliente-detailed',

@@ -198,7 +198,6 @@ exports.put = async (req, res) => {
             });
         }
     } catch (err) {
-        console.log(err);
         res.status(400).json(err);
     }
 }
@@ -208,8 +207,6 @@ exports.delete = async (req, res) => {
 
     let id = req.params.id;
     let loggedId = req.userData.id;
-
-    console.log('id: ' + id);
 
     try {
 

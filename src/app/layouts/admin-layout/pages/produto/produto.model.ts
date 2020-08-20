@@ -6,5 +6,6 @@ export interface Produto {
     ativo: boolean;
     createdAt: Date;
     updatedAt: Date;
+    tokens: any[];
     isChecked: boolean;
 }

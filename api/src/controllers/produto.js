@@ -1,6 +1,8 @@
 const Produto = require('../models/_index').Produto;
 const Token = require('../models/_index').Token;
 
+const { Op, where } = require("sequelize");
+
 //Adicionar um Produto ao banco de dados
 exports.post = async (req, res) => {
     try {

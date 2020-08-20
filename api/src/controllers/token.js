@@ -63,16 +63,44 @@ exports.get = async (req, res) => {
     const limit = parseInt(req.query.limit ? req.query.limit : 10);
     const page = parseInt(req.query.page ? req.query.page : 1);
     const offset = limit * (page - 1);
-
+    const filterSearch = req.query.filterSearch ? req.query.filterSearch : "";
     const produto_id = req.query.produto_id;
     let whereQuery = {};
+
+    if (filterSearch) {
+        whereQuery = {
+            [Op.or]: [
+                {
+                    id:
+                    {
+                        [Op.substring]: filterSearch
+                    }
+                },
+                {
+                    descricao:
+                    {
+                        [Op.substring]: filterSearch
+                    }
+                },
+                {
+                    sku:
+                    {
+                        [Op.substring]: filterSearch
+                    }
+                }
+            ]
+        }
+    }
 
     if (produto_id)
         whereQuery = { produto_id: produto_id }
 
     try {
 
-        totalTokens = await Token.findAndCountAll();
+        totalTokens = await Token.findAndCountAll({
+            where: whereQuery
+        });
+        
         paginatedTokens = await Token.findAll({
             limit: limit,
             offset: offset,
@@ -88,6 +116,8 @@ exports.get = async (req, res) => {
         res.status(200).json({
             message: 'Todos os Token foram buscados com sucesso!',
             count: totalTokens.count,
+            currentPage: page,
+            pageSize: limit,
             result: paginatedTokens
         })
 

@@ -1,0 +1,33 @@
+<div class="col-md-12">
+
+    <div class="card">
+        <div class="card-body">
+            <div class="row align-items-center">
+
+                <div class="col-xl-4">
+                    <filter-table (onSearch)="filterSearch($event)"></filter-table>
+                </div>
+
+                <div class="col-xl-8 text-right">
+                    <toolbar-button *ngFor="let button of toolbarButtons" [toolbarButton]="button"
+                        (onClick)="button.function($event)"></toolbar-button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-body">
+
+            <data-table [dataTable]="dataTable" [dataTableHead]="dataTableHead"
+                [dataTableProperties]="dataTableProperties" [pageSizeOptions]="pageSizeOptions"
+                (onChangedPage)="onChangedPage($event)" (onChangedPageSize)="onChangedPageSize($event)"
+                (onChangeBooleanValue)="onChangeBooleanValue($event)" (getDetail)="getDetail($event)">
+            </data-table>
+
+        </div>
+    </div>
+</div>
+
+<app-confirm-dialog></app-confirm-dialog>

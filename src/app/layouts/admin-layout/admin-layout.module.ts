@@ -16,6 +16,9 @@ import { AdmProfileComponent } from "./pages/adm/profile/adm-profile.component";
 import { ClienteListComponent } from "./pages/cliente/list/list.component";
 import { ClienteDetailedComponent } from "./pages/cliente/detailed/cliente-detailed.component";
 
+import { ProdutoListComponent } from "./pages/produto/list/list.component";
+import { ProdutoCreateComponent } from "./pages/produto/create/create.component";
+
 import { UserComponent } from "../../pages/user/user.component";
 import { TableComponent } from "../../pages/table/table.component";
 import { TypographyComponent } from "../../pages/typography/typography.component";
@@ -32,8 +35,7 @@ import { ConfirmDialogModule } from "../../components/confirm-dialog/confirm-dia
 
 
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
-import { ProdutoListComponent } from "./pages/produto/list/list.component";
-import { ProdutoCreateComponent } from "./pages/produto/create/create.component";
+
 
 
 @NgModule({
