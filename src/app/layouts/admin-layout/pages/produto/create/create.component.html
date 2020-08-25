@@ -1,7 +1,9 @@
 <form class="px-1" [formGroup]="form" (ngSubmit)="onSubmit()" (keydown.enter)="$event.preventDefault()">
     <div class="row">
-        <div class="col-md-12">
+
+        <div class='col-md-12'>
             <div class="card">
+
                 <div class="card-header">
                     <div class="row">
                         <div class="col-sm-6">
@@ -23,57 +25,81 @@
                 </div>
 
                 <div class="card-body">
-
-
                     <div class="row">
-                        <div *ngIf="produto" class="col-md-12 mb-4">
-                            <span class="mr-5">Data de Criação: {{produto.createdAt | date: "dd/MM/yyyy"}}</span>
-                            <span class="">Última atualização: {{produto.updatedAt | date: "dd/MM/yyyy"}}</span>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <label>SKU</label>
-                                <input formControlName="sku" type="text" class="form-control">
-
-                                <div *ngIf="sku.invalid && (sku.dirty || sku.touched)" class="text-danger">
-                                    <div *ngIf="sku.errors.required">{{fieldRequiredMessage}}</div>
+                        <div class="col-md-3" *ngIf="mode === 'edit' && produto">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="product-image">
+                                        <img [src]="produto.imagemUrl"
+                                            (error)="produto.imagemUrl = 'assets/img/empty-image.jpg'">
+                                    </div>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="col-md-9">
-                            <div class="form-group">
-                                <label>Descrição</label>
-                                <input formControlName="descricao" type="text" class="form-control">
+                        <div [ngClass]="(mode==='edit')?'col-md-9':'col-md-12'">
+                            <div class="row">
+                                <div *ngIf="produto" class="col-md-12 my-3">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <span class="mr-5">Data de Criação:
+                                                {{produto.createdAt | date: "dd/MM/yyyy"}}</span>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <span class="">Última atualização:
+                                                {{produto.updatedAt | date: "dd/MM/yyyy"}}</span>
+                                        </div>
+                                    </div>
 
-                                <div *ngIf="descricao.invalid && (descricao.dirty || descricao.touched)"
-                                    class="text-danger">
-                                    <div *ngIf="descricao.errors.required">{{fieldRequiredMessage}}</div>
                                 </div>
-                            </div>
-                        </div>
 
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <label>SKU</label>
+                                        <input formControlName="sku" type="text" class="form-control">
 
-                        <div class="col-md-9">
-                            <div class="form-group">
-                                <label>Imagem URL</label>
-                                <input formControlName="imagemUrl" type="text" class="form-control">
-
-                                <div *ngIf="imagemUrl.invalid && (imagemUrl.dirty || imagemUrl.touched)"
-                                    class="text-danger">
-                                    <div *ngIf="imagemUrl.errors.required">{{fieldRequiredMessage}}</div>
+                                        <div *ngIf="sku.invalid && (sku.dirty || sku.touched)" class="text-danger">
+                                            <div *ngIf="sku.errors.required">{{fieldRequiredMessage}}</div>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
 
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <label>Ativo</label>
-                                <div class="custom-control custom-switch">
-                                    <input type="checkbox" formControlName="ativo" [checked]="ativo" [id]="ativoToggle"
-                                        class="custom-control-input">
-                                    <label class="custom-control-label" [for]="ativoToggle"></label>
+                                <div class="col-md-8">
+                                    <div class="form-group">
+                                        <label>Descrição</label>
+                                        <input formControlName="descricao" type="text" class="form-control">
+
+                                        <div *ngIf="descricao.invalid && (descricao.dirty || descricao.touched)"
+                                            class="text-danger">
+                                            <div *ngIf="descricao.errors.required">{{fieldRequiredMessage}}</div>
+                                        </div>
+                                    </div>
                                 </div>
+
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <label>Ativo</label>
+                                        <div class="custom-control custom-switch">
+                                            <input type="checkbox" formControlName="ativo" [checked]="ativo"
+                                                [id]="ativoToggle" class="custom-control-input">
+                                            <label class="custom-control-label" [for]="ativoToggle"></label>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label>Imagem URL</label>
+                                        <input formControlName="imagemUrl" type="text" class="form-control">
+
+                                        <div *ngIf="imagemUrl.invalid && (imagemUrl.dirty || imagemUrl.touched)"
+                                            class="text-danger">
+                                            <div *ngIf="imagemUrl.errors.required">{{fieldRequiredMessage}}</div>
+                                        </div>
+                                    </div>
+                                </div>
+
                             </div>
                         </div>
                     </div>
@@ -84,8 +110,23 @@
         <div *ngIf="mode ==='edit'" class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    <h5 class="card-title">Tokens</h5>
+                    <div class="row align-items-center">
+                        <div class="col-xl-4">
+                            <h5 class="card-title">Tokens</h5>
+                        </div>
 
+                        <div class="col-xl-4">
+                            <filter-table (onSearch)="filterSearch($event)"></filter-table>
+                        </div>
+
+                        <div class="col-xl-4 text-right">
+                            <toolbar-button *ngFor="let button of toolbarButtons" [toolbarButton]="button"
+                                (onClick)="button.function($event)"></toolbar-button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-body">
                     <data-table [dataTable]="dataTable" [dataTableHead]="dataTableHead"
                         [dataTableProperties]="dataTableProperties" [pageSizeOptions]="pageSizeOptions"
                         (onChangedPage)="onChangedPage($event)" (onChangedPageSize)="onChangedPageSize($event)"

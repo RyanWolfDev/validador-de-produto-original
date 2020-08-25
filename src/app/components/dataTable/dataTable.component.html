@@ -42,6 +42,14 @@
                         <input type="checkbox" [checked]="data.isChecked" value="" id="dataIndex">
                     </span>
 
+                    <!-- Image -->
+                    <span *ngIf="property.type=='image'">
+                        <!-- <a href="{{data[property.link]}}" target="_blank">{{property.name}}</a> -->
+                        <div class="product-image">
+                            <img height="40" [src]="data[property.link]" (error)="data[property.link] = 'assets/img/empty-image.jpg'">
+                        </div>
+                    </span>
+
                     <!-- Text -->
                     <span *ngIf="property.type=='text'">
                         {{data[property.name]}}

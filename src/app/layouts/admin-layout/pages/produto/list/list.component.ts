@@ -28,9 +28,9 @@ export class ProdutoListComponent implements OnInit, OnDestroy {
   dataTableHead: string[] = [
     "checkbox",
     "Id",
+    "Imagem",
     "Descrição",
     "SKU",
-    "Imagem",
     "Ativo",
   ];
 
@@ -44,17 +44,18 @@ export class ProdutoListComponent implements OnInit, OnDestroy {
       type: "text",
     },
     {
+      name: "Visualizar Imagem",
+      link: "imagemUrl",
+      type: "image",
+    },
+  
+    {
       name: "descricao",
       type: "text",
     },
     {
       name: "sku",
       type: "text",
-    },
-    {
-      name: "Visualizar Imagem",
-      link: "imagemUrl",
-      type: "link",
     },
     {
       name: "ativo",

@@ -7,6 +7,7 @@ import { Subscription } from 'rxjs';
 //Models
 import { Produto } from '../produto.model';
 import { DataTable } from '../../../../../components/dataTable/dataTable.model';
+import { ToolbarButton } from 'src/app/components/toolbarButton/toolbarButton.model';
 
 //Services
 import { ProdutoService } from '../produto.service';
@@ -57,6 +58,28 @@ export class ProdutoCreateComponent implements OnInit {
         message: "",
         result: [],
     };
+
+    //Toolbar Buttons
+    toolbarButtons: ToolbarButton[] = [
+        {
+            name: "Imprimir",
+            colorClass: "warning",
+            iconClass: "nc-icon nc-tag-content",
+            size: 5,
+            function: () => {
+                this.createNewTokens();
+            },
+        },
+        {
+            name: "Gerar Tokens",
+            colorClass: "success",
+            iconClass: "nc-icon nc-simple-add",
+            size: 6,
+            function: () => {
+                this.createNewTokens();
+            },
+        },
+    ];
 
     constructor(
         private fb: FormBuilder,
@@ -133,6 +156,10 @@ export class ProdutoCreateComponent implements OnInit {
             .subscribe((response: DataTable) => {
                 this.dataTable = response;
             });
+    }
+
+    createNewTokens() {
+
     }
 
     get id() { return this.form.get('id'); }
