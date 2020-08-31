@@ -52,13 +52,9 @@ export class TokenService {
             });
     }
 
-    save(token: Token) {
-        this.http
-            .post<Token>(`${this.appService.getApiUrl()}/token`, token)
-            .subscribe((responseData) => {
-                console.log(responseData);
-                this.router.navigate(["/admin/token"]);
-            });
+    save(tokenForm: { quantidade: number, produto_id: number }) {
+        return this.http
+            .post<{ message: string, tokensCreated: number, result: Token[] }>(`${this.appService.getApiUrl()}/token`, tokenForm)
     }
 
     update(token: Token) {

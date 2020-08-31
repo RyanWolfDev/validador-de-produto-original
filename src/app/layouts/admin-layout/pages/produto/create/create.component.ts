@@ -7,7 +7,8 @@ import { Subscription } from 'rxjs';
 //Models
 import { Produto } from '../produto.model';
 import { DataTable } from '../../../../../components/dataTable/dataTable.model';
-import { ToolbarButton } from 'src/app/components/toolbarButton/toolbarButton.model';
+import { ToolbarButton } from '../../../../../components/toolbarButton/toolbarButton.model';
+import { Token } from '../../token/token.model';
 
 //Services
 import { ProdutoService } from '../produto.service';
@@ -19,7 +20,7 @@ import { TokenService } from '../../token/token.service';
     templateUrl: 'create.component.html'
 })
 
-export class ProdutoCreateComponent implements OnInit {
+export class ProdutoCreateComponent implements OnInit, OnDestroy {
 
     produto: Produto;
     produtoId: number;
@@ -28,12 +29,17 @@ export class ProdutoCreateComponent implements OnInit {
     fieldRequiredMessage: string = "* Campo obrigatório";
     form: FormGroup;
     private dataSub: Subscription;
+    showNewTokenModal: boolean = false;
+    tokenForm: FormGroup;
+    showTokensCreatedTable: boolean = false;
+    tokensCreated: Token[] = [];
 
     //Pagination
     pageSizeOptions = [10, 25, 50, 100];
 
     //Autorizacao DataTable
     dataTableHead: string[] = [
+        "checkbox",
         "Token",
         "Criado em"
     ];
@@ -41,6 +47,10 @@ export class ProdutoCreateComponent implements OnInit {
     isClickable = false;
 
     dataTableProperties: Object[] = [
+        {
+            name: "",
+            type: "checkbox",
+        },
         {
             name: "token",
             type: "text",
@@ -104,6 +114,13 @@ export class ProdutoCreateComponent implements OnInit {
         })
     }
 
+    buildTokenForm() {
+        this.tokenForm = this.fb.group({
+            quantidade: ['', Validators.required],
+            produto_id: [this.produtoId, Validators.required]
+        })
+    }
+
     isEdit() {
         this.route.paramMap.subscribe((paramMap: ParamMap) => {
 
@@ -113,8 +130,12 @@ export class ProdutoCreateComponent implements OnInit {
                 this.mode = 'edit';
 
                 this.pageTitle = `ID: ${param}`;
+
+                this.buildTokenForm();
+
                 this.produtoService.getById(parseInt(param)).subscribe(response => {
                     this.produto = response.result;
+
                     this.form.setValue({
                         id: this.produto.id,
                         descricao: this.produto.descricao,
@@ -122,6 +143,12 @@ export class ProdutoCreateComponent implements OnInit {
                         imagemUrl: this.produto.imagemUrl,
                         ativo: this.produto.ativo,
                     });
+
+                    this.tokenForm.setValue({
+                        produto_id: this.produto.id,
+                        quantidade: ''
+                    })
+
                     this.getTokens();
                 });
             } else {
@@ -159,7 +186,31 @@ export class ProdutoCreateComponent implements OnInit {
     }
 
     createNewTokens() {
+        this.showNewTokenModal = true;
+    }
 
+    onCancelTokenForm() {
+        this.showNewTokenModal = false;
+        this.showTokensCreatedTable = false;
+        this.tokensCreated = [];
+        this.tokenForm.patchValue({ quantidade: '' });
+    }
+
+    onSubmitTokenForm() {
+
+        if (this.tokenForm.invalid) {
+            return;
+        }
+
+        this.tokenService.save(this.tokenForm.value).subscribe((response) => {
+            this.getTokens();
+            this.showTokensCreatedTable = true;
+            this.tokensCreated = response.result;
+        });
+    }
+
+    ngOnDestroy() {
+        this.dataSub.unsubscribe();
     }
 
     get id() { return this.form.get('id'); }

@@ -47,7 +47,7 @@ exports.post = async (req, res) => {
         result = await Token.bulkCreate(tokensCriados);
 
         res.status(201).json({
-            message: "Token(s) cadastrado com sucesso!",
+            message: "Token(s) cadastrado(s) com sucesso!",
             tokensCreated: tokensCriados.length,
             result: result
         });
