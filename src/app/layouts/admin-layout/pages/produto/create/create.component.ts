@@ -210,7 +210,8 @@ export class ProdutoCreateComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy() {
-        this.dataSub.unsubscribe();
+        if (this.mode === 'edit')
+            this.dataSub.unsubscribe();
     }
 
     get id() { return this.form.get('id'); }
