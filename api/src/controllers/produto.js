@@ -6,6 +6,18 @@ const { Op, where } = require("sequelize");
 //Adicionar um Produto ao banco de dados
 exports.post = async (req, res) => {
     try {
+
+        //Valido se o SKU já existe
+        skuExistente = await Produto.findAll({
+            where: {
+                sku: req.body.sku
+            }
+        })
+
+        if (skuExistente[0]) {
+            throw { message: `SKU ${skuExistente[0].sku} já está em uso para o prduto: ${skuExistente[0].descricao}` }
+        }
+
         result = await Produto.create(req.body);
         res.status(201).json({
             message: "Produto cadastrado com sucesso!",
