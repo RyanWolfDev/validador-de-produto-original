@@ -137,12 +137,19 @@ export class ProdutoCreateComponent implements OnInit, OnDestroy {
             if (param !== 'new') {
                 this.mode = 'edit';
 
-                this.pageTitle = `ID: ${param}`;
 
                 this.buildTokenForm();
 
                 this.produtoService.getById(parseInt(param)).subscribe(response => {
                     this.produto = response.result;
+
+                    if (Object.keys(this.produto).length === 0) {
+                        this.showNotification('Produto não encontrado!', "danger")
+                        this.router.navigate(["/admin/produto"]);
+                        return;
+                    }
+
+                    this.pageTitle = `ID: ${param}`;
 
                     this.form.setValue({
                         id: this.produto.id,
@@ -183,7 +190,7 @@ export class ProdutoCreateComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy() {
-        if (this.mode === 'edit')
+        if (this.mode === 'edit' && this.dataSub)
             this.dataSub.unsubscribe();
     }
 
@@ -260,6 +267,7 @@ export class ProdutoCreateComponent implements OnInit, OnDestroy {
             return value.isChecked === true;
         });
     }
+    //#endregion
 
     showNotification(message: string, type: string) {
         this.toastr.error(
@@ -276,9 +284,6 @@ export class ProdutoCreateComponent implements OnInit, OnDestroy {
             }
         );
     }
-    //#endregion
-
-
     get id() { return this.form.get('id'); }
     get descricao() { return this.form.get('descricao'); }
     get sku() { return this.form.get('sku'); }
