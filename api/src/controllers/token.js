@@ -1,6 +1,8 @@
 const Token = require('../models/_index').Token;
 const Produto = require('../models/_index').Produto;
 
+const { Op, where } = require("sequelize");
+
 const randomHash = require('random-hash');
 
 //Adicionar um Token ao banco de dados
@@ -68,7 +70,7 @@ exports.get = async (req, res) => {
     let whereQuery = {};
 
     if (filterSearch) {
-        whereQuery = {
+        Object.assign(whereQuery, {
             [Op.or]: [
                 {
                     id:
@@ -77,30 +79,24 @@ exports.get = async (req, res) => {
                     }
                 },
                 {
-                    descricao:
-                    {
-                        [Op.substring]: filterSearch
-                    }
-                },
-                {
-                    sku:
+                    token:
                     {
                         [Op.substring]: filterSearch
                     }
                 }
             ]
-        }
+        })
     }
 
     if (produto_id)
-        whereQuery = { produto_id: produto_id }
+        Object.assign(whereQuery, { produto_id: produto_id })
 
     try {
 
         totalTokens = await Token.findAndCountAll({
             where: whereQuery
         });
-        
+
         paginatedTokens = await Token.findAll({
             limit: limit,
             offset: offset,

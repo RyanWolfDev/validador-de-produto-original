@@ -85,7 +85,7 @@
             <tr>
                 <td [attr.colspan]="isClickable ? dataTableHead.length +1 : dataTableHead.length">
                     <ngb-pagination [page]="dataTable.currentPage" [pageSize]="dataTable.pageSize"
-                        [collectionSize]="dataTable.count" (pageChange)="onChangedPage.emit($event)">
+                        [collectionSize]="dataTable.count" (pageChange)="onChangedPage.emit($event)" [maxSize]='4'>
                     </ngb-pagination>
                 </td>
             </tr>

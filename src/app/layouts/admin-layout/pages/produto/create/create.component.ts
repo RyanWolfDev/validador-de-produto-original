@@ -13,6 +13,8 @@ import { Token } from '../../token/token.model';
 //Services
 import { ProdutoService } from '../produto.service';
 import { TokenService } from '../../token/token.service';
+import { ToastrService } from 'ngx-toastr';
+import { PrintPageSerivce } from '../../../../../components/print-page/print-page.service';
 
 @Component({
     selector: 'produto-create',
@@ -28,11 +30,14 @@ export class ProdutoCreateComponent implements OnInit, OnDestroy {
     private mode = 'create';
     fieldRequiredMessage: string = "* Campo obrigatório";
     form: FormGroup;
+
+    //Tokens Variables
     private dataSub: Subscription;
     showNewTokenModal: boolean = false;
     tokenForm: FormGroup;
     showTokensCreatedTable: boolean = false;
     tokensCreated: Token[] = [];
+    filterText: string;
 
     //Pagination
     pageSizeOptions = [10, 25, 50, 100];
@@ -77,7 +82,7 @@ export class ProdutoCreateComponent implements OnInit, OnDestroy {
             iconClass: "nc-icon nc-tag-content",
             size: 5,
             function: () => {
-                this.createNewTokens();
+                this.onPrintTokens();
             },
         },
         {
@@ -96,8 +101,11 @@ export class ProdutoCreateComponent implements OnInit, OnDestroy {
         public route: ActivatedRoute,
         private router: Router,
         private produtoService: ProdutoService,
-        private tokenService: TokenService
+        private tokenService: TokenService,
+        private toastr: ToastrService,
+        private printPageService: PrintPageSerivce
     ) { }
+
 
     ngOnInit() {
         this.buildForm();
@@ -174,15 +182,40 @@ export class ProdutoCreateComponent implements OnInit, OnDestroy {
         this.router.navigate(["/admin/produto"]);
     }
 
-    getTokens() {
+    ngOnDestroy() {
+        if (this.mode === 'edit')
+            this.dataSub.unsubscribe();
+    }
 
-        this.tokenService.getAll(this.dataTable.pageSize, this.dataTable.currentPage, "", this.produto.id);
+    //#region TOKEN FUNCTIONS
+    getTokens(pageSize: number = this.dataTable.pageSize, currentPage: number = this.dataTable.currentPage, filterSearch = this.filterText) {
+
+        this.tokenService.getAll(pageSize, currentPage, filterSearch, this.produto.id);
 
         this.dataSub = this.tokenService
             .getDataUpdatedListener()
             .subscribe((response: DataTable) => {
                 this.dataTable = response;
             });
+    }
+
+    onChangedPage(page) {
+        this.dataTable.currentPage = page;
+        this.getTokens(this.dataTable.pageSize, page);
+    }
+
+    onChangedPageSize(pageSize) {
+        this.dataTable.pageSize = pageSize;
+        this.getTokens(pageSize, this.dataTable.currentPage);
+    }
+
+    filterSearch(filterSearch) {
+        this.filterText = filterSearch;
+        this.getTokens(
+            this.dataTable.pageSize,
+            this.dataTable.currentPage,
+            filterSearch
+        );
     }
 
     createNewTokens() {
@@ -209,10 +242,42 @@ export class ProdutoCreateComponent implements OnInit, OnDestroy {
         });
     }
 
-    ngOnDestroy() {
-        if (this.mode === 'edit')
-            this.dataSub.unsubscribe();
+    onPrintTokens() {
+        const checkedRows = this.getCheckedRows();
+        if (checkedRows.length < 1) {
+            this.showNotification('Nenhum Administrador foi selecionado', 'warning')
+        }
+
+        this.printPageService.print(checkedRows);
     }
+
+    onPrintAllTokens(tokens) {
+        this.printPageService.print(tokens);
+    }
+
+    getCheckedRows() {
+        return this.dataTable.result.filter((value, index, array) => {
+            return value.isChecked === true;
+        });
+    }
+
+    showNotification(message: string, type: string) {
+        this.toastr.error(
+            '<span data-notify="icon" class="nc-icon nc-alert-circle-i"></span><span data-notify="message">' +
+            message +
+            "</span>",
+            "",
+            {
+                timeOut: 4000,
+                enableHtml: true,
+                closeButton: true,
+                toastClass: `alert alert-${type} alert-with-icon`,
+                positionClass: "toast-top-right",
+            }
+        );
+    }
+    //#endregion
+
 
     get id() { return this.form.get('id'); }
     get descricao() { return this.form.get('descricao'); }

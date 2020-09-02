@@ -32,11 +32,10 @@ import { DataTableComponent } from "../../components/dataTable/dataTable.compone
 import { ToolbarButtonComponent } from "../../components/toolbarButton/toolbarButton.component";
 import { FilterTableComponent } from "../../components/filterTable/filterTable.component";
 import { ConfirmDialogModule } from "../../components/confirm-dialog/confirm-dialog.module";
+import { PrintPageComponent } from "../../components/print-page/print-page.component";
 
 
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
-
-
 
 @NgModule({
   imports: [
@@ -65,7 +64,8 @@ import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
     NotificationsComponent,
     DataTableComponent,
     ToolbarButtonComponent,
-    FilterTableComponent
+    FilterTableComponent,
+    PrintPageComponent
   ],
 })
 export class AdminLayoutModule { }

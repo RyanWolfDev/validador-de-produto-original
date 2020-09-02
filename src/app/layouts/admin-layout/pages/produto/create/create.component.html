@@ -168,7 +168,8 @@
                 <div *ngIf="showTokensCreatedTable && tokensCreated.length > 0" class="table-responsive">
                     <hr>
                     <span class="mt-3">Quantidade de Tokens Criados: {{tokensCreated.length}}</span>
-                    <button type="submit" class="btn btn-round btn-block btn-info">Imprimir todos</button>
+                    <button type="submit" (click)="onPrintAllTokens(tokensCreated)"
+                        class="btn btn-round btn-block btn-info">Imprimir todos</button>
 
                     <table class="table">
                         <thead>

@@ -14,23 +14,24 @@ export const ROUTES: RouteInfo[] = [
   { path: "/admin/adm", title: "Administradores", icon: "nc-badge", class: "" },
   { path: "/admin/cliente", title: "Clientes", icon: "nc-circle-10", class: "" },
   { path: "/admin/produto", title: "Produtos", icon: "nc-cart-simple", class: "" },
-  { path: "/admin/token", title: "Tokens", icon: "nc-tag-content", class: "" },
+  
+  // { path: "/admin/token", title: "Tokens", icon: "nc-tag-content", class: "" },
 
-  { path: "/icons", title: "Icons", icon: "nc-diamond", class: "" },
-  {
-    path: "/notifications",
-    title: "Notifications",
-    icon: "nc-bell-55",
-    class: "",
-  },
-  { path: "/user", title: "User Profile", icon: "nc-single-02", class: "" },
-  { path: "/table", title: "Table List", icon: "nc-tile-56", class: "" },
-  {
-    path: "/typography",
-    title: "Typography",
-    icon: "nc-caps-small",
-    class: "",
-  },
+  // { path: "/icons", title: "Icons", icon: "nc-diamond", class: "" },
+  // {
+  //   path: "/notifications",
+  //   title: "Notifications",
+  //   icon: "nc-bell-55",
+  //   class: "",
+  // },
+  // { path: "/user", title: "User Profile", icon: "nc-single-02", class: "" },
+  // { path: "/table", title: "Table List", icon: "nc-tile-56", class: "" },
+  // {
+  //   path: "/typography",
+  //   title: "Typography",
+  //   icon: "nc-caps-small",
+  //   class: "",
+  // },
 ];
 
 @Component({

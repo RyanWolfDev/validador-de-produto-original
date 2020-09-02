@@ -25,13 +25,7 @@ export class TokenService {
 
     getAll(pageSize: number, currentPage: number, filterSeach: string = "", produto_id: number = 0) {
 
-        let queryParams = '';
-
-        if (produto_id) {
-            queryParams = `?limit=${pageSize}&page=${currentPage}&produto_id=${produto_id}`
-        } else {
-            queryParams = `?limit=${pageSize}&page=${currentPage}&filterSearch=${filterSeach}`;
-        }
+        const queryParams = `?limit=${pageSize}&page=${currentPage}&produto_id=${produto_id}&filterSearch=${filterSeach}`;
 
         this.http
             .get<DataTable>(this.appService.getApiUrl() + "/token" + queryParams)
