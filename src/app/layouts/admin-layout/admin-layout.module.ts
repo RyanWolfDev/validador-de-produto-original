@@ -34,7 +34,6 @@ import { FilterTableComponent } from "../../components/filterTable/filterTable.c
 import { ConfirmDialogModule } from "../../components/confirm-dialog/confirm-dialog.module";
 import { PrintPageComponent } from "../../components/print-page/print-page.component";
 
-
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 
 @NgModule({

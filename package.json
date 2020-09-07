@@ -24,6 +24,7 @@
     "@angular/router": "9.1.9",
     "@ng-bootstrap/ng-bootstrap": "6.0.0",
     "@ngui/map": "0.30.3",
+    "@techiediaries/ngx-qrcode": "^9.1.0",
     "@types/googlemaps": "3.36.5",
     "arrive": "2.4.1",
     "bootstrap": "4.3.1",
