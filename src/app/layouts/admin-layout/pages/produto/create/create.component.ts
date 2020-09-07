@@ -252,7 +252,7 @@ export class ProdutoCreateComponent implements OnInit, OnDestroy {
     onPrintTokens() {
         const checkedRows = this.getCheckedRows();
         if (checkedRows.length < 1) {
-            this.showNotification('Nenhum Administrador foi selecionado', 'warning')
+            this.showNotification('Nenhum Token foi selecionado', 'warning')
         }
 
         this.printPageService.print(checkedRows);
