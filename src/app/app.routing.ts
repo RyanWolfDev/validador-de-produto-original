@@ -3,11 +3,12 @@ import { Routes } from "@angular/router";
 import { AdminLayoutComponent } from "./layouts/admin-layout/admin-layout.component";
 import { AuthGuard } from "./app-auth.guard";
 import { LoginAdminComponent } from "./layouts/admin-layout/login-admin/login-admin.component";
+import { ClienteLayoutComponent } from "./layouts/cliente-layout/cliente-layout.component";
 
 export const AppRoutes: Routes = [
   {
     path: "",
-    redirectTo: "admin/login",
+    redirectTo: "login",
     pathMatch: "full",
   },
   {
@@ -31,6 +32,19 @@ export const AppRoutes: Routes = [
         path: "",
         loadChildren:
           "./layouts/admin-layout/login-admin/login-admin.module#LoginAdminModule",
+      },
+    ],
+  },
+  {
+    path: "",
+    component: ClienteLayoutComponent,
+    // canActivate: [AuthGuard],
+    children: [
+      {
+        path: "",
+        loadChildren:
+          "./layouts/cliente-layout/cliente-layout.module#ClienteLayoutModule",
+        // canActivate: [AuthGuard]
       },
     ],
   },
