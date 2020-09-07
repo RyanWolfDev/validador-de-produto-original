@@ -253,8 +253,8 @@ export class ProdutoCreateComponent implements OnInit, OnDestroy {
         const checkedRows = this.getCheckedRows();
         if (checkedRows.length < 1) {
             this.showNotification('Nenhum Token foi selecionado', 'warning')
+            return;
         }
-
         this.printPageService.print(checkedRows);
     }
 

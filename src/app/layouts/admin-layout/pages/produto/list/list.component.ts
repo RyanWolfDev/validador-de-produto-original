@@ -48,7 +48,7 @@ export class ProdutoListComponent implements OnInit, OnDestroy {
       link: "imagemUrl",
       type: "image",
     },
-  
+
     {
       name: "descricao",
       type: "text",
@@ -171,6 +171,7 @@ export class ProdutoListComponent implements OnInit, OnDestroy {
     const checkedRows = this.getCheckedRows();
     if (checkedRows.length < 1) {
       this.showNotification('Nenhum Produto foi selecionado', 'warning')
+      return;
     }
     checkedRows.forEach((value, index, array) => {
       this.produtoService.delete(value.id).subscribe(() => {
