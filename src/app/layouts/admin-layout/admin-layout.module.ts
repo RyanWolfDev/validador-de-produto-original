@@ -1,9 +1,10 @@
 //Angular
-import { NgModule } from "@angular/core";
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
 import { RouterModule } from "@angular/router";
 import { CommonModule } from "@angular/common";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 
+//Routes
 import { AdminLayoutRoutes } from "./admin-layout.routing";
 
 //Pages
@@ -28,11 +29,11 @@ import { NotificationsComponent } from "../../pages/notifications/notifications.
 import { UpgradeComponent } from "../../pages/upgrade/upgrade.component";
 
 //App Components
-import { DataTableComponent } from "../../components/dataTable/dataTable.component";
-import { ToolbarButtonComponent } from "../../components/toolbarButton/toolbarButton.component";
-import { FilterTableComponent } from "../../components/filterTable/filterTable.component";
 import { ConfirmDialogModule } from "../../components/confirm-dialog/confirm-dialog.module";
 import { PrintPageComponent } from "../../components/print-page/print-page.component";
+import { DataTableModule } from "../../components/dataTable/dataTable.module";
+import { FilterTableModule } from "../../components/filterTable/filterTable.module";
+import { ToolbarButtonModule } from "../../components/toolbarButton/toolbarButton.module";
 
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 
@@ -44,6 +45,9 @@ import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
     NgbModule,
     ReactiveFormsModule,
     ConfirmDialogModule,
+    DataTableModule,
+    FilterTableModule,
+    ToolbarButtonModule
   ],
   declarations: [
     DashboardComponent,
@@ -61,9 +65,6 @@ import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
     IconsComponent,
     MapsComponent,
     NotificationsComponent,
-    DataTableComponent,
-    ToolbarButtonComponent,
-    FilterTableComponent,
     PrintPageComponent
   ],
 })
