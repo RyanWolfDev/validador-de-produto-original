@@ -11,6 +11,7 @@ import { NgbTabChangeEvent } from '@ng-bootstrap/ng-bootstrap';
 export class AuthClienteComponent implements OnInit {
 
   activeNav = 1;
+  formTitle = 'Seja Bem-vindo'
 
   constructor(private router: Router) { }
 

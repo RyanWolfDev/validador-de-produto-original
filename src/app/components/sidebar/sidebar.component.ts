@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from "@angular/core";
+import { Component, OnInit, OnDestroy, Input } from "@angular/core";
 import { LoginService } from "../../layouts/admin-layout/login-admin/pages/login.service";
 import { Subscription } from "rxjs";
 
@@ -9,43 +9,20 @@ export interface RouteInfo {
   class: string;
 }
 
-export const ROUTES: RouteInfo[] = [
-  { path: "/admin/dashboard", title: "Dashboard", icon: "nc-bank", class: "" },
-  { path: "/admin/adm", title: "Administradores", icon: "nc-badge", class: "" },
-  { path: "/admin/cliente", title: "Clientes", icon: "nc-circle-10", class: "" },
-  { path: "/admin/produto", title: "Produtos", icon: "nc-cart-simple", class: "" },
-  
-  // { path: "/admin/token", title: "Tokens", icon: "nc-tag-content", class: "" },
-
-  // { path: "/icons", title: "Icons", icon: "nc-diamond", class: "" },
-  // {
-  //   path: "/notifications",
-  //   title: "Notifications",
-  //   icon: "nc-bell-55",
-  //   class: "",
-  // },
-  // { path: "/user", title: "User Profile", icon: "nc-single-02", class: "" },
-  // { path: "/table", title: "Table List", icon: "nc-tile-56", class: "" },
-  // {
-  //   path: "/typography",
-  //   title: "Typography",
-  //   icon: "nc-caps-small",
-  //   class: "",
-  // },
-];
-
 @Component({
   moduleId: module.id,
   selector: "sidebar-cmp",
   templateUrl: "sidebar.component.html",
 })
 export class SidebarComponent implements OnInit, OnDestroy {
+
+  @Input() routes: RouteInfo[];
   userIsAuthenticated = false;
   private authListenerSubs: Subscription;
 
   public menuItems: any[];
 
-  constructor(private loginService: LoginService) {}
+  constructor(private loginService: LoginService) { }
 
   ngOnInit() {
     this.userIsAuthenticated = this.loginService.getIsAuth();
@@ -55,7 +32,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
         this.userIsAuthenticated = isAuthenticated;
       });
 
-    this.menuItems = ROUTES.filter((menuItem) => menuItem);
+    this.menuItems = this.routes.filter((menuItem) => menuItem);
   }
 
   ngOnDestroy() {

@@ -5,8 +5,8 @@ import {
   ViewChild,
   ElementRef,
   OnDestroy,
+  Input,
 } from "@angular/core";
-import { ROUTES } from "../../sidebar/sidebar.component";
 import { Router } from "@angular/router";
 import { Location } from "@angular/common";
 import { LoginService } from "../../../layouts/admin-layout/login-admin/pages/login.service";
@@ -18,6 +18,8 @@ import { Subscription } from "rxjs";
   templateUrl: "navbar.component.html",
 })
 export class NavbarComponent implements OnInit, OnDestroy {
+
+  @Input() routes: [];
   private listTitles: any[];
   location: Location;
   private nativeElement: Node;
@@ -52,7 +54,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
         this.userIsAuthenticated = isAuthenticated;
       });
 
-    this.listTitles = ROUTES.filter((listTitle) => listTitle);
+    this.listTitles = this.routes.filter((listTitle) => listTitle);
     var navbar: HTMLElement = this.element.nativeElement;
     this.toggleButton = navbar.getElementsByClassName("navbar-toggle")[0];
     this.router.events.subscribe((event) => {
