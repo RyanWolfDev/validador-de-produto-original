@@ -3,9 +3,9 @@ import { RouterModule } from "@angular/router";
 import { CommonModule } from "@angular/common";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 
-import { LoginAdminRoutes } from "./login-admin.routing";
+import { LoginAdminRoutes } from "./auth-admin.routing";
 
-import { LoginComponent } from "./login/login.component";
+import { LoginAdminComponent } from "./login/login.component";
 
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 
@@ -17,6 +17,6 @@ import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
     NgbModule,
     ReactiveFormsModule,
   ],
-  declarations: [LoginComponent],
+  declarations: [LoginAdminComponent],
 })
 export class LoginAdminModule {}

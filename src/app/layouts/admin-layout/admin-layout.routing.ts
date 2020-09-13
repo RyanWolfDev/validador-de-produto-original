@@ -1,18 +1,18 @@
 import { Routes } from "@angular/router";
 import { PagesAdminComponent } from "./pages/pages.component";
 import { AdminAuthGuard } from "./admin-auth.guard";
-import { LoginAdminComponent } from "./auth/login-admin.component";
+import { AuthAdminComponent } from "./auth/auth-admin.component";
 import { PagesAdminModule } from "./pages/pages.module";
 
 export const AdminLayoutRoutes: Routes = [
   {
     path: "",
-    component: LoginAdminComponent,
+    component: AuthAdminComponent,
     children: [
       {
         path: "",
         loadChildren:
-          "./auth/login-admin.module#LoginAdminModule",
+          "./auth/auth-admin.module#LoginAdminModule",
       },
     ],
   },

@@ -10,7 +10,7 @@ import { SidebarModule } from "../../components/sidebar/sidebar.module";
 import { NavbarModule } from "../../components/shared/navbar/navbar.module";
 import { FooterModule } from "../../components/shared/footer/footer.module";
 import { FixedPluginModule } from "../../components/shared/fixedplugin/fixedplugin.module";
-import { LoginAdminComponent } from "./auth/login-admin.component";
+import { AuthAdminComponent } from "./auth/auth-admin.component";
 import { PagesAdminComponent } from "./pages/pages.component";
 
 @NgModule({
@@ -27,7 +27,7 @@ import { PagesAdminComponent } from "./pages/pages.component";
   ],
   declarations: [
     PagesAdminComponent,
-    LoginAdminComponent
+    AuthAdminComponent
   ],
   providers: [AdminAuthGuard]
 

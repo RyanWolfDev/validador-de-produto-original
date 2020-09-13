@@ -9,10 +9,10 @@ import { LoginService } from "../auth-admin.service";
   moduleId: module.id,
   templateUrl: "login.component.html",
   styleUrls: [
-    "../login-admin.component.scss",
+    "../auth-admin.component.scss",
   ],
 })
-export class LoginComponent implements OnInit, OnDestroy {
+export class LoginAdminComponent implements OnInit, OnDestroy {
 
   private authStatusSub: Subscription;
 
