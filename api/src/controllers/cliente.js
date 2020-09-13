@@ -25,6 +25,10 @@ exports.post = async (req, res) => {
             throw { message: "Já existe uma conta cadastrada com esse E-mail!" }
         }
 
+        if (req.body.senha !== req.body.confirmarSenha) {
+            throw { message: "As senhas não são as mesmas! Por favor verifique." }
+        }
+
         if (req.body.senha) {
             const senhaHashed = await bcryptjs.hash(req.body.senha, 10);
             req.body.senha = senhaHashed;
@@ -262,6 +266,7 @@ exports.login = async (req, res) => {
         res.status(200).json({
             message: "Cliente logado com sucesso!",
             cliente_id: clienteExistente.id,
+            cliente_nome: clienteExistente.nome,
             token: token,
             expiresIn: 3600000
         })

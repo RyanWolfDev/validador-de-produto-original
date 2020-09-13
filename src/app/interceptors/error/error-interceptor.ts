@@ -63,9 +63,9 @@ export class ErrorInterceptor implements HttpInterceptor {
           }
         );
 
-        if (error.status === 401) {
-          this.router.navigate(["/"]);
-        }
+        // if (error.status === 401) {
+        //   this.router.navigate(["/"]);
+        // }
         return throwError(error);
       })
     );

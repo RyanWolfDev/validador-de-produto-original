@@ -6,32 +6,31 @@ import {
   ElementRef,
   OnDestroy,
   Input,
+  EventEmitter,
+  Output,
 } from "@angular/core";
 import { Router } from "@angular/router";
 import { Location } from "@angular/common";
-import { LoginService } from "../../../layouts/admin-layout/login-admin/pages/login.service";
-import { Subscription } from "rxjs";
 
 @Component({
   moduleId: module.id,
   selector: "navbar-cmp",
   templateUrl: "navbar.component.html",
 })
-export class NavbarComponent implements OnInit, OnDestroy {
+export class NavbarComponent implements OnInit {
 
   @Input() routes: [];
+  @Input() userLogin: string;
+  @Input() profileRoute: string;
+  @Output("logout") logout: EventEmitter<any> = new EventEmitter();
+
   private listTitles: any[];
   location: Location;
   private nativeElement: Node;
   private toggleButton;
   private sidebarVisible: boolean;
-
-  userIsAuthenticated = false;
-  private authListenerSubs: Subscription;
-
-  userLogin: string = '';
-
   public isCollapsed = true;
+
   @ViewChild("navbar-cmp", { static: false }) button;
 
   constructor(
@@ -39,7 +38,6 @@ export class NavbarComponent implements OnInit, OnDestroy {
     private renderer: Renderer2,
     private element: ElementRef,
     private router: Router,
-    private loginService: LoginService
   ) {
     this.location = location;
     this.nativeElement = element.nativeElement;
@@ -47,12 +45,6 @@ export class NavbarComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.userIsAuthenticated = this.loginService.getIsAuth();
-    this.authListenerSubs = this.loginService
-      .getAuthStatusListener()
-      .subscribe((isAuthenticated) => {
-        this.userIsAuthenticated = isAuthenticated;
-      });
 
     this.listTitles = this.routes.filter((listTitle) => listTitle);
     var navbar: HTMLElement = this.element.nativeElement;
@@ -61,8 +53,8 @@ export class NavbarComponent implements OnInit, OnDestroy {
       this.sidebarClose();
     });
 
-    this.userLogin = this.loginService.getAuthData().login;
   }
+
   getTitle() {
     var titlee = this.location.prepareExternalUrl(this.location.path());
     if (titlee.charAt(0) === "#") {
@@ -124,11 +116,8 @@ export class NavbarComponent implements OnInit, OnDestroy {
     }
   }
 
-  onLogout() {
-    this.loginService.logout();
-  }
-
-  ngOnDestroy() {
-    this.authListenerSubs.unsubscribe();
+  onLogout(event) {
+    this.logout.emit(event)
+    // this.loginAdminService.logout();
   }
 }

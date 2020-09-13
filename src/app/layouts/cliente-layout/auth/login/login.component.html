@@ -1,0 +1,31 @@
+<form [formGroup]="loginForm" (ngSubmit)="onLogin()">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group">
+                <label>E-mail</label>
+                <input type="email" class="form-control" formControlName="email">
+                <div *ngIf="email.invalid" class="text-danger">
+
+                    <div *ngIf="email.errors.email">
+                        Digite um e-mail válido!
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12 ">
+            <div class="form-group">
+                <label>Senha</label>
+                <input type="password" class="form-control" formControlName="senha" autocomplete="off">
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="update ml-auto mr-auto">
+            <button type="submit" class="btn btn-primary btn-round" [disabled]="!loginForm.valid">Login</button>
+        </div>
+    </div>
+</form>

@@ -1,0 +1,12 @@
+<div class="wrapper">
+    <div class="sidebar" data-color="white" data-active-color="danger">
+        <sidebar-cmp [routes]="routes"></sidebar-cmp>
+    </div>
+    <div class="main-panel">
+        <navbar-cmp [routes]="routes" [userLogin]="userLogin" [profileRoute]="profileRoute" (logout)="onLogout($event)"></navbar-cmp>
+        <div class="content">
+            <router-outlet></router-outlet>
+        </div>
+        <footer-cmp></footer-cmp>
+    </div>
+</div>

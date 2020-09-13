@@ -57,7 +57,7 @@
 
                             <div class="form-group">
                                 <label>Senha</label>
-                                <input formControlName="senha" type="password" class="form-control">
+                                <input formControlName="senha" type="password" class="form-control" autocomplete="off">
 
                                 <div *ngIf="senha.invalid && (senha.dirty || senha.touched)" class="text-danger">
                                     <div *ngIf="senha.errors.required">{{fieldRequiredMessage}}</div>
@@ -69,7 +69,7 @@
 
                             <div class="form-group">
                                 <label>Confirmar Senha</label>
-                                <input formControlName="confirmarSenha" type="password" class="form-control">
+                                <input formControlName="confirmarSenha" type="password" class="form-control" autocomplete="off">
 
                                 <div *ngIf="confirmarSenha.invalid && (confirmarSenha.dirty || confirmarSenha.touched)"
                                     class="text-danger">

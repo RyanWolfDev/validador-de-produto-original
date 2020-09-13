@@ -1,0 +1,56 @@
+<form [formGroup]="signupForm" (ngSubmit)="onSignup()">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group">
+                <label>Nome</label>
+                <input type="text" class="form-control" formControlName="nome">
+                <div *ngIf="nome.invalid && (nome.dirty || nome.touched)" class="text-danger">
+                    <div *ngIf="nome.errors.required">{{fieldRequiredMessage}}</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="form-group">
+                <label>E-mail</label>
+                <input type="email" class="form-control" formControlName="email">
+                <div *ngIf="email.invalid && (email.dirty || email.touched)" class="text-danger">
+                    <div *ngIf="email.errors.required">{{fieldRequiredMessage}}</div>
+                    <div *ngIf="email.errors.email">
+                        Digite um e-mail válido!
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label>Senha</label>
+                <input type="password" class="form-control" formControlName="senha" autocomplete="off">
+                <div *ngIf="senha.invalid && (senha.dirty || senha.touched)" class="text-danger">
+                    <div *ngIf="senha.errors.required">{{fieldRequiredMessage}}</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label>Confirmar Senha</label>
+                <input type="password" class="form-control" formControlName="confirmarSenha" autocomplete="off">
+                <div *ngIf="confirmarSenha.invalid && (confirmarSenha.dirty || confirmarSenha.touched)"
+                    class="text-danger">
+                    <div *ngIf="confirmarSenha.errors.confirmPasswordValidator">As senhas não são as
+                        mesmas!</div>
+                    <div *ngIf="confirmarSenha.errors.required">{{fieldRequiredMessage}}</div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="update ml-auto mr-auto">
+            <button type="submit" class="btn btn-primary btn-round" [disabled]="!signupForm.valid">Cadastrar</button>
+        </div>
+    </div>
+</form>

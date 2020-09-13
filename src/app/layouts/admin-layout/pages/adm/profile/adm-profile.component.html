@@ -46,7 +46,7 @@
 
                             <div class="form-group">
                                 <label>Nova Senha</label>
-                                <input formControlName="novaSenha" type="password" class="form-control">
+                                <input formControlName="novaSenha" type="password" class="form-control" autocomplete="off">
 
                                 <div *ngIf="novaSenha.invalid && (novaSenha.dirty || novaSenha.touched)"
                                     class="text-danger">
@@ -59,7 +59,7 @@
 
                             <div class="form-group">
                                 <label>Confirmar Nova Senha</label>
-                                <input formControlName="confirmarNovaSenha" type="password" class="form-control">
+                                <input formControlName="confirmarNovaSenha" type="password" class="form-control" autocomplete="off">
 
                                 <div *ngIf="confirmarNovaSenha.invalid && (confirmarNovaSenha.dirty || confirmarNovaSenha.touched)"
                                     class="text-danger">
@@ -74,7 +74,7 @@
 
                             <div class="form-group">
                                 <label>Senha Atual</label>
-                                <input formControlName="senhaAtual" type="password" class="form-control">
+                                <input formControlName="senhaAtual" type="password" class="form-control" autocomplete="off">
                                 <small class="text-muted">Campo obrigatório somente para atualização de senha</small>
                             </div>
 

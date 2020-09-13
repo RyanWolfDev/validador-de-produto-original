@@ -1,41 +1,17 @@
-//Angular
-import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
+import { NgModule } from "@angular/core";
 import { RouterModule } from "@angular/router";
+
+import { AdminLayoutRoutes } from "./admin-layout.routing";
+import { AdminAuthGuard } from "./admin-auth.guard";
 import { CommonModule } from "@angular/common";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
-
-//Routes
-import { AdminLayoutRoutes } from "./admin-layout.routing";
-
-//Pages
-import { DashboardComponent } from "../../pages/dashboard/dashboard.component";
-
-import { AdmCreateComponent } from "./pages/adm/create/create.component";
-import { AdmListComponent } from "./pages/adm/list/list.component";
-import { AdmProfileComponent } from "./pages/adm/profile/adm-profile.component";
-
-import { ClienteListComponent } from "./pages/cliente/list/list.component";
-import { ClienteDetailedComponent } from "./pages/cliente/detailed/cliente-detailed.component";
-
-import { ProdutoListComponent } from "./pages/produto/list/list.component";
-import { ProdutoCreateComponent } from "./pages/produto/create/create.component";
-
-import { UserComponent } from "../../pages/user/user.component";
-import { TableComponent } from "../../pages/table/table.component";
-import { TypographyComponent } from "../../pages/typography/typography.component";
-import { IconsComponent } from "../../pages/icons/icons.component";
-import { MapsComponent } from "../../pages/maps/maps.component";
-import { NotificationsComponent } from "../../pages/notifications/notifications.component";
-import { UpgradeComponent } from "../../pages/upgrade/upgrade.component";
-
-//App Components
-import { ConfirmDialogModule } from "../../components/confirm-dialog/confirm-dialog.module";
-import { PrintPageComponent } from "../../components/print-page/print-page.component";
-import { DataTableModule } from "../../components/dataTable/dataTable.module";
-import { FilterTableModule } from "../../components/filterTable/filterTable.module";
-import { ToolbarButtonModule } from "../../components/toolbarButton/toolbarButton.module";
-
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
+import { SidebarModule } from "../../components/sidebar/sidebar.module";
+import { NavbarModule } from "../../components/shared/navbar/navbar.module";
+import { FooterModule } from "../../components/shared/footer/footer.module";
+import { FixedPluginModule } from "../../components/shared/fixedplugin/fixedplugin.module";
+import { LoginAdminComponent } from "./auth/login-admin.component";
+import { PagesAdminComponent } from "./pages/pages.component";
 
 @NgModule({
   imports: [
@@ -44,28 +20,16 @@ import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
     FormsModule,
     NgbModule,
     ReactiveFormsModule,
-    ConfirmDialogModule,
-    DataTableModule,
-    FilterTableModule,
-    ToolbarButtonModule
+    SidebarModule,
+    NavbarModule,
+    FooterModule,
+    FixedPluginModule
   ],
   declarations: [
-    DashboardComponent,
-    AdmCreateComponent,
-    AdmListComponent,
-    AdmProfileComponent,
-    ClienteListComponent,
-    ClienteDetailedComponent,
-    ProdutoListComponent,
-    ProdutoCreateComponent,
-    UserComponent,
-    TableComponent,
-    UpgradeComponent,
-    TypographyComponent,
-    IconsComponent,
-    MapsComponent,
-    NotificationsComponent,
-    PrintPageComponent
+    PagesAdminComponent,
+    LoginAdminComponent
   ],
+  providers: [AdminAuthGuard]
+
 })
 export class AdminLayoutModule { }

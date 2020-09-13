@@ -1,0 +1,35 @@
+<div class="login-page">
+    <div class="row">
+        <div class="col-md-12 login-box">
+            <div class="card card-user">
+                <div class="card-header text-center">
+                    <h5 class="card-title">{{formTitle}}</h5>
+                </div>
+                <div class="card-body">
+
+                    <ul ngbNav #nav="ngbNav" [(activeId)]="activeNav" class="nav-tabs justify-content-center mb-2">
+                        <li [ngbNavItem]="1">
+                            <a ngbNavLink [routerLink]="['/login']">Entrar</a>
+                            <ng-template ngbNavContent>
+
+                            </ng-template>
+                        </li>
+                        <li [ngbNavItem]="2">
+                            <a ngbNavLink [routerLink]="['/signup']">Cadastrar</a>
+                            <ng-template ngbNavContent>
+                            </ng-template>
+                        </li>
+                    </ul>
+                    <div>
+
+                    </div>
+                    <router-outlet [ngbNavOutlet]="nav" >
+
+                    </router-outlet>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,37 @@
+<div class="col-md-12 login-box">
+
+    <div class="card card-user">
+        <div class="card-header text-center">
+            <h5 class="card-title">Login</h5>
+        </div>
+        <div class="card-body">
+            <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
+                <div class="row">
+                    <div class="col-md-12 ">
+                        <div class="form-group">
+                            <label>Login</label>
+                            <input type="text" class="form-control" formControlName="login">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12 ">
+                        <div class="form-group">
+                            <label>Senha</label>
+                            <input type="password" class="form-control" formControlName="senha" autocomplete="off">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="update ml-auto mr-auto">
+                        <button type="submit" class="btn btn-primary btn-round"
+                            [disabled]="!loginForm.valid">Login</button>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>

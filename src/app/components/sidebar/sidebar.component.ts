@@ -1,5 +1,4 @@
 import { Component, OnInit, OnDestroy, Input } from "@angular/core";
-import { LoginService } from "../../layouts/admin-layout/login-admin/pages/login.service";
 import { Subscription } from "rxjs";
 
 export interface RouteInfo {
@@ -14,28 +13,15 @@ export interface RouteInfo {
   selector: "sidebar-cmp",
   templateUrl: "sidebar.component.html",
 })
-export class SidebarComponent implements OnInit, OnDestroy {
+export class SidebarComponent implements OnInit {
 
   @Input() routes: RouteInfo[];
-  userIsAuthenticated = false;
-  private authListenerSubs: Subscription;
 
   public menuItems: any[];
 
-  constructor(private loginService: LoginService) { }
+  constructor() { }
 
   ngOnInit() {
-    this.userIsAuthenticated = this.loginService.getIsAuth();
-    this.authListenerSubs = this.loginService
-      .getAuthStatusListener()
-      .subscribe((isAuthenticated) => {
-        this.userIsAuthenticated = isAuthenticated;
-      });
-
     this.menuItems = this.routes.filter((menuItem) => menuItem);
-  }
-
-  ngOnDestroy() {
-    this.authListenerSubs.unsubscribe();
   }
 }

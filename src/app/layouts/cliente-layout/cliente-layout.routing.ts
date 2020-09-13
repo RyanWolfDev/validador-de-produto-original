@@ -1,5 +1,7 @@
 import { Routes } from "@angular/router";
-import { AuthClienteComponent } from "./pages/auth/auth-cliente.component";
+import { AuthClienteComponent } from "./auth/auth-cliente.component";
+import { PagesClienteComponent } from "./pages/pages.component";
+import { ClienteAuthGuard } from "./cliente-auth.guard";
 
 export const ClienteLayoutRoutes: Routes = [
     {
@@ -9,7 +11,20 @@ export const ClienteLayoutRoutes: Routes = [
             {
                 path: "",
                 loadChildren:
-                    "./pages/auth/auth-cliente.module#AuthClienteModule",
+                    "./auth/auth-cliente.module#AuthClienteModule",
+            },
+        ],
+    },
+    {
+        path: "",
+        component: PagesClienteComponent,
+        canActivate: [ClienteAuthGuard],
+        children: [
+            {
+                path: "",
+                loadChildren:
+                    "./pages/pages.module#PagesClienteModule",
+                canActivate: [ClienteAuthGuard],
             },
         ],
     },
