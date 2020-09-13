@@ -7,7 +7,7 @@ import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { Adm } from '../adm.model';
 
 //Validators
-import { ConfirmPasswordValidator } from './confirm-password.validator';
+import { ConfirmPasswordValidator } from '../../../../../validators/confirm-password.validator';
 
 //Services
 import { AdmService } from '../adm.service';
@@ -45,7 +45,7 @@ export class AdmCreateComponent implements OnInit {
             login: ['', Validators.required],
             ativo: [true, Validators.required],
             senha: ['', Validators.required],
-            confirmarSenha: ['', Validators.required],
+            confirmarSenha: ['', { validators: Validators.required, updateOn: "blur" }],
         },
             {
                 validator: ConfirmPasswordValidator("senha", "confirmarSenha")

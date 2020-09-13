@@ -1,13 +1,24 @@
 export interface ClienteLogin {
-    email: string;
-    senha: string;
-  }
-  
-  export interface ClienteLoginResponse {
-    message: string;
-    adm_id: number;
-    login: string;
-    token: string;
-    expiresIn: number;
-  }
-  
+  email: string;
+  senha: string;
+}
+
+export interface ClienteLoginResponse {
+  message: string;
+  cliente_id: number;
+  token: string;
+  expiresIn: number;
+}
+
+export interface Cliente {
+  id: number;
+  nome: string;
+  email: string;
+  senha: string;
+  ativo: boolean;
+  createdAt: Date;
+  updatedAt: Date;
+  autorizacoes: any[];
+  isChecked: boolean;
+}
+

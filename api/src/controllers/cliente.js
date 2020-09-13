@@ -14,6 +14,17 @@ const fs = require('fs');
 exports.post = async (req, res) => {
     try {
 
+        //Valido se e-mail já está em uso
+        emailExistente = await Cliente.findAll({
+            where: {
+                email: req.body.email
+            }
+        })
+
+        if (emailExistente[0]) {
+            throw { message: "Já existe uma conta cadastrada com esse E-mail!" }
+        }
+
         if (req.body.senha) {
             const senhaHashed = await bcryptjs.hash(req.body.senha, 10);
             req.body.senha = senhaHashed;
@@ -251,7 +262,8 @@ exports.login = async (req, res) => {
         res.status(200).json({
             message: "Cliente logado com sucesso!",
             cliente_id: clienteExistente.id,
-            token: token
+            token: token,
+            expiresIn: 3600000
         })
 
     } catch (err) {

@@ -12,4 +12,5 @@ export const ClienteLayoutRoutes: Routes = [
                     "./pages/auth/auth-cliente.module#AuthClienteModule",
             },
         ],
-    },];
+    },
+];

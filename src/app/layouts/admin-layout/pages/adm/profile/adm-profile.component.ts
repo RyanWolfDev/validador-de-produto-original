@@ -7,7 +7,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Adm } from '../adm.model';
 
 //Validators
-import { ConfirmPasswordValidator } from '../create/confirm-password.validator';
+import { ConfirmPasswordValidator } from '../../../../../validators/confirm-password.validator';
 
 //Services
 import { AdmService } from '../adm.service';

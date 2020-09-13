@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { NgbTabChangeEvent } from '@ng-bootstrap/ng-bootstrap';
 
 
 @Component({
@@ -8,5 +10,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AuthClienteComponent implements OnInit {
 
-  ngOnInit() { }
+  activeNav = 1;
+
+  constructor(private router: Router) { }
+
+  ngOnInit() {
+    if (this.router.url === '/signup') {
+      this.activeNav = 2;
+    }
+  }
 }

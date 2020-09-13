@@ -1,5 +1,11 @@
-<form [formGroup]="loginForm" (ngSubmit)="onLogin()">
+<form [formGroup]="signupForm" (ngSubmit)="onSignup()">
     <div class="row">
+        <div class="col-md-12">
+            <div class="form-group">
+                <label>Nome</label>
+                <input type="text" class="form-control" formControlName="nome">
+            </div>
+        </div>
         <div class="col-md-12">
             <div class="form-group">
                 <label>E-mail</label>
@@ -15,17 +21,23 @@
     </div>
 
     <div class="row">
-        <div class="col-md-12 ">
+        <div class="col-md-6">
             <div class="form-group">
                 <label>Senha</label>
                 <input type="password" class="form-control" formControlName="senha">
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label>Confirmar Senha</label>
+                <input type="password" class="form-control" formControlName="confirmarSenha">
             </div>
         </div>
     </div>
 
     <div class="row">
         <div class="update ml-auto mr-auto">
-            <button type="submit" class="btn btn-primary btn-round" [disabled]="!loginForm.valid">Login</button>
+            <button type="submit" class="btn btn-primary btn-round" [disabled]="!signupForm.valid">Cadastrar</button>
         </div>
     </div>
 </form>

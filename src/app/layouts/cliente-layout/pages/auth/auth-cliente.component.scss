@@ -1,0 +1,20 @@
+.login-page {
+  background: #f4f3ef !important;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  height: 100vh;
+  display: flex;
+  align-self: center;
+}
+
+.login-box {
+  min-width: 300px;
+  transform: scale(1.0);
+  @media only screen and (min-width: 2200px) {
+    zoom: 175%;
+  }
+  @media only screen and (max-width: 767px) {
+    max-width: fit-content;
+  }
+}

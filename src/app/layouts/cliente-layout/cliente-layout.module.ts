@@ -13,17 +13,18 @@ import { ClienteLayoutRoutes } from "./cliente-layout.routing";
 
 
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
+import { AuthClienteComponent } from "./pages/auth/auth-cliente.component";
 
 @NgModule({
-  imports: [
-    CommonModule,
-    RouterModule.forChild(ClienteLayoutRoutes),
-    FormsModule,
-    NgbModule,
-    ReactiveFormsModule,
-  ],
-  declarations: [ 
-
-  ],
+    imports: [
+        CommonModule,
+        RouterModule.forChild(ClienteLayoutRoutes),
+        FormsModule,
+        NgbModule,
+        ReactiveFormsModule,
+    ],
+    declarations: [
+        AuthClienteComponent
+    ],
 })
 export class ClienteLayoutModule { }

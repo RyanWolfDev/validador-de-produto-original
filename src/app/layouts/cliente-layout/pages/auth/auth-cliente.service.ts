@@ -5,6 +5,7 @@ import { Router } from "@angular/router";
 
 import { ClienteLogin, ClienteLoginResponse } from "./auth-cliente.model";
 import { AppService } from "../../../../app.service";
+import { Cliente } from "./auth-cliente.model";
 
 @Injectable({
     providedIn: "root",
@@ -53,7 +54,7 @@ export class AuthClienteService {
                         const expiresInDuration = response.expiresIn;
                         this.setAuthTimer(expiresInDuration);
                         this.isAuthenticated = true;
-                        this.userId = response.adm_id;
+                        this.userId = response.cliente_id;
                         this.authStatusListener.next(true);
                         const now = new Date();
                         const expirationDate = new Date(now.getTime() + expiresInDuration);
@@ -65,6 +66,15 @@ export class AuthClienteService {
                     this.authStatusListener.next(false);
                 }
             );
+    }
+
+    save(cliente: Cliente) {
+        this.http
+            .post<Cliente>(`${this.appService.getApiUrl()}/cliente/cadastrar`, cliente)
+            .subscribe((responseData) => {
+                console.log(responseData);
+                // this.router.navigate(["/"]);
+            });
     }
 
     autoAuthUser() {
@@ -102,8 +112,7 @@ export class AuthClienteService {
 
     private saveAuthData(userData: ClienteLoginResponse, expirationDate: Date) {
         localStorage.setItem("token", userData.token);
-        localStorage.setItem("userId", userData.adm_id.toString());
-        localStorage.setItem("login", userData.login);
+        localStorage.setItem("userId", userData.cliente_id.toString());
         localStorage.setItem("expiresIn", expirationDate.toISOString());
     }
 
