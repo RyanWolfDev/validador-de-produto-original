@@ -2,7 +2,8 @@ import { Component, OnInit, OnDestroy } from "@angular/core";
 import { Subscription } from "rxjs";
 import { FormBuilder, Validators } from "@angular/forms";
 
-import { LoginService } from "../auth-admin.service";
+import { AuthAdminService } from "../auth-admin.service";
+import { Router } from "@angular/router";
 
 @Component({
   selector: "login",
@@ -12,11 +13,14 @@ import { LoginService } from "../auth-admin.service";
     "../auth-admin.component.scss",
   ],
 })
-export class LoginAdminComponent implements OnInit, OnDestroy {
+export class LoginAdminComponent implements OnInit {
 
-  private authStatusSub: Subscription;
 
-  constructor(private loginService: LoginService, private fb: FormBuilder) { }
+  constructor(
+    private authAdminService: AuthAdminService,
+    private fb: FormBuilder,
+    private router: Router
+  ) { }
 
   loginForm = this.fb.group({
     login: ["", Validators.required],
@@ -24,19 +28,13 @@ export class LoginAdminComponent implements OnInit, OnDestroy {
   });
 
   ngOnInit() {
-    this.authStatusSub = this.loginService
-      .getAuthStatusListener()
-      .subscribe((authStatus) => {
-        console.log(authStatus);
-
-      });
+    if (this.authAdminService.getIsAuth()) {
+      this.router.navigate(['admin/dashboard']);
+    }
   }
 
   onLogin() {
-    this.loginService.login(this.loginForm.value);
+    this.authAdminService.login(this.loginForm.value);
   }
 
-  ngOnDestroy() {
-    this.authStatusSub.unsubscribe();
-  }
 }

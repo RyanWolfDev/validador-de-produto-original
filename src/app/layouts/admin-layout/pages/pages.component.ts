@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { LoginService } from '../auth/auth-admin.service';
+import { AuthAdminService } from '../auth/auth-admin.service';
 
 
 @Component({
@@ -8,7 +8,7 @@ import { LoginService } from '../auth/auth-admin.service';
     templateUrl: './pages.component.html',
     styleUrls: ['../admin-layout.component.scss']
 })
-export class PagesAdminComponent implements OnInit, OnDestroy {
+export class PagesAdminComponent implements OnInit {
 
     //Routes for SIDEMENU and NAVBAR
     routes = [
@@ -20,10 +20,8 @@ export class PagesAdminComponent implements OnInit, OnDestroy {
 
     userLogin = this.authAdminService.getAuthData().login;
     profileRoute = "/admin/profile";
-    userIsAuthenticated = false;
-    private authListenerSubs: Subscription;
-
-    constructor(private authAdminService: LoginService) { }
+   
+    constructor(private authAdminService: AuthAdminService) { }
 
     onLogout() {
         this.authAdminService.logout();
@@ -31,17 +29,5 @@ export class PagesAdminComponent implements OnInit, OnDestroy {
 
     ngOnInit() {
 
-        this.authAdminService.autoAuthUser();
-
-        this.userIsAuthenticated = this.authAdminService.getIsAuth();
-        this.authListenerSubs = this.authAdminService
-            .getAuthStatusListener()
-            .subscribe((isAuthenticated) => {
-                this.userIsAuthenticated = isAuthenticated;
-            });
-    }
-
-    ngOnDestroy() {
-        this.authListenerSubs.unsubscribe();
     }
 }

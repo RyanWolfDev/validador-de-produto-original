@@ -72,8 +72,7 @@ export class AuthClienteService {
         this.http
             .post<Cliente>(`${this.appService.getApiUrl()}/cliente/cadastrar`, cliente)
             .subscribe((responseData) => {
-                console.log(responseData);
-                // this.router.navigate(["/"]);
+                this.login(cliente);
             });
     }
 

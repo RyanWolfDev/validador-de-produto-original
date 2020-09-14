@@ -9,7 +9,7 @@ import { AppService } from "../../../app.service";
 @Injectable({
   providedIn: "root",
 })
-export class LoginService {
+export class AuthAdminService {
   private isAuthenticated = false;
   private token: string;
   private tokenTimer: any;

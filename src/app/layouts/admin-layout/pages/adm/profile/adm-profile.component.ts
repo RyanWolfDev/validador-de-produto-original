@@ -11,7 +11,7 @@ import { ConfirmPasswordValidator } from '../../../../../validators/confirm-pass
 
 //Services
 import { AdmService } from '../adm.service';
-import { LoginService } from '../../../auth/auth-admin.service';
+import { AuthAdminService } from '../../../auth/auth-admin.service';
 
 @Component({
   selector: "adm-profile",
@@ -31,7 +31,7 @@ export class AdmProfileComponent implements OnInit {
     public route: ActivatedRoute,
     private router: Router,
     private admService: AdmService,
-    private loginService: LoginService
+    private authAdminService: AuthAdminService
   ) { }
 
   ngOnInit() {
@@ -53,7 +53,7 @@ export class AdmProfileComponent implements OnInit {
   }
 
   loadProfile() {
-    this.admId = this.loginService.getUserId();
+    this.admId = this.authAdminService.getUserId();
 
     this.admService.getById(this.admId).subscribe(response => {
       this.adm = response.result;

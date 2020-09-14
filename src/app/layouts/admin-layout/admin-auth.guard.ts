@@ -1,12 +1,12 @@
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
-import { LoginService } from './auth/auth-admin.service';
+import { AuthAdminService } from './auth/auth-admin.service';
 
 @Injectable()
 export class AdminAuthGuard implements CanActivate {
     constructor(
-        private adminAuthService: LoginService,
+        private adminAuthService: AuthAdminService,
         private router: Router
     ) { }
 

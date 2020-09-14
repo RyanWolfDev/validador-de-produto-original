@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { AuthClienteService } from './auth/auth-cliente.service';
 
 
 @Component({
@@ -6,7 +8,27 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './cliente-layout.component.html',
   styleUrls: ['./cliente-layout.component.scss']
 })
-export class ClienteLayoutComponent implements OnInit {
+export class ClienteLayoutComponent implements OnInit, OnDestroy {
 
-  ngOnInit() { }
+  userIsAuthenticated = false;
+  private authListenerSubs: Subscription;
+
+  constructor(
+    private authClienteService: AuthClienteService
+  ) { }
+
+  ngOnInit() {
+    this.authClienteService.autoAuthUser();
+
+    this.userIsAuthenticated = this.authClienteService.getIsAuth();
+    this.authListenerSubs = this.authClienteService
+      .getAuthStatusListener()
+      .subscribe((isAuthenticated) => {
+        this.userIsAuthenticated = isAuthenticated;
+      });
+  }
+
+  ngOnDestroy() {
+    this.authListenerSubs.unsubscribe();
+  }
 }

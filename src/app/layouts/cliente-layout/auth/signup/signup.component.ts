@@ -42,7 +42,6 @@ export class SignupClienteComponent implements OnInit, OnDestroy {
         if (!this.signupForm.valid) {
             return;
         }
-        console.log(this.signupForm.value);
         this.authClienteService.save(this.signupForm.value);
     }
 
