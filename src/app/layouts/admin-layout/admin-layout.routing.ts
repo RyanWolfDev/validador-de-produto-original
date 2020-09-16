@@ -19,7 +19,6 @@ export const AdminLayoutRoutes: Routes = [
   {
     path: "",
     component: PagesAdminComponent,
-    canActivate: [AdminAuthGuard],
     children: [
       {
         path: "",

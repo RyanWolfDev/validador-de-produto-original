@@ -12,18 +12,19 @@ export class PagesClienteComponent implements OnInit {
 
     //Routes for SIDEMENU and NAVBAR
     routes = [
-        { path: "/cliente/home", title: "Validar", icon: "nc-check-2", class: "" },
-        { path: "/cliente/autorizacoes", title: "Meus Produtos", icon: "nc-badge", class: "" },
+        { path: "/cliente/validarProduto", title: "Validar Produto", icon: "nc-check-2", class: "", isSideMenuItem: true },
+        { path: "/cliente/autorizacoes", title: "Meus Produtos", icon: "nc-badge", class: "", isSideMenuItem: true },
+        { path: "/cliente/profile", title: "Meu Perfil", isSideMenuItem: false },
     ];
 
     userLogin = this.authClienteService.getAuthData().nome;
-    profileRoute = "cliente/profile";
-  
+    profileRoute = "/cliente/profile";
+
     constructor(private authClienteService: AuthClienteService) { }
 
     onLogout() {
         this.authClienteService.logout();
-    } 
+    }
 
-    ngOnInit() {}
+    ngOnInit() { }
 }

@@ -1,14 +1,14 @@
 import { Component, OnInit, OnDestroy } from "@angular/core";
 
 @Component({
-    selector: "home-cliente",
+    selector: "validar-produto-cliente",
     moduleId: module.id,
-    templateUrl: "home.component.html",
+    templateUrl: "validarProduto.component.html",
     styleUrls: [
         "../../cliente-layout.component.scss",
     ],
 })
-export class HomeClienteComponent implements OnInit, OnDestroy {
+export class ValidarProdutoClienteComponent implements OnInit, OnDestroy {
 
     constructor() { }
 

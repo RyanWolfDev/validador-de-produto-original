@@ -4,7 +4,6 @@ import {
   Renderer2,
   ViewChild,
   ElementRef,
-  OnDestroy,
   Input,
   EventEmitter,
   Output,

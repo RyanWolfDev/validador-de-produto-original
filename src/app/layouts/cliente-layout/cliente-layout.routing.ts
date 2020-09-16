@@ -18,7 +18,6 @@ export const ClienteLayoutRoutes: Routes = [
     {
         path: "",
         component: PagesClienteComponent,
-        canActivate: [ClienteAuthGuard],
         children: [
             {
                 path: "",
@@ -28,4 +27,5 @@ export const ClienteLayoutRoutes: Routes = [
             },
         ],
     },
+    { path: '**', redirectTo: 'login' }
 ];

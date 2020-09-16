@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AuthAdminService } from './auth/auth-admin.service';
 import { Subscription } from 'rxjs';
+import { AppService } from '../../app.service';
 
 @Component({
   selector: 'app-admin-layout',
@@ -13,10 +14,12 @@ export class AdminLayoutComponent implements OnInit, OnDestroy {
   private authListenerSubs: Subscription;
 
   constructor(
-    private authAdminService: AuthAdminService
+    private authAdminService: AuthAdminService,
+    private appService: AppService
   ) { }
 
   ngOnInit() {
+    this.appService.setLayout('Admin');
     this.authAdminService.autoAuthUser();
 
     this.userIsAuthenticated = this.authAdminService.getIsAuth();

@@ -6,14 +6,15 @@ import { AuthAdminService } from './auth/auth-admin.service';
 @Injectable()
 export class AdminAuthGuard implements CanActivate {
     constructor(
-        private adminAuthService: AuthAdminService,
+        private authAdminService: AuthAdminService,
         private router: Router
     ) { }
 
     canActivate(
         route: ActivatedRouteSnapshot,
         state: RouterStateSnapshot): boolean | Observable<boolean> | Promise<boolean> {
-        const isAuth = this.adminAuthService.getIsAuth();
+        this.authAdminService.autoAuthUser();
+        const isAuth = this.authAdminService.getIsAuth();
         console.log(isAuth);
         if (!isAuth) {
             this.router.navigate(['/admin/login']);

@@ -262,7 +262,7 @@ exports.login = async (req, res) => {
             login: admExistente.login,
             id: admExistente.id
         },
-            'LUCAS_COTRIM_DEV',
+            'SECRET_KEY_FOR_ADM',
             { expiresIn: '1h' }
         );
 

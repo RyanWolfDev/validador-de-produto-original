@@ -5,7 +5,7 @@ import { Router } from "@angular/router";
 
 import { ClienteLogin, ClienteLoginResponse } from "./auth-cliente.model";
 import { AppService } from "../../../app.service";
-import { Cliente } from "./auth-cliente.model";
+import { Cliente } from "../pages/cliente/cliente.model";
 
 @Injectable({
     providedIn: "root",
@@ -59,21 +59,13 @@ export class AuthClienteService {
                         const now = new Date();
                         const expirationDate = new Date(now.getTime() + expiresInDuration);
                         this.saveAuthData(response, expirationDate);
-                        this.router.navigate(["cliente/home"]);
+                        this.router.navigate(["cliente/validarProduto"]);
                     }
                 },
                 (error) => {
                     this.authStatusListener.next(false);
                 }
             );
-    }
-
-    save(cliente: Cliente) {
-        this.http
-            .post<Cliente>(`${this.appService.getApiUrl()}/cliente/cadastrar`, cliente)
-            .subscribe((responseData) => {
-                this.login(cliente);
-            });
     }
 
     autoAuthUser() {

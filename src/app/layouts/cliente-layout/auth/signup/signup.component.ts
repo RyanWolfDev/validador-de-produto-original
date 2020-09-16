@@ -3,6 +3,7 @@ import { Subscription } from "rxjs";
 import { FormBuilder, Validators } from "@angular/forms";
 import { AuthClienteService } from "../auth-cliente.service";
 import { ConfirmPasswordValidator } from "../../../../validators/confirm-password.validator";
+import { ClienteService } from "../../pages/cliente/cliente.service";
 
 @Component({
     selector: "signup-form-cliente",
@@ -17,7 +18,11 @@ export class SignupClienteComponent implements OnInit, OnDestroy {
     private authStatusSub: Subscription;
     fieldRequiredMessage = 'Campo Obrigatório!';
 
-    constructor(private authClienteService: AuthClienteService, private fb: FormBuilder) { }
+    constructor(
+        private authClienteService: AuthClienteService,
+        private fb: FormBuilder,
+        private clienteService: ClienteService
+    ) { }
 
     signupForm = this.fb.group({
         nome: ["", Validators.required],
@@ -42,7 +47,7 @@ export class SignupClienteComponent implements OnInit, OnDestroy {
         if (!this.signupForm.valid) {
             return;
         }
-        this.authClienteService.save(this.signupForm.value);
+        this.clienteService.save(this.signupForm.value);
     }
 
     ngOnDestroy() {

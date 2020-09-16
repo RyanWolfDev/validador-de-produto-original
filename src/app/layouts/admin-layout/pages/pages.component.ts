@@ -12,15 +12,15 @@ export class PagesAdminComponent implements OnInit {
 
     //Routes for SIDEMENU and NAVBAR
     routes = [
-        { path: "/admin/dashboard", title: "Dashboard", icon: "nc-bank", class: "" },
-        { path: "/admin/adm", title: "Administradores", icon: "nc-badge", class: "" },
-        { path: "/admin/cliente", title: "Clientes", icon: "nc-circle-10", class: "" },
-        { path: "/admin/produto", title: "Produtos", icon: "nc-cart-simple", class: "" },
+        { path: "/admin/dashboard", title: "Dashboard", icon: "nc-bank", class: "", isSideMenuItem: true },
+        { path: "/admin/adm", title: "Administradores", icon: "nc-badge", class: "", isSideMenuItem: true },
+        { path: "/admin/cliente", title: "Clientes", icon: "nc-circle-10", class: "", isSideMenuItem: true },
+        { path: "/admin/produto", title: "Produtos", icon: "nc-cart-simple", class: "", isSideMenuItem: true },
     ];
 
     userLogin = this.authAdminService.getAuthData().login;
     profileRoute = "/admin/profile";
-   
+
     constructor(private authAdminService: AuthAdminService) { }
 
     onLogout() {

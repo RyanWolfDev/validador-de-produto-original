@@ -28,7 +28,7 @@ export class LoginClienteComponent implements OnInit {
 
     ngOnInit() {
         if (this.authClienteService.getIsAuth()) {
-            this.router.navigate(['cliente/home'])
+            this.router.navigate(['cliente/validarProduto'])
         }
     }
 

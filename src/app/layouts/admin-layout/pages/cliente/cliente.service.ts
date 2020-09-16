@@ -43,14 +43,14 @@ export class ClienteService {
             });
     }
 
-    save(cliente: Cliente) {
-        this.http
-            .post<Cliente>(`${this.appService.getApiUrl()}/cliente`, cliente)
-            .subscribe((responseData) => {
-                console.log(responseData);
-                this.router.navigate(["/admin/cliente"]);
-            });
-    }
+    // save(cliente: Cliente) {
+    //     this.http
+    //         .post<Cliente>(`${this.appService.getApiUrl()}/cliente`, cliente)
+    //         .subscribe((responseData) => {
+    //             console.log(responseData);
+    //             this.router.navigate(["/admin/cliente"]);
+    //         });
+    // }
 
     update(cliente: Cliente) {
         this.http
@@ -62,7 +62,7 @@ export class ClienteService {
     }
 
     getById(id: string) {
-        return this.http.get<{ message: string, result: Cliente }>(`${this.appService.getApiUrl()}/cliente/${id}`);
+        return this.http.get<{ message: string, result: Cliente }>(`${this.appService.getApiUrl()}/cliente/detail/${id}`);
     }
 
     delete(id: number) {

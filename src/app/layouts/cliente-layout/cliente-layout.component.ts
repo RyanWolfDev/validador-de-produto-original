@@ -1,5 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { AppService } from '../../app.service';
 import { AuthClienteService } from './auth/auth-cliente.service';
 
 
@@ -14,10 +15,12 @@ export class ClienteLayoutComponent implements OnInit, OnDestroy {
   private authListenerSubs: Subscription;
 
   constructor(
-    private authClienteService: AuthClienteService
+    private authClienteService: AuthClienteService,
+    private appService: AppService
   ) { }
 
   ngOnInit() {
+    this.appService.setLayout('Cliente');
     this.authClienteService.autoAuthUser();
 
     this.userIsAuthenticated = this.authClienteService.getIsAuth();

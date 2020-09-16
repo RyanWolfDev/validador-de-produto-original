@@ -6,7 +6,8 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 
 import { PagesClienteRoutes } from "./pages.routing";
-import { HomeClienteComponent } from "./home/home.component";
+import { ValidarProdutoClienteComponent } from "./validarProduto/validarProduto.component";
+import { ClienteProfileComponent } from "./cliente/profile/profile.component";
 
 @NgModule({
     imports: [
@@ -16,6 +17,6 @@ import { HomeClienteComponent } from "./home/home.component";
         NgbModule,
         ReactiveFormsModule,
     ],
-    declarations: [HomeClienteComponent],
+    declarations: [ValidarProdutoClienteComponent, ClienteProfileComponent],
 })
 export class PagesClienteModule { }

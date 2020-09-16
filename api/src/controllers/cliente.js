@@ -161,18 +161,40 @@ exports.getById = async (req, res) => {
 //Atualizar Cliente 
 exports.put = async (req, res) => {
 
-    const id = req.params.id;
+    const id = req.userData.id
 
     try {
         propertiesToUpdate = {
             nome: req.body.nome,
             email: req.body.email,
-            ativo: req.body.ativo
         };
 
-        if (req.body.senha) {
-            const senhaHashed = await bcryptjs.hash(req.body.senha, 10);
+        //Se for atualização da senha do Profile
+        if (req.body.senhaAtual && req.body.novaSenha) {
+
+            clienteExistente = await Cliente.findAll({
+                where: {
+                    id: id
+                }
+            })
+
+            clienteExistente = clienteExistente[0];
+
+            if (!clienteExistente)
+                throw { message: "Não foi possível alterar a senha do Cliente logado" }
+
+
+            senhaIsEqual = await bcryptjs.compare(req.body.senhaAtual, clienteExistente.senha);
+
+            if (!senhaIsEqual) {
+                throw { message: "Senha atual incorreta!" }
+            }
+
+            const senhaHashed = await bcryptjs.hash(req.body.novaSenha, 10);
             propertiesToUpdate.senha = senhaHashed;
+
+        } else if (req.body.senhaAtual || req.body.novaSenha) {
+            throw { message: "Preencha os campos de Nova senha e Senha Atual para atualização de senha" }
         }
 
         result = await Cliente.update(propertiesToUpdate, {
@@ -189,7 +211,7 @@ exports.put = async (req, res) => {
 
             res.status(200).json({
                 updatedRows: result[0],
-                message: "Cliente atualizado com sucesso!",
+                message: "Perfil atualizado com sucesso!",
                 result: clientepdated
             })
 
@@ -259,7 +281,7 @@ exports.login = async (req, res) => {
             email: clienteExistente.email,
             id: clienteExistente.id
         },
-            'LUCAS_COTRIM_DEV',
+            'SECRET_KEY_FOR_CLIENTE',
             { expiresIn: '1h' }
         );
 
