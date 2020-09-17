@@ -15,6 +15,7 @@ import { Location } from "@angular/common";
   moduleId: module.id,
   selector: "navbar-cmp",
   templateUrl: "navbar.component.html",
+  styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent implements OnInit {
 
@@ -117,6 +118,5 @@ export class NavbarComponent implements OnInit {
 
   onLogout(event) {
     this.logout.emit(event)
-    // this.loginAdminService.logout();
   }
 }
