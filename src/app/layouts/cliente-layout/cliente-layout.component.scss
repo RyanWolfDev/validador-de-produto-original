@@ -1,0 +1,13 @@
+#token-input {
+  text-align: center;
+  height: 65px;
+  font-size: x-large;
+  @media only screen and (max-width: 500px) {
+    height: 50px;
+    font-size: small;
+  }
+}
+
+input:focus::placeholder {
+  color: transparent;
+}
