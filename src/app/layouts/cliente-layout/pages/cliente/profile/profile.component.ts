@@ -76,7 +76,7 @@ export class ClienteProfileComponent implements OnInit {
     }
 
     onCancel() {
-        this.router.navigate(["/cliente"]);
+        this.router.navigate(["/cliente/validarProduto"]);
     }
 
     get nome() { return this.profileForm.get('nome'); }
