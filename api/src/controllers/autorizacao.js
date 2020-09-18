@@ -39,7 +39,7 @@ exports.post = async (req, res) => {
         })
 
         if (autorizacaoExistente[0]) {
-            throw { message: 'Autorização já existe!' };
+            throw { message: 'Esse produto já possui um certificado! Verifique em "Meus Produtos"' };
         }
 
         //Crio a nova autorizacao
