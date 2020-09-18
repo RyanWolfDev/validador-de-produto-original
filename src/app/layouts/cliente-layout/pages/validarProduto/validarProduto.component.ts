@@ -1,6 +1,8 @@
 import { Component, OnInit, OnDestroy } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
+import { Autorizacao } from "../autorizacoes/autorizacao.model";
+import { AutorizacaoService } from "../autorizacoes/autorizacao.service";
 
 @Component({
     selector: "validar-produto-cliente",
@@ -14,11 +16,13 @@ export class ValidarProdutoClienteComponent implements OnInit {
 
     placeholderTokenInput: string = "Digite o TOKEN do produto aqui...";
     validaProdutoForm: FormGroup;
+    autorizacao: Autorizacao;
 
     constructor(
         private fb: FormBuilder,
         public route: ActivatedRoute,
         private router: Router,
+        private autorizacaoService: AutorizacaoService
     ) { }
 
     ngOnInit() {
@@ -37,6 +41,13 @@ export class ValidarProdutoClienteComponent implements OnInit {
             return;
         }
 
-        // this.autorizacaoService.create(this.profileForm.value);
+        this.autorizacaoService.checkAndSave(this.validaProdutoForm.value).subscribe(response => {
+            this.autorizacao = response;
+            console.log(this.autorizacao)
+        });
+    }
+    onPaste(event) {
+        console.log(event);
+        this.validaProdutoForm.value.token.trim()
     }
 }

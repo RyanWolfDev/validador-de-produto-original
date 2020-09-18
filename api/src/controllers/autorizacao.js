@@ -27,7 +27,11 @@ exports.post = async (req, res) => {
         tokenValido = tokenValido[0];
 
         if (!tokenValido) {
-            throw { message: 'Token Inválido!' };
+            res.status(200).json({
+                message: "Token Inválido!",
+            });
+            return;
+            // throw { message: 'Token Inválido!' };
         }
 
         //Valido se já existe alguma autorização com o token e cliente do body
@@ -39,7 +43,7 @@ exports.post = async (req, res) => {
         })
 
         if (autorizacaoExistente[0]) {
-            throw { message: 'Esse produto já possui um certificado! Verifique em "Meus Produtos"' };
+            throw { message: 'Esse Token já possui um certificado!' };
         }
 
         //Crio a nova autorizacao
@@ -48,10 +52,20 @@ exports.post = async (req, res) => {
             token_id: tokenValido.id
         }
 
-        result = await Autorizacao.create(autorizacao);
+        createdAutorizacao = await Autorizacao.create(autorizacao);
+
+        tokenObject = await Token.findByPk(createdAutorizacao.token_id, {
+            include: {
+                model: Produto,
+                as: 'produto'
+            }
+        })
+
+        result = createdAutorizacao.toJSON();
+        result.token = tokenObject
 
         res.status(201).json({
-            message: "Autorização cadastrada com sucesso!",
+            message: "Este é um produto Original!",
             result: result
         });
     }

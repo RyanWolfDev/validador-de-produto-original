@@ -1,0 +1,36 @@
+<div *ngIf="autorizacao" class="modal " tabindex="-1" role="dialog" style="display:block!important"
+    data-backdrop="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">Certificado</h5>
+                <button type="button" class="close" (click)="onCloseModal()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <div class="modal-body text-center">
+
+                <div class="alert" [ngClass]="(autorizacao.result)?'alert-success':'alert-danger'">
+                    <span>
+                        <strong>{{autorizacao.message}}</strong>
+                    </span>
+                </div>
+                <div class="produto-info" *ngIf="autorizacao.result">
+                    <div class=" produto-descricao">
+                        {{autorizacao.result.token.produto.descricao}}
+                    </div>
+
+                    <div class="produto-imagem mt-4">
+                        <img [src]="autorizacao.result.token.produto.imagemUrl" width="200">
+                    </div>
+                </div>
+
+                <div *ngIf="!autorizacao.result">
+                    <span> * Entre em contato com o fornecedor para confirmar a autenticidade do produto *</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
