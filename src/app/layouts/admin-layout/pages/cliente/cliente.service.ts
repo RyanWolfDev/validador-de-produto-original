@@ -43,20 +43,10 @@ export class ClienteService {
             });
     }
 
-    // save(cliente: Cliente) {
-    //     this.http
-    //         .post<Cliente>(`${this.appService.getApiUrl()}/cliente`, cliente)
-    //         .subscribe((responseData) => {
-    //             console.log(responseData);
-    //             this.router.navigate(["/admin/cliente"]);
-    //         });
-    // }
-
     update(cliente: Cliente) {
         this.http
-            .put(`${this.appService.getApiUrl()}/cliente/${cliente.id}`, cliente)
+            .put(`${this.appService.getApiUrl()}/cliente/${cliente.id}/admUpdate`, cliente)
             .subscribe((response) => {
-                console.log(response);
                 this.router.navigate(["/admin/cliente"]);
             });
     }

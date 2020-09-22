@@ -12,7 +12,8 @@ const checkAuthCliente = require('../middlewares/check-auth-cliente');
 router.get('', checkAuthAdm, ClientesController.get);
 router.get('/csv', checkAuthAdm, ClientesController.exportCsv);
 router.get('/detail/:id', checkAuthAdm, ClientesController.getById);
-router.delete('/:id', checkAuthAdm, ClientesController.delete);
+router.put('/:id/admUpdate', checkAuthAdm, ClientesController.updateClienteAtivo);
+// router.delete('/:id', checkAuthAdm, ClientesController.delete);
 
 //Rotas restritas ao Cliente
 router.post('/cadastrar', ClientesController.post);

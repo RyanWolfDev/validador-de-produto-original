@@ -245,6 +245,45 @@ exports.put = async (req, res) => {
     }
 }
 
+exports.updateClienteAtivo = async (req, res) => {
+
+    try {
+
+        id = req.params.id
+
+        propertiesToUpdate = {
+            ativo: req.body.ativo,
+        };
+
+        result = await Cliente.update(propertiesToUpdate, {
+            where: {
+                id: id
+            }
+        });
+
+        if (result[0]) {
+
+            clientepdated = await Cliente.findByPk(id, {
+                attributes: ['id', 'nome', 'email', 'ativo', 'createdAt', 'updatedAt'],
+            });
+
+            res.status(200).json({
+                updatedRows: result[0],
+                message: "Perfil atualizado com sucesso!",
+                result: clientepdated
+            })
+
+        } else {
+            res.status(400).json({
+                message: "Nenhum Cliente foi atualizado"
+            });
+        }
+    } catch (err) {
+        res.status(400).json(err);
+    }
+}
+
+
 //Deletar um Cliente no banco de dados
 exports.delete = async (req, res) => {
 
