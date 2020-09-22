@@ -25,11 +25,17 @@
                     <div class="produto-imagem mt-4">
                         <img [src]="autorizacao.result.token.produto.imagemUrl" width="200">
                     </div>
+
+                    <div class="text-center">
+                        <a [routerLink]="['/cliente/meusprodutos']" class="btn btn-outline-info btn-round">Ir para Meus
+                            Produtos</a>
+                    </div>
                 </div>
 
                 <div *ngIf="!autorizacao.result">
                     <span> * Entre em contato com o fornecedor para confirmar a autenticidade do produto *</span>
                 </div>
+
             </div>
         </div>
     </div>

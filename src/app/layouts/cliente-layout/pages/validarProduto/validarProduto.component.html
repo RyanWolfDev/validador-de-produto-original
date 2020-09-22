@@ -8,8 +8,8 @@
                             <form class="px-1" [formGroup]="validaProdutoForm" (ngSubmit)="onSubmit()"
                                 (keydown.enter)="$event.preventDefault()">
 
-                                <input id="token-input" formControlName="token" (paste)=onPaste($event)
-                                    type="text" class="form-control" placeholder={{placeholderTokenInput}}>
+                                <input id="token-input" formControlName="token" type="text" class="form-control"
+                                    placeholder={{placeholderTokenInput}}>
                                 <div class="text-center mt-4">
                                     <button type="submit"
                                         class="btn btn-round btn-lg btn-success btn-block">Validar</button>

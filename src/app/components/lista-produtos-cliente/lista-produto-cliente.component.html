@@ -1,0 +1,51 @@
+<div class="row align-items-center">
+
+    <div class="col mb-2">
+        <span class="">{{listData.count}} registros encontrados</span>
+    </div>
+
+    <div class="col col-lg-2">
+        <div class="form-group">
+            <select class="form-control custom-select" (change)="onChangedPageSize.emit($event.target.value)">
+                <option *ngFor="let pageSize of [10,20,30,40,50]" [value]='pageSize'>{{pageSize}}</option>
+            </select>
+        </div>
+    </div>
+
+</div>
+
+
+
+<div class="list-group">
+    <div class="list-group-item" *ngFor="let autorizacao of listData.result">
+        <div class="media">
+            <img width="100" [src]="autorizacao.token.produto.imagemUrl" class="align-self-center mr-3">
+            <div class="media-body">
+                <p class="mt-0 media-title">{{autorizacao.token.produto.descricao}}
+                    <small> - {{autorizacao.createdAt | date: 'dd/MM/yyyy'}}</small>
+                </p>
+                <p>Sku: {{autorizacao.token.produto.sku}}</p>
+                <p>Token: {{autorizacao.token.token}}</p>
+
+                <div class="media-actions">
+
+                    <div ngbDropdown class="d-inline-block">
+                        <a class="actions-link" id="{{autorizacao.id}}" ngbDropdownToggle>Ações </a>
+                        <div class="dropdown-itens" ngbDropdownMenu [attr.aria-label]="autorizacao.id">
+                            <button (click)="onDeleteAutorizacao.emit(autorizacao.id)" ngbDropdownItem>Excluir</button>
+                        </div>
+                    </div>
+
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="mt-4">
+    <ngb-pagination [page]="listData.currentPage" [pageSize]="listData.pageSize" [collectionSize]="listData.count"
+        (pageChange)="onChangedPage.emit($event)" [maxSize]='4'>
+    </ngb-pagination>
+</div>

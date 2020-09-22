@@ -43,11 +43,7 @@ export class ValidarProdutoClienteComponent implements OnInit {
 
         this.autorizacaoService.checkAndSave(this.validaProdutoForm.value).subscribe(response => {
             this.autorizacao = response;
-            console.log(this.autorizacao)
         });
     }
-    onPaste(event) {
-        console.log(event);
-        this.validaProdutoForm.value.token.trim()
-    }
+
 }

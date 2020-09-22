@@ -1,0 +1,12 @@
+<div class="card">
+    <div class="card-body">
+
+        <lista-produto-cliente [listData]="listData" (onChangedPage)="onChangedPage($event)"
+            (onChangedPageSize)="onChangedPageSize($event)"
+            (onDeleteAutorizacao)="showDialog($event,'Você tem certeza disso?')">
+        </lista-produto-cliente>
+
+    </div>
+</div>
+
+<app-confirm-dialog></app-confirm-dialog>

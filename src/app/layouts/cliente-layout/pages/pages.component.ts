@@ -13,7 +13,7 @@ export class PagesClienteComponent implements OnInit {
     //Routes for SIDEMENU and NAVBAR
     routes = [
         { path: "/cliente/validarProduto", title: "Validar Produto", icon: "nc-check-2", class: "", isSideMenuItem: true },
-        { path: "/cliente/autorizacoes", title: "Meus Produtos", icon: "nc-badge", class: "", isSideMenuItem: true },
+        { path: "/cliente/meusprodutos", title: "Meus Produtos", icon: "nc-badge", class: "", isSideMenuItem: true },
         { path: "/cliente/profile", title: "Meu Perfil", isSideMenuItem: false },
     ];
 

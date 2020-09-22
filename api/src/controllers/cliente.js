@@ -169,6 +169,26 @@ exports.put = async (req, res) => {
             email: req.body.email,
         };
 
+        //Valido se e-mail já está em uso
+        emailExistente = await Cliente.findAll({
+            where: {
+                email: req.body.email,
+
+                [Op.and]: [
+                    {
+                        id:
+                        {
+                            [Op.not]: id
+                        }
+                    }
+                ]
+            }
+        })
+
+        if (emailExistente[0]) {
+            throw { message: "Já existe uma conta cadastrada com esse E-mail!" }
+        }
+
         //Se for atualização da senha do Profile
         if (req.body.senhaAtual && req.body.novaSenha) {
 
