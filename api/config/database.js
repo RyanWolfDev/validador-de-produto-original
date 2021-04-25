@@ -1,7 +1,7 @@
 module.exports = {
   username: 'root',
   password: 'root',
-  database: 'bfms',
+  database: 'product-validator',
   host: 'localhost',
   dialect: 'mysql',
   port:8889,
