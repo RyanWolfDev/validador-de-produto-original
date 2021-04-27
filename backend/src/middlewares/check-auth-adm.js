@@ -6,7 +6,7 @@ module.exports = async (req, res, next) => {
         const token = await req.headers.authorization.split(" ")[1];
 
         const decodedToken = await jwt.verify(token, 'SECRET_KEY_FOR_ADM');
-
+        console.log(decodedToken)
         //Valido se o usuario é realmente um Adm
         isAdm = await Adm.findAll({
             where: {

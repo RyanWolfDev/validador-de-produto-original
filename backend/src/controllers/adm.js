@@ -22,6 +22,7 @@ exports.post = async (req, res) => {
         if (req.body.senha) {
             const senhaHashed = await bcryptjs.hash(req.body.senha, 10);
             req.body.senha = senhaHashed;
+            console.log(senhaHashed)
         }
 
         result = await Adm.create(req.body);

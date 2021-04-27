@@ -181,3 +181,5 @@ ALTER TABLE `autorizacao`
 --
 ALTER TABLE `token`
   ADD CONSTRAINT `token_ibfk_1` FOREIGN KEY (`produto_id`) REFERENCES `produto` (`id`) ON DELETE CASCADE;
+
+INSERT INTO `adm`(`id`, `login`, `senha`, `ativo`, `createdAt`, `updatedAt`) VALUES (1,'admin','$2a$10$IcG1jfZMugwAoeO50OaaW.9/G5Kvk.dOQmm.rvM7SivTjpQKrGp7q',true, now(), now())
